@@ -8,12 +8,14 @@ fun main() {
     calcularSueldo(100.00) // esta bien, usa 12
     calcularSueldo(100.00, 14.00) // esta bien se sobreescribe y ya no es 12
 
+
+    //-----------------------------------------------
     //Duck Tyiping
     var edadProfesor: Int = 32
     var sueldoProfesor = 1.32
     // no se puede hacer esto
     //edadProfesor = sueldoProfesor +5
-
+    //-----------------------------------------------
     //Variables Mutables / Inmutables
     //1. mutables (RE asignar "=")
     var edadCachorro: Int = 0
@@ -23,8 +25,7 @@ fun main() {
 
     //2. inmutables (NO RE asignar "=")
     val numeroCedula = 1234567890
-
-
+    //-----------------------------------------------
     //Tipos de variables (JAVA)
     //1. Primitivas:
     val nombreProfesor: String = "Valeria Hidalgo"
@@ -32,8 +33,8 @@ fun main() {
     val estadoCivil: Char = 'S'
 
     //2. no primitivas
-
-    //condicionales
+    //-----------------------------------------------
+    //CONDICIONALES
     //en lugar del switch when
     val estadoCivilWhen: String = "S"
 
@@ -51,28 +52,30 @@ fun main() {
         else -> println("No reconocido")
     }
 
-    val coqueteo = if (estadoCivilWhen == "S") "SI" else "NO"
-
-    //Named parameters / Parámetros nombrados
+    val coqueteo: String = if (estadoCivilWhen == "S") "SI" else "NO"
+    //-----------------------------------------------
+    //NAMED PARAMETERS/ Parámetros nombrados
     //cuando puedo enviar los parametros sin que importe el orden
     //Sirven cuando se tiene muchos parámetros y quiero setear parametros en especifico
     calcularSueldo(tasa = 12.40, sueldo = 14.00)
-//------------------------------------------
+    //------------------------------------------
     //TIPOS DE ARREGLOS
-    //arreglos estáticos
+    //1. Arreglos estáticos
     //No puedo modificar los elementos del arreglo
     //arregloEstatico.add(12) --> no se puede
     val arregloEstatico: Array<Int> = arrayOf(1,2,3)
 
-    //arreglos dinámicos
+    //2. Arreglos dinámicos
     val arregloDinamico: ArrayList<Int> = arrayListOf(1,2,3,4,5,6,7,8,9,10)
     println(arregloDinamico)
     arregloDinamico.add(11)
     arregloDinamico.add(12)
-
+    //------------------------------------------
     //OPERADORES --> Sirve para los arreglos estaticos y dinamicos
     //NO utilizar ni for ni while. Sino USAR EL OPERADOR
     //Todo operador devuelve
+
+    //------------------------------------------
 
     //FOR EACH --> UNIT
         //itera un arreglo
@@ -82,6 +85,8 @@ fun main() {
     }
     println(respuestaForEach)
 
+    //It -> valor o los valores que van a llegar a esta funcion
+    // Si solamente se recibe 1 parametro, este se va a llamar "it"
     arregloDinamico.forEach{
         println("Valor actual: ${it}")
     }
@@ -89,6 +94,7 @@ fun main() {
     arregloDinamico.forEachIndexed { index, i ->
         println("valor ${i} indice: ${index}")
     }
+    //------------------------------------------
 
     //MAP --> muta el arreglo, cambia el arreglo
     //1 enviar el nuevo valor de la iteracion
