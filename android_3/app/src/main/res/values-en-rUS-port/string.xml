@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hola_mundo">
+    <font fgcolor = "#FFEB3B">
+        NARUTO
+    </font>
+    </string>
+</resources>
