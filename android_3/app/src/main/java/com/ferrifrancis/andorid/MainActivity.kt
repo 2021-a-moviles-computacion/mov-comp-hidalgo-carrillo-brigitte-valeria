@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,15 @@ class MainActivity : AppCompatActivity() {
         //R.id : busca los recursos que he creando
         )
         botonIrACicloVida.setOnClickListener { //escucho el boton
-            abrirCicloVida()
+            abrirActividad(ACicloVida::class.java)
+        }
+        //abre boton
+        val botonIrListView = findViewById<Button>(
+            R.id.btn_ir_list_view
+        )
+        //escucha los clicks
+        btn_ir_list_view.setOnClickListener {
+            abrirActividad(BListView::class.java)//abre esta clase
         }
     }
 
@@ -49,12 +58,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     //funcion para abrir pantalla ciclo de vida
-    fun abrirCicloVida()
+    fun abrirActividad(clase : Class<*>)
     {
         //para que se abra la página debo hacer un intent
         val intentExplicito = Intent(
             this,
-            ACicloVida:: class.java
+            clase
         )
         //startActivity para que aparezca la nueva actividad
         this.startActivity(intentExplicito)
