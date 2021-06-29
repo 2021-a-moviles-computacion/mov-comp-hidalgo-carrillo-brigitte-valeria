@@ -1,5 +1,3 @@
-import javax.swing.plaf.basic.BasicSplitPaneUI
-
 fun main() {
 
     val palabra: String = "valeria";
@@ -65,7 +63,7 @@ fun main() {
     //1. Arreglos estáticos
     //No puedo modificar los elementos del arreglo
     //arregloEstatico.add(12) --> no se puede
-    val arregloEstatico: Array<Int> = arrayOf(1, 2, 3)
+    var arregloEstatico: Array<Int> = arrayOf(1, 2, 3)
 
     //2. Arreglos dinámicos
     val arregloDinamico: ArrayList<Int> = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -206,7 +204,7 @@ class Suma(
     //constructor primario
     uno: Int, //parametro requerido
     dos: Int, //parametro requerido
-) : Numeros( //Estoy heredando de otra clase. Construtor primario para super
+) : Numeros2( //Estoy heredando de otra clase. Construtor primario para super
     uno,
     dos
 ) {
