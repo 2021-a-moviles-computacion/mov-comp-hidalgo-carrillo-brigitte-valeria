@@ -30,6 +30,26 @@ class MainActivity : AppCompatActivity() {
         btn_ir_list_view.setOnClickListener {
             abrirActividad(BListView::class.java)//abre esta clase
         }
+
+        val botonIrIntentw = findViewById<Button>(
+            R.id.btn_ir_list_view
+        )
+        //escucha los clicks
+        botonIrIntentw.setOnClickListener {
+            abrirActividadConParametros(CIntentExplicitParametros::class.java)//abre esta clase
+        }
+    }
+
+    fun abrirActividadConParametros(clase: Class<*>)
+    {
+        val intentExplicito = Intent(
+            this, clase
+        )
+        //put extra solo me deja mandar variables primitivas
+        intentExplicito.putExtra("nombre", "Adrian")
+        intentExplicito.putExtra("apellido", "Eguez")
+        intentExplicito.putExtra("edad", "32")
+        startActivity(intentExplicito)
     }
 
     override  fun onStart()
