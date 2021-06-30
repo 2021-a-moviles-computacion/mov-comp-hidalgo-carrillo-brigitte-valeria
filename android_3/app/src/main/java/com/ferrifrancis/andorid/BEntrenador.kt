@@ -4,8 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class BEntrenador
-    (val nombre: String,
-            val descripcion: String): Parcelable
+    (val nombre: String?,
+            val descripcion: String?): Parcelable
 {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -13,8 +13,14 @@ class BEntrenador
     ) {
     }
 
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        TODO("Not yet implemented")
+    override fun writeToParcel(parcel: Parcel?, p1: Int) {
+        //escribe las variables en el sistema operativo
+        //? elvis operator si no es null entonces haz esto ...
+        //si no quiero usar el elvis operator se pone
+        //if (parcel != null){}
+        parcel?.writeString(nombre)
+        parcel?.writeString(descripcion)
+
     }
 
     override fun toString(): String{
@@ -23,6 +29,7 @@ class BEntrenador
 
     override fun describeContents(): Int {
         TODO("Not yet implemented")
+        return 0
     }
 
     companion object CREATOR : Parcelable.Creator<BEntrenador> {
