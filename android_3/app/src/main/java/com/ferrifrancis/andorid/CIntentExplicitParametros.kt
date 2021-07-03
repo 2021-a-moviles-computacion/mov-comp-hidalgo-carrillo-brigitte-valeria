@@ -30,7 +30,7 @@ class CIntentExplicitParametros : AppCompatActivity() {
             intentDevolverParametros.putExtra("edadModificado", "33")
             intentDevolverParametros.putExtra("entrenadorModificado", BEntrenador("vicente","sarzosa"))
             this.setResult(Activity.RESULT_OK, intentDevolverParametros)
-            finish()
+            //finish()
             this.finish()
         }
     }

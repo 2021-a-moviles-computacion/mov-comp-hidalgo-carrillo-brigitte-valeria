@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode){
+                //agarron el requestCode
             CODIGO_RESPUESTA_INTENT_EXPLICITO->{
                 if (resultCode == RESULT_OK)
                 {
