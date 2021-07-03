@@ -18,13 +18,15 @@ fun main()
         {
             1 ->{ //Registrar colegio
                 val colegio = funcion.registroColegio()
-                listaColegioActual.add(colegio)
+                if(colegio != null) listaColegioActual.add(colegio)
+                else println("Error en el ingreso de datos")
             }
             2 ->{ //Registrar estudiante
                 val numColegio: Int=funcion.imprimirNombreColegioReturnIdx(listaColegioActual)
                 if(numColegio != -1) {
-                    val estudiante: Estudiante = funcion.registroEstudiante(listaColegioActual.get(numColegio).nombre)
-                    listaColegioActual.get(numColegio).estudiantes.add(estudiante)
+                    val estudiante: Estudiante? = funcion.registroEstudiante(listaColegioActual.get(numColegio).nombre)
+                    if(estudiante != null) listaColegioActual.get(numColegio).estudiantes.add(estudiante)
+                    else println("No se registró estudiante")
                 }
                 else
                     println("No se registró estudiante")
@@ -36,19 +38,29 @@ fun main()
                 println(funcion.imprimirEstudianteXColegio(listaColegioActual))
             }
             5 -> { //actualizar aulas colegio
-                funcion.actualizarAulaColegio(listaColegioActual)
+                if(funcion.actualizarAulaColegio(listaColegioActual)) println("Actualización correcta!")
+                else println("Valor ingresado incorrecto")
             }
             6 ->{ //actualizar curso de un estudiante
-                funcion.actualizarCursoEstudiante(listaColegioActual)
+                if(funcion.actualizarCursoEstudiante(listaColegioActual)) println("Actualización correcta!")
+                else println("Valor ingresado incorrecto")
             }
             7 ->{//borrar colegio
                 val idxColegio = funcion.imprimirNombreColegioReturnIdx(listaColegioActual)
-                listaColegioActual.removeAt(idxColegio)
+                if(idxColegio != -1)  listaColegioActual.removeAt(idxColegio)
+                else println("Colegio no borrado")
             }
             8 ->{//borrar estudiante
                 val idxColegio = funcion.imprimirNombreColegioReturnIdx(listaColegioActual)
-                val idxEstudiante = funcion.imprimirEstudiante1ColegioYReturnIdx((listaColegioActual), idxColegio)
-                listaColegioActual[idxColegio].estudiantes.removeAt(idxEstudiante)
+                if(idxColegio != -1)
+                {
+                    val idxEstudiante = funcion.imprimirEstudiante1ColegioYReturnIdx((listaColegioActual), idxColegio)
+                    if(idxEstudiante!=-1)
+                    {
+                        listaColegioActual[idxColegio].estudiantes.removeAt(idxEstudiante)
+                    }
+                }
+                else println("Estudiante no borrado")
             }
             9->{//Salir
                 break
