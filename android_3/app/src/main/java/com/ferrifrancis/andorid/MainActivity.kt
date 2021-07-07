@@ -17,6 +17,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        EBaseDeDatos.TablaUsuario = ESqliteHelperUsuario(this)
+    /*
+        if(EBaseDeDatos.TablaUsuario != null){
+            EBaseDeDatos.TablaUsuario?.consultarUsuarioPorId()
+            EBaseDeDatos.TablaUsuario?.crearUsuarioFormulario()
+            EBaseDeDatos.TablaUsuario?.eliminarUsuarioFormulario()
+            EBaseDeDatos.TablaUsuario?.actualizarUsuarioFormulario()
+        }
+    */
         setContentView(R.layout.activity_main)
         //LOG
         //TIPOS: informacion, debug, warning
@@ -57,6 +67,16 @@ class MainActivity : AppCompatActivity() {
             )
             startActivityForResult(intentConRespuesta, CODIGO_RESPUESTA_INTENT_IMPLICITO)
         }
+
+        //abre boton
+        val botonIrDeberClase = findViewById<Button>(
+            R.id.btn_claseDeber
+        )
+        //escucha los clicks
+        botonIrDeberClase.setOnClickListener {
+            abrirActividad(ClaseDeber::class.java)//abre esta clase
+        }
+
     }
 
     fun abrirActividadConParametros(clase: Class<*>)
@@ -69,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         intentExplicito.putExtra("apellido", "Eguez")
         intentExplicito.putExtra("edad", "32")
         intentExplicito.putExtra("entrenador",
-            BEntrenador("Adrian","Eguez")
+            BEntrenador("Adrian","Eguez", null)
             )
         startActivityForResult(intentExplicito, CODIGO_RESPUESTA_INTENT_EXPLICITO)
         /*

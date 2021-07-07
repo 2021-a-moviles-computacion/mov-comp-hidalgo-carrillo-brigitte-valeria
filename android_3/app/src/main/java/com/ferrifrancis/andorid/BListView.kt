@@ -1,5 +1,6 @@
 package com.ferrifrancis.andorid
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 
 class BListView : AppCompatActivity() {
 
@@ -40,17 +42,47 @@ class BListView : AppCompatActivity() {
         botonAnadirNumero.setOnClickListener{
             //cuando de clic, que trabaje esta función
             anadirItemsAlListView(
-                BEntrenador("prueba", "d@d.com")
+                BEntrenador("prueba", "d@d.com",null)
                 , arregloNumeros, adaptador)
         }
-/*
+
         listViewEjemplo.setOnItemLongClickListener { adapterView, view, posicion, id ->
             Log.i("list-view", "Dio clic ${posicion}")
+
+            val builder = AlertDialog.Builder(this)
+
+            builder.setTitle("titulo")
+            //builder.setMessage("Mensaje")
+            val seleccionUsuario = booleanArrayOf(
+                true, false, false
+            )
+
+            val opciones = resources.getStringArray(R.array.string_array_opciones_dialogo)
+
+            builder.setMultiChoiceItems(
+                opciones,
+                seleccionUsuario,
+                {
+                    dialog, which, isChecked ->
+                    Log.i("list-view","${which} ${isChecked}")
+                }
+            )
+            builder.setPositiveButton(
+                "si", DialogInterface.OnClickListener{dialog, which ->
+                    Log.i("list-view", "si")
+                }
+            )
+            builder.setNegativeButton(
+                "No",null
+            )
+
+            val dialogo = builder.create()
+            dialogo.show()
             return@setOnItemLongClickListener true
         }
-        */
+
         //registro a listview para que se sea un context menu
-        registerForContextMenu(listViewEjemplo)
+        //registerForContextMenu(listViewEjemplo)
 
     }
     override fun onCreateContextMenu(

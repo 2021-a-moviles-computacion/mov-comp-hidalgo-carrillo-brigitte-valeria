@@ -5,22 +5,24 @@ import android.os.Parcelable
 
 class BEntrenador
     (val nombre: String?,
-            val descripcion: String?): Parcelable
+            val descripcion: String?,
+            val liga: DLiga?
+            ): Parcelable
 {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readParcelable(DLiga::class.java.classLoader)//leo
     ) {
     }
-
-    override fun writeToParcel(parcel: Parcel?, p1: Int) {
+    override fun writeToParcel(parcel: Parcel?, flag: Int) {
         //escribe las variables en el sistema operativo
         //? elvis operator si no es null entonces haz esto ...
         //si no quiero usar el elvis operator se pone
         //if (parcel != null){}
         parcel?.writeString(nombre)
         parcel?.writeString(descripcion)
-
+        parcel?.writeParcelable(liga,flag)
     }
 
     override fun toString(): String{
@@ -28,7 +30,6 @@ class BEntrenador
     }
 
     override fun describeContents(): Int {
-        TODO("Not yet implemented")
         return 0
     }
 
