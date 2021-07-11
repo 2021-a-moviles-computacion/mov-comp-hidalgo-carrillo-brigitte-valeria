@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Exam</string>
+    <string name="txt_colegio">Colegios</string>
+    <string name="btn_anadir">Añadir</string>
+    <string name="menItmCol_editar">Editar</string>
+    <string name="menItmCol_eliminar">Eliminar</string>
+    <string name="menItmCol_anadirEst">Añadir Estudiante</string>
+</resources>
