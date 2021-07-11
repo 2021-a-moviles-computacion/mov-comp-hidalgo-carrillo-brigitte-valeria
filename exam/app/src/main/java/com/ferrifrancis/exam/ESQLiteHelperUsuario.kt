@@ -1,11 +1,13 @@
 package com.ferrifrancis.exam
 
 import Colegio
+import Estudiante
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import androidx.core.database.getStringOrNull
 
 open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     context,
@@ -85,10 +87,10 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     {
         val scriptConsulta = "SELECT * FROM colegio WHERE idColegio === ${id}"
         val baseLectura = readableDatabase
+        val arregloColegio = ArrayList<Colegio>()
 
         val resultadoLectura = baseLectura.rawQuery(scriptConsulta, null)
         val colegio = Colegio(null, null, null, null, null,null)
-        val arregloColegio = ArrayList<Colegio>()
 
         if(resultadoLectura.moveToFirst())
         {
@@ -115,8 +117,104 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return arregloColegio
     }
 
+    fun consultaEstudiantePorID(id: Int): ArrayList<Estudiante>
+    {
+        val conexionLectura = readableDatabase
+        val listaEstudiante =  ArrayList<Estudiante>()
+        val scriptConsulta = "SELECT * FROM estudiante WHERE cedula =${id}"
+
+        val resultadoConsulta =conexionLectura.rawQuery(scriptConsulta, null)
+
+
+        if(resultadoConsulta.moveToFirst())
+        {
+            do{
+                val cedula = resultadoConsulta.getString(0)
+                val nombre = resultadoConsulta.getString(1)
+                val fechaNac = resultadoConsulta.getString(2)
+                val curso = resultadoConsulta.getString(3)
+                val sexo = resultadoConsulta.getString(4)
+                val idColegio = resultadoConsulta.getInt(5)
+
+                if(cedula != null) {
+                    val estudiante = Estudiante(nombre, fechaNac, curso, cedula, sexo, idColegio)
+                    listaEstudiante.add(estudiante)
+                }
+            }while (resultadoConsulta.moveToNext())
+        }
+
+        conexionLectura.close()
+        resultadoConsulta.close()
+        Log.i("bdd", "Consulta estudiante")
+        return listaEstudiante
+    }
+
+    fun eliminarColegioPorID(id: Int): Boolean
+    {
+        val conexionEliminar = writableDatabase
+        val resultadoEliminar: Int =conexionEliminar.delete("colegio",
+            "idColegio =?",
+            arrayOf(id.toString())
+            )
+        conexionEliminar.close()
+        return if(resultadoEliminar != -1) true else false
+    }
+
+    fun eliminarEstudiantePorID(id: Int): Boolean{
+        val conexionEliminar = writableDatabase
+        val resultadoEliminar = conexionEliminar.delete(
+            "estudiante",
+            "cedula =?",
+            arrayOf( id.toString())
+        )
+        conexionEliminar.close()
+        return if(resultadoEliminar ==-1) false else true
+    }
+
+    fun actualizarColegioPorID(id: Int, numAulas: Int): Boolean{
+        val conexionActualizar = writableDatabase
+        val valoresActualizar = ContentValues()
+        valoresActualizar.put("numAulas", numAulas)
+        val resultadoActualizar: Int = conexionActualizar.update(
+            "colegio",
+            valoresActualizar,
+            "idColegio",
+            arrayOf(id.toString())
+        )
+        conexionActualizar.close()
+        return if(resultadoActualizar == -1) false else true
+    }
+
+    fun actualizarEstudianteID(cedula: String, curso: String): Boolean{
+        val conexionActualizar = writableDatabase
+        val valoresActualizar = ContentValues()
+
+        valoresActualizar.put("curso", curso)
+
+        val resultadoActualizar = conexionActualizar.update(
+            "estudiante",
+            valoresActualizar,
+            "cedulaEstudiante=?",
+            arrayOf(cedula)
+        )
+
+        conexionActualizar.close()
+        return if(resultadoActualizar ==-1) false else true
+    }
+
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
 
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
