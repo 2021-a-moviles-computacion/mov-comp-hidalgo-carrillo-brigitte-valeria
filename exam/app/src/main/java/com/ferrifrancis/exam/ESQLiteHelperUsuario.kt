@@ -4,6 +4,7 @@ import Colegio
 import Estudiante
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -22,7 +23,9 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
                 nombreColegio VARCHAR(30),
                 esFiscal BOOLEAN,
                 distrito INTEGER,
-                numAulas INTEGER,
+                numAulas INTEGER, 
+                metros2 FLOAT
+                
             )
         """.trimIndent()
 
@@ -33,7 +36,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
             fechaNacimiento DATE,
             curso VARCHAR(40),
             sexo VARCHAR(1),
-            idColegio INTEGER
+            idColegio INTEGER,
             CONSTRAINT FK_estudianteColegio FOREIGN KEY (idColegio)
             REFERENCES colegio(idColegio)
             )
@@ -46,18 +49,17 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         db?.execSQL(scriptCrearTablaEstudiante)
     }
 
-    fun crearEstudianteFormulario (nombre: String, fechaNacimiento: String,
-                curso: String, cedula: String, sexo: String, idColegio: Int): Boolean{
+    fun crearEstudianteFormulario (estudiante: Estudiante): Boolean{
         //existe el id?
         val conexionEscritura = writableDatabase
         val valoresAGuardar = ContentValues()
-        valoresAGuardar.put("idColegio",idColegio)
-        valoresAGuardar.put("nombreEstudiante",nombre)
-        valoresAGuardar.put("cedulaEstudiante",cedula)
-        valoresAGuardar.put("fechaNacimiento",fechaNacimiento)
-        valoresAGuardar.put("curso",curso)
-        valoresAGuardar.put("idColegio",idColegio)
-        valoresAGuardar.put("sexo", sexo)
+        
+        valoresAGuardar.put("nombreEstudiante",estudiante.nombre)
+        valoresAGuardar.put("cedulaEstudiante",estudiante.cedula)
+        valoresAGuardar.put("fechaNacimiento",estudiante.fechaNacimiento)
+        valoresAGuardar.put("curso",estudiante.curso)
+        valoresAGuardar.put("idColegio",estudiante.idColegio)
+        valoresAGuardar.put("sexo", estudiante.sexo)
 
         val resultadoEscritura =  conexionEscritura.insert("estudiante",null, valoresAGuardar)
         conexionEscritura.close()
@@ -65,16 +67,15 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return if (resultadoEscritura.toInt() == -1) false else true
     }
 
-    fun creaColegioFormulario(nombre: String, metros2: Float, esFiscal: Boolean,
-            distrito: Int, numAulas: Int): Boolean
+    fun creaColegioFormulario(colegio: Colegio): Boolean
     {
         val conexionEscritura= writableDatabase
         val contenidosAgregar = ContentValues()
-        contenidosAgregar.put("nombre", nombre)
-        contenidosAgregar.put("metros2", metros2)
-        contenidosAgregar.put("esFiscal", esFiscal)
-        contenidosAgregar.put("distrito", distrito)
-        contenidosAgregar.put("numAulas", numAulas)
+        contenidosAgregar.put("nombre", colegio.nombre)
+        contenidosAgregar.put("metros2", colegio.metros2)
+        contenidosAgregar.put("esFiscal", colegio.esFiscal)
+        contenidosAgregar.put("distrito", colegio.distrito)
+        contenidosAgregar.put("numAulas", colegio.numAulas)
 
         val resultadoEscritura=conexionEscritura.insert("colegio", null, contenidosAgregar)
         conexionEscritura.close()
@@ -85,7 +86,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
 
     fun consultaColegioPorID(id: Int): ArrayList<Colegio>
     {
-        val scriptConsulta = "SELECT * FROM colegio WHERE idColegio === ${id}"
+        val scriptConsulta = "SELECT * FROM colegio WHERE idColegio == ${id}"
         val baseLectura = readableDatabase
         val arregloColegio = ArrayList<Colegio>()
 
@@ -202,7 +203,29 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return if(resultadoActualizar ==-1) false else true
     }
 
+    fun consultaUltimoIDColegio():Int{
+        val conexion = readableDatabase
+        val scriptConsulta = "SELECT idColegio FROM colegio"
+        
+        val resultadoConsulta: Cursor =conexion.rawQuery(scriptConsulta,null)
+        return if(resultadoConsulta.moveToLast()) resultadoConsulta.getInt(0) else -1
+
+    }
+    
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+        /*
+        if (p2 > p1) {
+            if (p0 != null) {
+                p0.execSQL("ALTER TABLE colegio ADD COLUMN metros2 INTEGER ")
+                Log.i("bdd","-------------------->Actualizó columna metros2 en colegio")
+            };
+        }
+        */
+        /*
+        if (p0 != null) {
+            p0.execSQL("DROP TABLE IF EXISTS colegio")
+        };
+        */
 
     }
 

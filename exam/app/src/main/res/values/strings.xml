@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">Exam</string>
     <string name="txt_colegio">Colegios</string>
-    <string name="btn_anadir">Añadir</string>
+    <string name="btn_anadir">Registrar</string>
     <string name="menItmCol_editar">Editar</string>
     <string name="menItmCol_eliminar">Eliminar</string>
-    <string name="menItmCol_anadirEst">Añadir Estudiante</string>
+    <string name="menItmCol_anadirEst">Registrar Estudiante</string>
+
+    <string name="txt_nombre_cole">Nombre</string>
+    <string name="txt_metros2_cole">Metros cuadrados</string>
+    <string name="txt_fiscal_cole">¿Es fiscal?</string>
+    <string name="txt_distrito_cole">Distrito</string>
+    <string name="txt_num_aulas_cole">Número aulas</string>
+    <string name="txt_registrar_cole">Registrar Colegio</string>
+
 </resources>

@@ -2,12 +2,14 @@ package com.ferrifrancis.exam
 
 import Colegio
 import Estudiante
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import androidx.annotation.RequiresApi
 
@@ -19,15 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        /*Lista*/
         val listaEstudiantes = arrayListOf<Estudiante>(
-            Estudiante("Valeria H","1997-12-12", "matematica","1709793036", 'F',0 ),
-            Estudiante("Brigitte C","1997-06-14", "artistica","1701193031", 'F',1 )
+            Estudiante("Valeria H","1997-12-12", "matematica","1709793036", "F",0 ),
+            Estudiante("Brigitte C","1997-06-14", "artistica","1701193031", "F",1 )
 
         )
 
         val listaEstudiantes2 = arrayListOf<Estudiante>(
-            Estudiante("Maria H","1997-12-12", "estudios sociales","1709793036", 'F',0 ),
-            Estudiante("Jorge C","1997-06-14", "lenguaje","1701193031", 'M',1 )
+            Estudiante("Maria H","1997-12-12", "estudios sociales","1709793036", "F",0 ),
+            Estudiante("Jorge C","1997-06-14", "lenguaje","1701193031", "M",1 )
         )
 
 
@@ -48,6 +51,21 @@ class MainActivity : AppCompatActivity() {
         listViewColegio.adapter = adaptador
 
         registerForContextMenu(listViewColegio)
+
+        /*Botones*/
+        val botonAñadir = findViewById<Button>(R.id.btn_añadirColegio)
+        botonAñadir.setOnClickListener {
+            abrirActividad(BFormularioColegio::class.java)
+        }
+    }
+
+    fun abrirActividad(clase : Class <*>)
+    {
+        val intentExplicito = Intent(
+            this,
+            clase
+        )
+        this.startActivity(intentExplicito)
     }
 
     override fun onCreateContextMenu(
