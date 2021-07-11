@@ -1,5 +1,6 @@
 package com.ferrifrancis.exam
 
+import Colegio
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -79,6 +80,41 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
 
         return if(resultadoEscritura.toInt()==-1) false else true
     }
+
+    fun consultaColegioPorID(id: Int): ArrayList<Colegio>
+    {
+        val scriptConsulta = "SELECT * FROM colegio WHERE idColegio === ${id}"
+        val baseLectura = readableDatabase
+
+        val resultadoLectura = baseLectura.rawQuery(scriptConsulta, null)
+        val colegio = Colegio(null, null, null, null, null,null)
+        val arregloColegio = ArrayList<Colegio>()
+
+        if(resultadoLectura.moveToFirst())
+        {
+            do{
+                val idColegio = resultadoLectura.getInt(0)
+                val nombre = resultadoLectura.getString(1)
+                val esFiscal: Boolean = resultadoLectura.getInt(2) >0
+                val distrito = resultadoLectura.getInt(3)
+                val aulasNum = resultadoLectura.getInt(4)
+
+                if(idColegio != null)
+                {
+                    colegio.idColegio = idColegio
+                    colegio.nombre = nombre
+                    colegio.esFiscal = esFiscal
+                    colegio.distrito = distrito
+                    colegio.numAulas = aulasNum
+                    arregloColegio.add(colegio)
+                }
+            }while(resultadoLectura.moveToNext())
+        }
+        baseLectura.close()
+        resultadoLectura.close()
+        return arregloColegio
+    }
+
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
 
     }
