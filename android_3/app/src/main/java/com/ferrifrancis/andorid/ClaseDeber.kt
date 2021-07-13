@@ -42,19 +42,31 @@ class ClaseDeber : AppCompatActivity() {
             val botonConsultar = findViewById<Button>(R.id.btn_consultar_dc)
             botonConsultar.setOnClickListener {
                 val resultadoConsulta: EUsuarioBDD? = EBaseDeDatos.TablaUsuario?.consultarUsuarioPorId(1)
+                Log.i("bd","consulta: ${resultadoConsulta}")
                 Log.i("bd","${resultadoConsulta?.id} ${resultadoConsulta?.nombre} ${resultadoConsulta?.descripcion}")
+                /*
+                val usuarios = EBaseDeDatos.TablaUsuario?.consultarUsuario()
+                if (usuarios != null) {
+                    usuarios.forEach {
+                        val user = it
+                        Log.i("bd","Uusuario: ${user.id} ${user.descripcion} ${user.nombre}")
+                    }
+                }
+                */
             }
 
             val botonEliminar = findViewById<Button>(R.id.btn_eliminar_dc)
             botonEliminar.setOnClickListener {
-                val resultadoEliminar = EBaseDeDatos.TablaUsuario?.eliminarUsuarioFormulario(1)
+                val resultadoEliminar = EBaseDeDatos.TablaUsuario?.eliminarUsuarioFormulario(89)
                 Log.i("bd", "elimino usuario id1?${resultadoEliminar}")
                 eliminarItemsAlListView("ejemplo-descripcion",contenidoListV,adaptador)
+                eliminarItemsAlListView("ejemplo2-descripcion2",contenidoListV,adaptador)
             }
 
             val botonActualizar = findViewById<Button>(R.id.btn_actualizar_dc)
             botonActualizar.setOnClickListener {
-                val resultadoActualizar = EBaseDeDatos.TablaUsuario?.actualizarUsuarioFormulario("ejemplo2","descripcion2","1")
+                val resultadoActualizar  = EBaseDeDatos.TablaUsuario?.actualizarUsuarioFormulario("ejemplo2","descripcion2","1")
+                Log.i("bd","actualizo?${resultadoActualizar}")
                 actualizarItemsAlListView("ejemplo2-descripcion2", contenidoListV, adaptador)
 
             }
@@ -90,7 +102,7 @@ class ClaseDeber : AppCompatActivity() {
 
         Log.i("inf","------------------------>${arreglo.size}")
         if(arreglo.size > 3)
-            arreglo[4] = valor
+            arreglo[3] = valor
 
         //actualiza la interfaz
         adaptador.notifyDataSetChanged()

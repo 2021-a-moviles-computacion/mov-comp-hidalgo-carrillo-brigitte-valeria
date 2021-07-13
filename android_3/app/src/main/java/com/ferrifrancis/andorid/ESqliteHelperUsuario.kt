@@ -56,7 +56,7 @@ class ESqliteHelperUsuario(
             scriptCOnsultarUsuario,
             null
         )
-        val existeUsuario = resultaConsultaLectura.moveToFirst()
+        val existeUsuario: Boolean = resultaConsultaLectura.moveToFirst()
         val usuarioEncontrado = EUsuarioBDD(0,"","")
 
         if(existeUsuario) {
@@ -79,15 +79,48 @@ class ESqliteHelperUsuario(
         return usuarioEncontrado
     }
 
+    fun consultarUsuario(): ArrayList<EUsuarioBDD>
+    {
+        val scriptCOnsultarUsuario = "SELECT * FROM USUARIO "
+        val baseDatosLectura = readableDatabase
+        val arrayUsuario = ArrayList<EUsuarioBDD>()
+        var resultaConsultaLectura = baseDatosLectura.rawQuery(
+            scriptCOnsultarUsuario,
+            null
+        )
+        val existeUsuario = resultaConsultaLectura.moveToFirst()
+        val usuarioEncontrado = EUsuarioBDD(0,"","")
+
+        if(existeUsuario) {
+            do {
+                val id = resultaConsultaLectura.getInt(0) //columna indice 0--> ID
+                val nombre = resultaConsultaLectura.getString(1) //columna indice 0--> ID
+                val descripcion = resultaConsultaLectura.getString(2) //columna indice 0--> ID
+
+                if(id != null)
+                {
+                    usuarioEncontrado.id = id
+                    usuarioEncontrado.nombre = nombre
+                    usuarioEncontrado.descripcion = descripcion
+                    arrayUsuario.add(usuarioEncontrado)
+                }
+
+            } while (resultaConsultaLectura.moveToNext())
+        }
+        resultaConsultaLectura.close()
+        baseDatosLectura.close()
+        return arrayUsuario
+    }
+
     fun eliminarUsuarioFormulario(id: Int ): Boolean{
         val conexionEscritura = writableDatabase
-        val resultadoEliminacion = conexionEscritura.delete(
+        val resultadoEliminacion: Int = conexionEscritura.delete(
             "USUARIO",
             "id=?",
             arrayOf(id.toString())
         )
         conexionEscritura.close()
-        return if (resultadoEliminacion.toInt() == -1) false else true
+        return if (resultadoEliminacion == -1) false else true
     }
 
     fun actualizarUsuarioFormulario(nombre: String, descripcion: String, idActualizar: String):Boolean{
