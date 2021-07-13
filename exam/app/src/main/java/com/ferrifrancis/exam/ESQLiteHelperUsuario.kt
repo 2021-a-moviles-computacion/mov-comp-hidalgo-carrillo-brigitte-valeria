@@ -8,7 +8,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import androidx.core.database.getStringOrNull
 
 open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     context,
@@ -24,7 +23,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
                 esFiscal BOOLEAN,
                 distrito INTEGER,
                 numAulas INTEGER, 
-                metros2 FLOAT
+            
                 
             )
         """.trimIndent()
@@ -71,8 +70,8 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     {
         val conexionEscritura= writableDatabase
         val contenidosAgregar = ContentValues()
-        contenidosAgregar.put("nombre", colegio.nombre)
-        contenidosAgregar.put("metros2", colegio.metros2)
+        contenidosAgregar.put("nombreColegio", colegio.nombre)
+        //contenidosAgregar.put("metros2", colegio.metros2)
         contenidosAgregar.put("esFiscal", colegio.esFiscal)
         contenidosAgregar.put("distrito", colegio.distrito)
         contenidosAgregar.put("numAulas", colegio.numAulas)
@@ -84,6 +83,36 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return if(resultadoEscritura.toInt()==-1) false else true
     }
 
+    fun consultaColegios(): ArrayList<Colegio>
+    {
+        val conexionConsulta = readableDatabase
+        val scriptConsulta = "SELECT * FROM colegio"
+        val listaColegios = ArrayList<Colegio>()
+
+        val resultadoConsulta: Cursor =conexionConsulta.rawQuery(scriptConsulta, null)
+
+        if(resultadoConsulta.moveToFirst())
+        {
+
+            do {
+                val idColegio = resultadoConsulta.getInt(0)
+                val nombreColegio = resultadoConsulta.getString(1)
+                val esFiscal = resultadoConsulta.getInt(2) > 0
+                val distrito = resultadoConsulta.getInt(3)
+                val numAulas = resultadoConsulta.getInt(4)
+
+                val colegio = Colegio(nombreColegio, esFiscal, distrito, numAulas, idColegio)
+
+
+                if (idColegio != null) {
+                    listaColegios.add(colegio)
+                }
+            }while(resultadoConsulta.moveToNext())
+        }
+
+        return listaColegios
+    }
+
     fun consultaColegioPorID(id: Int): ArrayList<Colegio>
     {
         val scriptConsulta = "SELECT * FROM colegio WHERE idColegio == ${id}"
@@ -91,7 +120,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         val arregloColegio = ArrayList<Colegio>()
 
         val resultadoLectura = baseLectura.rawQuery(scriptConsulta, null)
-        val colegio = Colegio(null, null, null, null, null,null)
+        val colegio = Colegio(null, null, null, null,null)
 
         if(resultadoLectura.moveToFirst())
         {
@@ -213,14 +242,14 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     }
     
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        /*
+
         if (p2 > p1) {
             if (p0 != null) {
                 p0.execSQL("ALTER TABLE colegio ADD COLUMN metros2 INTEGER ")
                 Log.i("bdd","-------------------->Actualizó columna metros2 en colegio")
             };
         }
-        */
+
         /*
         if (p0 != null) {
             p0.execSQL("DROP TABLE IF EXISTS colegio")

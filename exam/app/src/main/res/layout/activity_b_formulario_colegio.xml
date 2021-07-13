@@ -34,26 +34,16 @@
         app:layout_constraintTop_toBottomOf="@+id/it_num_aulas_cole" />
 
     <EditText
-        android:id="@+id/it_metros2_cole"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="@+id/it_nombre_cole"
-        app:layout_constraintStart_toStartOf="@+id/it_nombre_cole"
-        app:layout_constraintTop_toBottomOf="@+id/it_nombre_cole" />
-
-    <EditText
         android:id="@+id/it_distrito_cole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/it_metros2_cole"
-        app:layout_constraintStart_toStartOf="@+id/it_metros2_cole"
-        app:layout_constraintTop_toBottomOf="@+id/it_metros2_cole" />
+        app:layout_constraintEnd_toEndOf="@+id/it_nombre_cole"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/it_nombre_cole"
+        app:layout_constraintTop_toBottomOf="@+id/it_nombre_cole" />
 
     <EditText
         android:id="@+id/it_num_aulas_cole"
@@ -86,17 +76,6 @@
         app:layout_constraintEnd_toEndOf="@+id/it_nombre_cole"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/it_nombre_cole" />
-
-    <TextView
-        android:id="@+id/tv_metros2_cole"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/txt_metros2_cole"
-        app:layout_constraintBottom_toTopOf="@+id/it_metros2_cole"
-        app:layout_constraintEnd_toEndOf="@+id/it_metros2_cole"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/it_metros2_cole" />
 
     <TextView
         android:id="@+id/tv_distrito_cole"
