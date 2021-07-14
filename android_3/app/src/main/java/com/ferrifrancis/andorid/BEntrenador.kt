@@ -16,7 +16,7 @@ class BEntrenador
     ) {
     }
     override fun writeToParcel(parcel: Parcel?, flag: Int) {
-        //escribe las variables en el sistema operativo
+        //escribe las variables en la memoria
         //? elvis operator si no es null entonces haz esto ...
         //si no quiero usar el elvis operator se pone
         //if (parcel != null){}
