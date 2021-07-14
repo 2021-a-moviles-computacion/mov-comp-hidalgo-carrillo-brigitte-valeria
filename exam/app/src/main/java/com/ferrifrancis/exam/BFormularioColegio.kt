@@ -1,6 +1,7 @@
 package com.ferrifrancis.exam
 
 import Colegio
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -36,9 +37,17 @@ class BFormularioColegio : AppCompatActivity() {
 
             val resu=EBaseDeDatos.TablaUsuario?.consultaUltimoIDColegio()
             Log.i("bd","CANTIDAD DE CREADOS${resu}")
+
+            abrirActividad(MainActivity::class.java)
         }
 
     }
 
-
+    fun abrirActividad (clase: Class<*>)
+    {
+        val intentoExplicito = Intent(
+            this,
+            clase
+        )
+    }
 }

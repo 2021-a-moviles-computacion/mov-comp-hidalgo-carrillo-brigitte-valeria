@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BVerEstudiantesColegio">
+
+    <ListView
+        android:id="@+id/lv_ver_est_cole"
+        android:layout_width="217dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_ver_est_cole"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/tv_ver_est_cole"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ver_est_cole" />
+
+    <TextView
+        android:id="@+id/tv_ver_est_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_agregar_estudiante"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="103dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/lv_ver_est_cole"
+        app:layout_constraintStart_toStartOf="@+id/lv_ver_est_cole"
+        app:layout_constraintTop_toBottomOf="@+id/lv_ver_est_cole" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
