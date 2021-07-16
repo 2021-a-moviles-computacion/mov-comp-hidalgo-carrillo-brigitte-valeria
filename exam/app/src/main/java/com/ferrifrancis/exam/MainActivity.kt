@@ -62,15 +62,15 @@ class MainActivity : AppCompatActivity() {
 
     fun abrirActividadConParametros(clase: Class<*>, colegio: Colegio)
     {
-        val intentExplicito = Intent(this,clase)
-        intentExplicito.putExtra("colegio",colegio)
-        startActivityForResult(intentExplicito, CODIGO_RESPUESTA)
+        val intentExplicito = Intent(this,clase)// con quien te vas a comunicar
+        intentExplicito.putExtra("colegio",colegio)//la información que vas a pasar
+        startActivityForResult(intentExplicito, CODIGO_RESPUESTA)//manda este código
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when(item?.itemId)
         {
-            R.id.mi_anadirEst ->{
+            R.id.mi_ver_est ->{
                 abrirActividadConParametros(BVerEstudiantesColegio::class.java, listaColegios[this.indxItemContextMenu])
                 return true
             }
@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mi_eliminar -> {
+                return true
+            }
+            R.id.mi_registrar_estudiantes -> {
+                abrirActividadConParametros(BFormularioEstudiante::class.java, listaColegios[this.indxItemContextMenu])
                 return true
             }
             else -> super.onContextItemSelected(item)

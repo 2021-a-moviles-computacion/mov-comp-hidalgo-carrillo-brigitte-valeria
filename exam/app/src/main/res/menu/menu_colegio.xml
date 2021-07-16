@@ -9,6 +9,9 @@
         android:id="@+id/mi_eliminar"
         android:title="@string/menItmCol_eliminar" />
     <item
-        android:id="@+id/mi_anadirEst"
-        android:title="@string/menItmCol_anadirEst" />
+        android:id="@+id/mi_ver_est"
+        android:title="@string/menItmCol_verEst" />
+    <item
+        android:id="@+id/mi_registrar_estudiantes"
+        android:title="@string/menItmCol_registrarEst" />
 </menu>
