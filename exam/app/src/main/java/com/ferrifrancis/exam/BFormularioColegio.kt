@@ -49,5 +49,6 @@ class BFormularioColegio : AppCompatActivity() {
             this,
             clase
         )
+        this.startActivity(intentoExplicito)
     }
 }

@@ -48,6 +48,34 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         db?.execSQL(scriptCrearTablaEstudiante)
     }
 
+    fun consultaEstudiantesXIDCole(id: Int): ArrayList<Estudiante>
+    {
+        val conexionEstudiante = readableDatabase
+        val consulta = "SELECT * FROM estudiante WHERE idColegio = ${id}"
+        val resultadoConsulta = conexionEstudiante.rawQuery(consulta, null)
+        val arrayEstudiantes = ArrayList<Estudiante>()
+
+        if (resultadoConsulta.moveToFirst())
+        {
+
+             do
+             {
+                 val cedula: String = resultadoConsulta.getString(0)
+                 val nombre =resultadoConsulta.getString(1)
+                 val fechaNacimiento = resultadoConsulta.getString(2)
+                 val curso = resultadoConsulta.getString(3)
+                 val sexo= resultadoConsulta.getString(4)
+                 val idColegio = resultadoConsulta.getInt(5)
+
+                 val estudiante = Estudiante(nombre, fechaNacimiento, curso, cedula, sexo, idColegio)
+                 arrayEstudiantes.add(estudiante)
+                 Log.i("db","cedula ${cedula}")
+             }while(resultadoConsulta.moveToNext())
+            //Log.i("db","cedula ${resultado}")
+        }
+        return arrayEstudiantes
+    }
+
     fun crearEstudianteFormulario (estudiante: Estudiante): Boolean{
         //existe el id?
         val conexionEscritura = writableDatabase
@@ -126,13 +154,14 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         {
             do{
                 val idColegio = resultadoLectura.getInt(0)
-                val nombre = resultadoLectura.getString(1)
-                val esFiscal: Boolean = resultadoLectura.getInt(2) >0
-                val distrito = resultadoLectura.getInt(3)
-                val aulasNum = resultadoLectura.getInt(4)
 
                 if(idColegio != null)
                 {
+                    val nombre = resultadoLectura.getString(1)
+                    val esFiscal: Boolean = resultadoLectura.getInt(2) >0
+                    val distrito = resultadoLectura.getInt(3)
+                    val aulasNum = resultadoLectura.getInt(4)
+
                     colegio.idColegio = idColegio
                     colegio.nombre = nombre
                     colegio.esFiscal = esFiscal

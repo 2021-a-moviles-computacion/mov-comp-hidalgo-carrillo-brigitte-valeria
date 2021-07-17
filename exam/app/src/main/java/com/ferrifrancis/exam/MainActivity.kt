@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.i("oncreate","CREADA")
         //Contenido que irá en la lista
         //-------------------------------------jalar datos bd
         listaColegios= jalarDatosColegioBD()
@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
             listaColegios
 
         )
-
-
 
         val listViewColegio = findViewById<ListView>(R.id.ltv_colegio)
         listViewColegio.adapter = adaptador

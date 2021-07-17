@@ -32,6 +32,10 @@ class Estudiante(
         return 0
     }
 
+    override fun toString(): String {
+       return "${this.nombre}\nCurso: ${this.curso}"
+    }
+
     companion object CREATOR : Parcelable.Creator<Estudiante> {
         override fun createFromParcel(parcel: Parcel): Estudiante {
             return Estudiante(parcel)
