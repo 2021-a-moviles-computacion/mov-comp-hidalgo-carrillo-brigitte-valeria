@@ -48,6 +48,11 @@ class MainActivity : AppCompatActivity() {
             abrirActividad(BListView::class.java)//abre esta clase
         }
 
+        val btnHttp = findViewById<Button>(R.id.btn_ir_http)
+        btnHttp.setOnClickListener {
+            abrirActividadConParametros(HHttpActivity::class.java)
+        }
+
         val botonIrIntentw = findViewById<Button>(
             R.id.btn_ir_intent
         )
@@ -68,6 +73,10 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intentConRespuesta, CODIGO_RESPUESTA_INTENT_IMPLICITO)
         }
 
+        val botonRecyclerView = findViewById<Button>(R.id.btn_ir_recycler_view)
+        botonRecyclerView.setOnClickListener {
+            abrirActividadConParametros(GRecyclerView::class.java)
+        }
         //abre boton
         val botonIrDeberClase = findViewById<Button>(
             R.id.btn_claseDeber
