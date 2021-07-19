@@ -2,6 +2,7 @@ package com.ferrifrancis.exam
 
 import Colegio
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,10 +16,25 @@ class BFormularioColegio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b_formulario_colegio)
         EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
-
-
         val botonAnadirColegio =  findViewById<Button>(R.id.id_btn_anadir_cole)
+        val edireColegio = findViewById<EditText>(R.id.it_nombre_cole)
+        val opcionAbrirComo=intent.getIntExtra("id",-1)//recibo los datos que mandó la otra clase
 
+        when (opcionAbrirComo){
+            //0 --> registra, ver
+
+            0->{
+
+            }
+            1 ->{ //1 --> edita
+                edireColegio.setFocusable(false);
+                edireColegio.setEnabled(false);
+                edireColegio.setCursorVisible(false);
+                edireColegio.setKeyListener(null);
+            }
+        }
+
+        //edireColegio.inputType = null
         botonAnadirColegio.setOnClickListener {
 
             val nombreColegio = findViewById<EditText>(R.id.it_nombre_cole).text.toString()

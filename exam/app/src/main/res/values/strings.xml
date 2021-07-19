@@ -26,5 +26,8 @@
     <string name="txt_inf_colegio">Información colegio</string>
     <string name="txt_inf_estudiante">Información estudiante</string>
 
+    <string name="txt_act_cole">Actualizar colegio</string>
+    <string name="txt_act_est">Actualizar estudiante</string>
+
 
 </resources>

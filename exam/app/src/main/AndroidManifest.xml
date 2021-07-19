@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BFormularioEstudiante"></activity>
+        <activity android:name=".CEditarColegio"></activity>
+        <activity android:name=".BFormularioEstudiante" />
         <activity android:name=".BVerEstudiantesColegio" />
         <activity android:name=".BFormularioColegio" />
         <activity android:name=".AAnadirColegio" />
