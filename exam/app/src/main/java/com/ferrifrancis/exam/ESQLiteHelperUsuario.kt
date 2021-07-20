@@ -230,18 +230,24 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return if(resultadoEliminar ==-1) false else true
     }
 
-    fun actualizarColegioPorID(id: Int, numAulas: Int): Boolean{
+    fun actualizarColegioPorID(id: Int?, numAulas: Int): Boolean{
         val conexionActualizar = writableDatabase
         val valoresActualizar = ContentValues()
-        valoresActualizar.put("numAulas", numAulas)
-        val resultadoActualizar: Int = conexionActualizar.update(
-            "colegio",
-            valoresActualizar,
-            "idColegio",
-            arrayOf(id.toString())
-        )
-        conexionActualizar.close()
-        return if(resultadoActualizar == -1) false else true
+        Log.i("bd","ACTUALIZAR COLEGIO ${id}")
+        Log.i("bd","ACTUALIZAR COLEGIO ${numAulas}")
+
+        if(id != null) {
+            valoresActualizar.put("numAulas", numAulas)
+            val resultadoActualizar: Int = conexionActualizar.update(
+                "colegio",
+                valoresActualizar,
+                "idColegio=?",
+                arrayOf(id.toString())
+            )
+            conexionActualizar.close()
+            return if (resultadoActualizar == -1) false else true
+        }
+        return false
     }
 
     fun actualizarEstudianteID(cedula: String, curso: String): Boolean{

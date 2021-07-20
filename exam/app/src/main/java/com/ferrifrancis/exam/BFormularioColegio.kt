@@ -13,9 +13,12 @@ import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
 import androidx.core.view.isVisible
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BFormularioColegio : AppCompatActivity() {
     val listaColegios = ArrayList<Colegio>()
+
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class BFormularioColegio : AppCompatActivity() {
 
         val opcionAbrirComo=intent.getIntExtra("id",-1)//recibo los datos que mandó la otra clase
         val colegio=intent.getParcelableExtra<Colegio>("colegio")//recibo los datos que mandó la otra clase
-
+        Log.i("bd","EL ID DEL COLEGIO ${colegio?.idColegio}")
 
 
         when (opcionAbrirComo){
@@ -42,8 +45,10 @@ class BFormularioColegio : AppCompatActivity() {
             0->{
                 preparaActividadParaRegistrar(botonEditarColegio,txtEditarColegio,botonAnadirColegio,txtRegistrarColegio)
                 botonAnadirColegio.setOnClickListener {
-                    registrarColegio(nombreColegio,distrito,numAulas,esFiscal)
+                    val resulRegis=registrarColegio(nombreColegio,distrito,numAulas,esFiscal)
+                    Log.i("bd","actualizo? ${resulRegis}")
                     abrirActividad(MainActivity::class.java)
+
                 }
             }
             1 ->{ //1 --> edita
@@ -51,6 +56,16 @@ class BFormularioColegio : AppCompatActivity() {
                     preparaActividadParaEditar(nombreColegio,distrito,numAulas,esFiscal,
                         colegio,botonAnadirColegio,txtRegistrarColegio
                     ,botonEditarColegio,txtEditarColegio)
+
+                    botonEditarColegio.setOnClickListener {
+                        Log.i("bd", "ID COLEGIO ${numAulas.text.toString().toInt()}")
+                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarColegioPorID(
+                            colegio.idColegio,
+                            numAulas.text.toString().toInt()
+                        )
+                        Log.i("bd", "actualizo? ${resulAct}")
+                        abrirActividad(MainActivity::class.java)
+                    }
                 }
             }
         }
@@ -68,6 +83,18 @@ class BFormularioColegio : AppCompatActivity() {
         txtRegistrarColegio.visibility= View.VISIBLE
     }
 
+    fun escondeEditText(objeto: EditText){
+        objeto.setFocusable(false);
+        objeto.setEnabled(false);
+        objeto.setCursorVisible(false);
+        objeto.setKeyListener(null);
+    }
+    fun escondeSwitch(objeto: Switch){
+        objeto.setFocusable(false);
+        objeto.setEnabled(false);
+        objeto.setCursorVisible(false);
+        objeto.setKeyListener(null);
+    }
     fun preparaActividadParaEditar(nombreColegio: EditText,distrito: EditText,
                           numAulas: EditText,esFiscal: Switch, colegio: Colegio,
                             btnAnadir: Button, txtRegistrarColegio: TextView
@@ -75,16 +102,10 @@ class BFormularioColegio : AppCompatActivity() {
     {
         //Setea y edita los edit text que no puede editar
         nombreColegio.setText(colegio.nombre)
-        nombreColegio.setFocusable(false);
-        nombreColegio.setEnabled(false);
-        nombreColegio.setCursorVisible(false);
-        nombreColegio.setKeyListener(null);
+        escondeEditText(nombreColegio)
 
         distrito.setText(colegio.distrito.toString())
-        distrito.setFocusable(false);
-        distrito.setEnabled(false);
-        distrito.setCursorVisible(false);
-        distrito.setKeyListener(null);
+        escondeEditText(distrito)
 
         if (colegio.esFiscal == true)
             esFiscal.setChecked(true)
@@ -92,15 +113,13 @@ class BFormularioColegio : AppCompatActivity() {
             esFiscal.setChecked(false)
 
         esFiscal.setText(colegio.distrito.toString())
-        esFiscal.setFocusable(false);
-        esFiscal.setEnabled(false);
-        esFiscal.setCursorVisible(false);
-        esFiscal.setKeyListener(null);
+        escondeSwitch(esFiscal)
 
         btnAnadir.visibility= View.GONE
         txtRegistrarColegio.visibility= View.GONE
         botonEditarColegio.visibility= View.VISIBLE
         txtEditarColegio.visibility= View.VISIBLE
+
 
     }
 

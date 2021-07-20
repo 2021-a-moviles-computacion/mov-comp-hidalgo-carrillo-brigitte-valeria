@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         this.indxItemContextMenu = info.position
         Log.i("list-view", "list view ${this.indxItemContextMenu}")
+        Log.i("list-view","TAMAÑO aulas--->${listaColegios[indxItemContextMenu].numAulas}")
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
