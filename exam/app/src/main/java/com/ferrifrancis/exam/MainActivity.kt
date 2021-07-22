@@ -1,6 +1,7 @@
 package com.ferrifrancis.exam
 
 import Colegio
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             //abrirActividad(BFormularioColegio::class.java)
             abrirActividadConParametros(BFormularioColegio::class.java,null,0)
         }
+
     }
 
     fun abrirActividad(clase : Class <*>)
@@ -86,8 +89,33 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mi_eliminar -> {
+                /*builder*/
+
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Eliminar Colegio")
+                builder.setMessage("Se eliminará el colegio y el registro de todos sus estudiantes ¿Eliminar?")
+
+                builder.apply {
+                    builder.setPositiveButton("Si", DialogInterface.OnClickListener{dialog,which ->
+                        Log.i("list-view", "si")
+                        val rptaEliminar =eliminarColegioBD()
+                        Log.i("bdd", "eliminar: ${rptaEliminar}")
+                    })
+                    builder.setNegativeButton("no", DialogInterface.OnClickListener{dialog,which ->
+                        Log.i("list-view", "no")
+
+                    })
+                }
+
+                val dialogo = builder.create()
+                dialogo.show()
+
+                Log.i("list-view","${indxItemContextMenu}")
+
                 return true
             }
+
+
             R.id.mi_registrar_estudiantes -> {
                 abrirActividadConParametros(BFormularioEstudiante::class.java, listaColegios[this.indxItemContextMenu],0)
                 return true
@@ -148,10 +176,16 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         Log.i("android","on destroy")
     }
-    fun anadirItemsAlListView(/*colegio: Colegio, colegioLista: ArrayList<Colegio>,*/ adaptador: ArrayAdapter<Colegio>)
-    {
-        //colegioLista.add(colegio)
-        adaptador.notifyDataSetChanged()
+
+    fun eliminarColegioBD(): Boolean{
+        EBaseDeDatos.TablaUsuario= ESQLiteHelperUsuario(this)
+        val indxCole: Int? =this.listaColegios[indxItemContextMenu].idColegio
+        if (indxCole != null) {
+            val rptaEliminar: Boolean = EBaseDeDatos.TablaUsuario!!.eliminarColegioPorID(indxCole)
+            return rptaEliminar
+        }
+        else
+            return false
     }
 
     fun jalarDatosColegioBD(): ArrayList<Colegio>
