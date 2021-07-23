@@ -23,13 +23,17 @@ class BFormularioEstudiante : AppCompatActivity() {
 
 
         val colegio = intent.getParcelableExtra<Colegio>("colegio")//recibo los datos que mandó la otra clase
+        val abrirFormularioComo = intent.getIntExtra("id",-1)//recibo los datos que mandó la otra clase
         EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
+
         val txt_nombreColegio = findViewById<TextView>(R.id.tv_pone_nombre_cole_for_est)
+        txt_nombreColegio.text = colegio?.nombre
         val botonRegsitrarEstudiante = findViewById<Button>(R.id.btn_registrar_for_est)
 
         botonRegsitrarEstudiante.setOnClickListener {
             if (colegio != null) {
-                txt_nombreColegio.text = colegio.nombre
+
+                Log.i("bdd", "nombre colegio${colegio.nombre}")
                 this.idColegio = colegio.idColegio!!
 
                 val estudiante = getValoresFormularioDevuelveEstudiante()

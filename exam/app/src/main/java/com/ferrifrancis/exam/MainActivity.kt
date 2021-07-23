@@ -75,8 +75,11 @@ class MainActivity : AppCompatActivity() {
                 abrirActividadConParametros(
                     BVerEstudiantesColegio::class.java,
                     listaColegios[this.indxItemContextMenu],
+
                     0
+
                 )
+                Log.i("bdd", "-->envia:${listaColegios[this.indxItemContextMenu].idColegio}")
                 return true
             }
             R.id.mi_editar -> {

@@ -46,7 +46,7 @@ class BFormularioColegio : AppCompatActivity() {
                 preparaActividadParaRegistrar(botonEditarColegio,txtEditarColegio,botonAnadirColegio,txtRegistrarColegio)
                 botonAnadirColegio.setOnClickListener {
                     val resulRegis=registrarColegio(nombreColegio,distrito,numAulas,esFiscal)
-                    Log.i("bd","actualizo? ${resulRegis}")
+                    Log.i("bdd","actualizo? ${resulRegis}")
                     abrirActividad(MainActivity::class.java)
 
                 }

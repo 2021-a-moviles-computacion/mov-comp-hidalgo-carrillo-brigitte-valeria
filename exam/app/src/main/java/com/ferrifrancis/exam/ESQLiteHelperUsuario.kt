@@ -48,12 +48,25 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         db?.execSQL(scriptCrearTablaEstudiante)
     }
 
+    fun existeCedulaEstudiante(cedula: String?): Boolean
+    {
+         val conexion = readableDatabase
+        if(cedula != null) {
+            val consulta = "SELECT * FROM estudiante WHERE cedulaEstudiante =${cedula}"
+            val resultadoConsulta = conexion.rawQuery(consulta, null)
+            Log.i("bdd", "cuantas filas hay existeCedulaEstudiante?${resultadoConsulta.count}")
+            return if (resultadoConsulta.count != 0) true else false
+        }
+        else return false
+    }
+
     fun consultaEstudiantesXIDCole(id: Int): ArrayList<Estudiante>
     {
         val conexionEstudiante = readableDatabase
         val consulta = "SELECT * FROM estudiante WHERE idColegio = ${id}"
         val resultadoConsulta = conexionEstudiante.rawQuery(consulta, null)
         val arrayEstudiantes = ArrayList<Estudiante>()
+        Log.i("bdd", "cuantas filas hay consultaEstudiantesXID?${resultadoConsulta.count}")
 
         if (resultadoConsulta.moveToFirst())
         {
@@ -78,20 +91,22 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
 
     fun crearEstudianteFormulario (estudiante: Estudiante): Boolean{
         //existe el id?
-        val conexionEscritura = writableDatabase
-        val valoresAGuardar = ContentValues()
-        
-        valoresAGuardar.put("nombreEstudiante",estudiante.nombre)
-        valoresAGuardar.put("cedulaEstudiante",estudiante.cedula)
-        valoresAGuardar.put("fechaNacimiento",estudiante.fechaNacimiento)
-        valoresAGuardar.put("curso",estudiante.curso)
-        valoresAGuardar.put("idColegio",estudiante.idColegio)
-        valoresAGuardar.put("sexo", estudiante.sexo)
+        if (!existeCedulaEstudiante(estudiante?.cedula)) {
+            val conexionEscritura = writableDatabase
+            val valoresAGuardar = ContentValues()
 
-        val resultadoEscritura =  conexionEscritura.insert("estudiante",null, valoresAGuardar)
-        conexionEscritura.close()
-        Log.i("bdd", "Creó estudiante? ${resultadoEscritura}")
-        return if (resultadoEscritura.toInt() == -1) false else true
+            valoresAGuardar.put("nombreEstudiante", estudiante.nombre)
+            valoresAGuardar.put("cedulaEstudiante", estudiante.cedula)
+            valoresAGuardar.put("fechaNacimiento", estudiante.fechaNacimiento)
+            valoresAGuardar.put("curso", estudiante.curso)
+            valoresAGuardar.put("idColegio", estudiante.idColegio)
+            valoresAGuardar.put("sexo", estudiante.sexo)
+            Log.i("bdd", "--> recibo ${estudiante.idColegio}")
+            val resultadoEscritura = conexionEscritura.insert("estudiante", null, valoresAGuardar)
+            conexionEscritura.close()
+            Log.i("bdd", "Creó estudiante? ${resultadoEscritura}")
+            return if (resultadoEscritura.toInt() == -1) false else true
+        }else return false
     }
 
     fun creaColegioFormulario(colegio: Colegio): Boolean
@@ -176,11 +191,11 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return arregloColegio
     }
 
-    fun consultaEstudiantePorID(id: Int): ArrayList<Estudiante>
+    fun consultaEstudiantePorIDReturnArray(id: Int): ArrayList<Estudiante>
     {
         val conexionLectura = readableDatabase
         val listaEstudiante =  ArrayList<Estudiante>()
-        val scriptConsulta = "SELECT * FROM estudiante WHERE cedula =${id}"
+        val scriptConsulta = "SELECT * FROM estudiante WHERE cedulaEstudiante =${id}"
 
         val resultadoConsulta =conexionLectura.rawQuery(scriptConsulta, null)
 
