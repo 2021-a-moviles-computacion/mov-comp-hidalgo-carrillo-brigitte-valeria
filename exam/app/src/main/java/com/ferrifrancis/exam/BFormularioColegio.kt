@@ -84,10 +84,10 @@ class BFormularioColegio : AppCompatActivity() {
     }
 
     fun escondeEditText(objeto: EditText){
-        objeto.setFocusable(false);
-        objeto.setEnabled(false);
-        objeto.setCursorVisible(false);
-        objeto.setKeyListener(null);
+        objeto.setFocusable(false)
+        objeto.setEnabled(false)
+        objeto.setCursorVisible(false)
+        objeto.setKeyListener(null)
     }
     fun escondeSwitch(objeto: Switch){
         objeto.setFocusable(false);

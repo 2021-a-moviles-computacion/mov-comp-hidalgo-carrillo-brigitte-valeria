@@ -7,7 +7,7 @@ class Estudiante(
     var curso: String?,
     val cedula: String?,
     val sexo: String?,
-    val idColegio: Int): Parcelable
+    val idColegio: Int?): Parcelable
 {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -25,7 +25,9 @@ class Estudiante(
         parcel.writeString(curso)
         parcel.writeString(cedula)
         parcel.writeString(sexo)
-        parcel.writeInt(idColegio)
+        if (idColegio != null) {
+            parcel.writeInt(idColegio)
+        }
     }
 
     override fun describeContents(): Int {

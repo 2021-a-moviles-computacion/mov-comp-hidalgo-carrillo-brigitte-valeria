@@ -207,5 +207,15 @@
                 android:text="@string/txt_masculino" />
         </RadioGroup>
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="@+id/btn_registrar_for_est"
+            app:layout_constraintStart_toStartOf="@+id/btn_registrar_for_est"
+            app:layout_constraintTop_toBottomOf="@+id/btn_registrar_for_est" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
