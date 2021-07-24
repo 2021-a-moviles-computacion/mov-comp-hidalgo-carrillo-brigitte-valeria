@@ -196,8 +196,9 @@ class MainActivity : AppCompatActivity() {
         EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
         val indxCole: Int? = this.listaColegios[indxItemContextMenu].idColegio
         if (indxCole != null) {
-            val rptaEliminar: Boolean = EBaseDeDatos.TablaUsuario!!.eliminarColegioPorID(indxCole)
-            return rptaEliminar
+            val rptaEliminarCole: Boolean = EBaseDeDatos.TablaUsuario!!.eliminarColegioPorID(indxCole)
+            EBaseDeDatos.TablaUsuario!!.eliminarEstPorIDCole(indxCole)
+            return rptaEliminarCole
         } else
             return false
     }
