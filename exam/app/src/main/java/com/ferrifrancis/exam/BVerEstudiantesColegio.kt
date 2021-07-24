@@ -5,6 +5,8 @@ import Estudiante
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextMenu
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
@@ -33,6 +35,7 @@ class BVerEstudiantesColegio : AppCompatActivity() {
                     listaEstudiantes
                 )
                 listaView.adapter = adaptador
+                registerForContextMenu(listaView)
 
             } else
             {
@@ -44,7 +47,7 @@ class BVerEstudiantesColegio : AppCompatActivity() {
                 listaView.adapter = adaptador
 
             }
-            registerForContextMenu(listaView)
+           // registerForContextMenu(listaView)
 
 
         }
@@ -56,4 +59,15 @@ class BVerEstudiantesColegio : AppCompatActivity() {
         return EBaseDeDatos.TablaUsuario!!.consultaEstudiantesXIDCole(idCole)
     }
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+
+         super.onCreateContextMenu(menu, v, menuInfo)
+         val inflater = menuInflater
+         inflater.inflate(R.menu.menu_estudiante,menu)
+
+    }
 }
