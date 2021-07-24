@@ -23,8 +23,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
                 esFiscal BOOLEAN,
                 distrito INTEGER,
                 numAulas INTEGER, 
-            
-                
+                     
             )
         """.trimIndent()
 
@@ -227,15 +226,18 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return if (resultadoEliminar != -1) true else false
     }
 
-    fun eliminarEstudiantePorCedula(id: Int): Boolean {
-        val conexionEliminar = writableDatabase
-        val resultadoEliminar = conexionEliminar.delete(
-            "estudiante",
-            "cedula =?",
-            arrayOf(id.toString())
-        )
-        conexionEliminar.close()
-        return if (resultadoEliminar == -1) false else true
+    fun eliminarEstudiantePorCedula(id: String?=null): Boolean {
+        if(id != null){
+            val conexionEliminar = writableDatabase
+            val resultadoEliminar = conexionEliminar.delete(
+                "estudiante",
+                "cedulaEstudiante =?",
+                arrayOf(id)
+            )
+            conexionEliminar.close()
+            return if (resultadoEliminar == -1) false else true
+        }
+        return false
     }
 
     fun eliminarEstPorIDCole(idColegio: Int?): Boolean
