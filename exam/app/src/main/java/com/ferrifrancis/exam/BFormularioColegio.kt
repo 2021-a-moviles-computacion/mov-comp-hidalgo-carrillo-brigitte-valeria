@@ -3,7 +3,6 @@ package com.ferrifrancis.exam
 import Colegio
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
-import androidx.core.view.isVisible
-import java.util.*
 import kotlin.collections.ArrayList
 
 class BFormularioColegio : AppCompatActivity() {
@@ -59,7 +56,7 @@ class BFormularioColegio : AppCompatActivity() {
 
                     botonEditarColegio.setOnClickListener {
                         Log.i("bd", "ID COLEGIO ${numAulas.text.toString().toInt()}")
-                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarColegioPorID(
+                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarAulasColegioPorID(
                             colegio.idColegio,
                             numAulas.text.toString().toInt()
                         )

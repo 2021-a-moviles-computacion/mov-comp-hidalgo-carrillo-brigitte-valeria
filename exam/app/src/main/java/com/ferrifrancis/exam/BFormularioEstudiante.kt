@@ -3,14 +3,12 @@ package com.ferrifrancis.exam
 import Colegio
 import Estudiante
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import com.google.android.material.chip.ChipGroup
 
 class BFormularioEstudiante : AppCompatActivity() {
 
@@ -31,6 +29,7 @@ class BFormularioEstudiante : AppCompatActivity() {
         val txt_nombreColegio = findViewById<TextView>(R.id.tv_pone_nombre_cole_for_est)
         txt_nombreColegio.text = colegio?.nombre
         val botonRegsitrarEstudiante = findViewById<Button>(R.id.btn_registrar_for_est)
+        val botonEditarEstudiante = findViewById<Button>(R.id.btn_editar_for_est)
 
         val nombre = findViewById<EditText>(R.id.it_nombre_est_for_est)
         val cedula = findViewById<EditText>(R.id.it_cedula_for_est)
@@ -41,6 +40,7 @@ class BFormularioEstudiante : AppCompatActivity() {
         when (abrirFormularioComo)
         {
             0->{ //registrar
+                prepararActividadParaRegistrar(botonEditarEstudiante)
                 botonRegsitrarEstudiante.setOnClickListener {
                     if (colegio != null) {
 
@@ -61,14 +61,10 @@ class BFormularioEstudiante : AppCompatActivity() {
             }
             1->{ //editar
                 if (estudiante != null) {
-                    preparaActividadParaEditar(estudiante ,nombre,cedula,fecha,sexo,curso)
-                    botonEditarColegio.setOnClickListener {
-                        Log.i("bd", "ID COLEGIO ${numAulas.text.toString().toInt()}")
-                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarColegioPorID(
-                            colegio.idColegio,
-                            numAulas.text.toString().toInt()
-                        )
-                        Log.i("bd", "actualizo? ${resulAct}")
+                    preparaActividadParaEditar(estudiante ,nombre,cedula,fecha,sexo,curso,botonRegsitrarEstudiante)
+                    botonEditarEstudiante.setOnClickListener {
+                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarCursoEstudiantePorID(estudiante.cedula!!,curso.text.toString())
+                        Log.i("bd", "editó estudiante? ${resulAct}")
                         abrirActividad(MainActivity::class.java)
                     }
                 }
@@ -91,12 +87,24 @@ class BFormularioEstudiante : AppCompatActivity() {
         objeto.setKeyListener(null);
     }
 
-    @SuppressLint("ResourceType")
-    fun preparaActividadParaEditar(estudiante: Estudiante, nombre: EditText, cedula: EditText
-                                   , fecha: EditText, sexo: RadioGroup, curso: EditText)
+    fun prepararActividadParaRegistrar(btnEditar: Button)
     {
+        findViewById<TextView>(R.id.tv_actualiza_est_for_est).visibility = View.GONE
+        btnEditar.visibility = View.GONE
 
+    }
 
+    @SuppressLint("ResourceType", "WrongViewCast")
+    fun preparaActividadParaEditar(estudiante: Estudiante, nombre: EditText, cedula: EditText
+                                   , fecha: EditText, sexo: RadioGroup, curso: EditText,
+                                        botonRegistrar: Button)
+    {
+        //esconde lo que no debe aparecer
+        findViewById<TextView>(R.id.tv_registra_est_for_est).visibility= View.GONE
+        findViewById<TextView>(R.id.tv_informacion_colegio_for_est).visibility= View.GONE
+        findViewById<TextView>(R.id.tv_pone_nombre_cole_for_est).visibility= View.GONE
+        findViewById<TextView>(R.id.tv_nombre_coleg_for_est).visibility= View.GONE
+        botonRegistrar.visibility = View.GONE
         //Setea y edita los edit text que no puede editar
         nombre.setText(estudiante.nombre)
         escondeEditText(nombre)

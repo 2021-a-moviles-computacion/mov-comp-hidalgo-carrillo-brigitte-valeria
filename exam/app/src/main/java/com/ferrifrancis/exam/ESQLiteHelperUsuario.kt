@@ -238,18 +238,23 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return if (resultadoEliminar == -1) false else true
     }
 
-    fun eliminarEstPorIDCole(idColegio: Int): Boolean
+    fun eliminarEstPorIDCole(idColegio: Int?): Boolean
     {
-        val conexion= writableDatabase
-        val resultadoEliminar: Int = conexion.delete("estudiante",
-        "idColegio=?",
-        arrayOf(idColegio.toString()))
-        conexion.close()
-        Log.i("bdd","Número estudiantes eliminado: ${resultadoEliminar}")
-        return (resultadoEliminar != 0)
+        if (idColegio != null) {
+            val conexion = writableDatabase
+            val resultadoEliminar: Int = conexion.delete(
+                "estudiante",
+                "idColegio=?",
+                arrayOf(idColegio.toString())
+            )
+            conexion.close()
+            Log.i("bdd", "Número estudiantes eliminado: ${resultadoEliminar}")
+            return (resultadoEliminar != 0)
+        }
+        else return false
     }
 
-    fun actualizarColegioPorID(id: Int?, numAulas: Int): Boolean{
+    fun actualizarAulasColegioPorID(id: Int?, numAulas: Int): Boolean{
         val conexionActualizar = writableDatabase
         val valoresActualizar = ContentValues()
         Log.i("bd","ACTUALIZAR COLEGIO ${id}")
@@ -269,7 +274,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         return false
     }
 
-    fun actualizarEstudianteID(cedula: String, curso: String): Boolean{
+    fun actualizarCursoEstudiantePorID(cedula: String, curso: String): Boolean{
         val conexionActualizar = writableDatabase
         val valoresActualizar = ContentValues()
 

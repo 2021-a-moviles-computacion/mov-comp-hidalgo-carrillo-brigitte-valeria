@@ -18,10 +18,10 @@
             android:text="@string/menItmCol_registrarEst"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.06" />
+            app:layout_constraintVertical_bias="0.041" />
 
         <TextView
             android:id="@+id/rv_nombre_est_for_est"
@@ -177,7 +177,7 @@
             android:id="@+id/btn_registrar_for_est"
             android:layout_width="227dp"
             android:layout_height="50dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:text="@string/menItmCol_registrarEst"
             app:layout_constraintEnd_toEndOf="@+id/rg_sexo_for_est"
             app:layout_constraintHorizontal_bias="0.0"
@@ -208,14 +208,26 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_editar_for_est"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="@+id/btn_registrar_for_est"
-            app:layout_constraintStart_toStartOf="@+id/btn_registrar_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/btn_registrar_for_est" />
+            android:layout_marginTop="84dp"
+            android:text="@string/txt_act_est"
+            app:layout_constraintEnd_toEndOf="@+id/rg_sexo_for_est"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/rg_sexo_for_est"
+            app:layout_constraintTop_toBottomOf="@+id/rg_sexo_for_est" />
+
+        <TextView
+            android:id="@+id/tv_actualiza_est_for_est"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/txt_act_est"
+            app:layout_constraintBottom_toTopOf="@+id/tv_registra_est_for_est"
+            app:layout_constraintEnd_toEndOf="@+id/tv_registra_est_for_est"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="@+id/tv_registra_est_for_est" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
