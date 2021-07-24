@@ -7,10 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import kotlin.collections.ArrayList
 
 class BFormularioColegio : AppCompatActivity() {
@@ -42,7 +39,8 @@ class BFormularioColegio : AppCompatActivity() {
             0->{
                 preparaActividadParaRegistrar(botonEditarColegio,txtEditarColegio,botonAnadirColegio,txtRegistrarColegio)
                 botonAnadirColegio.setOnClickListener {
-                    val resulRegis=registrarColegio(nombreColegio,distrito,numAulas,esFiscal)
+                    val resulRegis: Boolean? =registrarColegio(nombreColegio,distrito,numAulas,esFiscal)
+                    if (resulRegis == true) Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show()
                     Log.i("bdd","actualizo? ${resulRegis}")
                     abrirActividad(MainActivity::class.java)
 
@@ -60,6 +58,7 @@ class BFormularioColegio : AppCompatActivity() {
                             colegio.idColegio,
                             numAulas.text.toString().toInt()
                         )
+                        if (resulAct) Toast.makeText(this, "¡Colegio editado!", Toast.LENGTH_SHORT).show()
                         Log.i("bd", "actualizo? ${resulAct}")
                         abrirActividad(MainActivity::class.java)
                     }

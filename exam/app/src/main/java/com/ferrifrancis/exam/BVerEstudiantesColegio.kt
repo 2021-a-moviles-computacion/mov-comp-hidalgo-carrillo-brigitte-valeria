@@ -47,6 +47,7 @@ class BVerEstudiantesColegio: AppCompatActivity() {
         EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
 
         val resultadoEliminar: Boolean =EBaseDeDatos.TablaUsuario!!.eliminarEstudiantePorCedula(listaEstudiantes[posicionEstudiante].cedula)
+        if (resultadoEliminar) Toast.makeText(this, "¡Eliminado!", Toast.LENGTH_SHORT).show()
         return resultadoEliminar
 
     }
@@ -122,6 +123,7 @@ class BVerEstudiantesColegio: AppCompatActivity() {
                             listaEstudiantes= jalarDatosEstudianteBD()
                             poneDatosEnAdaptador()
 
+
                         })
                     builder.setNegativeButton(
                         "no",
@@ -136,6 +138,7 @@ class BVerEstudiantesColegio: AppCompatActivity() {
             }
             else -> super.onContextItemSelected(item)
         }
+
     }
 
     override fun onCreateContextMenu(

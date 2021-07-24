@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import android.widget.Toast.LENGTH_SHORT
 
 class BFormularioEstudiante : AppCompatActivity() {
 
@@ -53,6 +54,7 @@ class BFormularioEstudiante : AppCompatActivity() {
 
                         if (resultadoTabla) {
                             Log.i("bdd", "Estudiante creado")
+                            Toast.makeText(this, "¡Estudiante registrado!", LENGTH_SHORT).show()
                         }
                         abrirActividad(MainActivity::class.java)
                     }
@@ -65,6 +67,7 @@ class BFormularioEstudiante : AppCompatActivity() {
                     botonEditarEstudiante.setOnClickListener {
                         val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarCursoEstudiantePorID(estudiante.cedula!!,curso.text.toString())
                         Log.i("bd", "editó estudiante? ${resulAct}")
+                        Toast.makeText(this, "¡Estudiante editado!", LENGTH_SHORT).show()
                         abrirActividad(MainActivity::class.java)
                     }
                 }

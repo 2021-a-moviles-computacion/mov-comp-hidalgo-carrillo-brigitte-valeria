@@ -11,10 +11,7 @@ import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import java.util.*
@@ -108,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                             listaColegios=jalarDatosColegioBD()
                             poneDatosEnAdaptador()
 
+
                         })
                     builder.setNegativeButton(
                         "no",
@@ -198,6 +196,7 @@ class MainActivity : AppCompatActivity() {
         if (indxCole != null) {
             val rptaEliminarCole: Boolean = EBaseDeDatos.TablaUsuario!!.eliminarColegioPorID(indxCole)
             EBaseDeDatos.TablaUsuario!!.eliminarEstPorIDCole(indxCole)
+            if (rptaEliminarCole) Toast.makeText(this, "¡Eliminado!", Toast.LENGTH_SHORT).show()
             return rptaEliminarCole
         } else
             return false
