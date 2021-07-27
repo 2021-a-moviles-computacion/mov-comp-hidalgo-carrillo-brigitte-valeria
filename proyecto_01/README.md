@@ -4,4 +4,5 @@
 
 
 Historias de usuario: https://trello.com/b/XyBa8yU8/historias-de-usuario-am
+
 Modelo relacional: https://docs.google.com/document/d/1vKQrP81fNfYhFgERBTethiYXvUqNm42prDsJXq7hkSs/edit?usp=sharing
