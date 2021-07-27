@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BFormularioColegio">
+
+
+    <EditText
+        android:id="@+id/it_nombre_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/sw_esfiscal_cole"
+        android:layout_width="54dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="@+id/it_num_aulas_cole"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="@+id/it_num_aulas_cole"
+        app:layout_constraintTop_toBottomOf="@+id/it_num_aulas_cole" />
+
+    <EditText
+        android:id="@+id/it_distrito_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/it_nombre_cole"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/it_nombre_cole"
+        app:layout_constraintTop_toBottomOf="@+id/it_nombre_cole" />
+
+    <EditText
+        android:id="@+id/it_num_aulas_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/it_distrito_cole"
+        app:layout_constraintStart_toStartOf="@+id/it_distrito_cole"
+        app:layout_constraintTop_toBottomOf="@+id/it_distrito_cole" />
+
+    <TextView
+        android:id="@+id/tv_es_fiscal_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:text="@string/txt_fiscal_cole"
+        app:layout_constraintBottom_toTopOf="@+id/sw_esfiscal_cole"
+        app:layout_constraintEnd_toEndOf="@+id/sw_esfiscal_cole"
+        app:layout_constraintStart_toStartOf="@+id/sw_esfiscal_cole" />
+
+    <TextView
+        android:id="@+id/tv_nombre_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/txt_nombre"
+        app:layout_constraintBottom_toTopOf="@+id/it_nombre_cole"
+        app:layout_constraintEnd_toEndOf="@+id/it_nombre_cole"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/it_nombre_cole" />
+
+    <TextView
+        android:id="@+id/tv_distrito_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/txt_distrito_cole"
+        app:layout_constraintBottom_toTopOf="@+id/it_distrito_cole"
+        app:layout_constraintEnd_toEndOf="@+id/it_distrito_cole"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/it_distrito_cole" />
+
+    <TextView
+        android:id="@+id/tv_num_aulas_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/txt_num_aulas_cole"
+        app:layout_constraintBottom_toTopOf="@+id/it_num_aulas_cole"
+        app:layout_constraintEnd_toEndOf="@+id/it_num_aulas_cole"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/it_num_aulas_cole" />
+
+    <Button
+        android:id="@+id/id_btn_anadir_cole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_registrar"
+        app:layout_constraintEnd_toEndOf="@+id/it_num_aulas_cole"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/sw_esfiscal_cole"
+        app:layout_constraintTop_toBottomOf="@+id/sw_esfiscal_cole" />
+
+    <TextView
+        android:id="@+id/tv_registrar_colegio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="@string/txt_registrar_cole"
+        app:layout_constraintBottom_toTopOf="@+id/it_nombre_cole"
+        app:layout_constraintEnd_toEndOf="@+id/it_nombre_cole"
+        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintStart_toStartOf="@+id/it_nombre_cole" />
+
+    <Button
+        android:id="@+id/btn_editar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/txt_act_cole"
+        app:layout_constraintEnd_toEndOf="@+id/id_btn_anadir_cole"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/id_btn_anadir_cole"
+        app:layout_constraintTop_toBottomOf="@+id/id_btn_anadir_cole" />
+
+    <TextView
+        android:id="@+id/tv_editar_colegio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/txt_act_cole"
+        app:layout_constraintBottom_toTopOf="@+id/it_nombre_cole"
+        app:layout_constraintEnd_toEndOf="@+id/tv_registrar_colegio"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_registrar_colegio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
