@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">cookpad</string>
     <string name="str_empty"></string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="titulo_receta">Receta titulo</string>
+    <string name="nombre_autor_receta">Nombre autor receta</string>
+
 </resources>
