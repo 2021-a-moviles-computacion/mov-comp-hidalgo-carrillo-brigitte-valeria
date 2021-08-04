@@ -8,10 +8,11 @@
     app:cardElevation="10dp"
     app:cardCornerRadius="2dp"
     app:cardPreventCornerOverlap="false"
+    tools:context=".fragments.HomeFragment"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="233dp"
+        android:layout_width="489dp"
         android:layout_height="wrap_content">
 
 

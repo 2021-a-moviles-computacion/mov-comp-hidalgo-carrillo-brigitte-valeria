@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ferrifrancis.cookpad.R
 import com.ferrifrancis.cookpad.adapter.HomeData
 import com.ferrifrancis.cookpad.adapter.HomeRecyclerAdapter
@@ -20,9 +21,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
 
-        }
     }
 
 
@@ -38,6 +37,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
         initRecyclerView()
+        addDataSet()
+
     }
 
     private fun addDataSet()
