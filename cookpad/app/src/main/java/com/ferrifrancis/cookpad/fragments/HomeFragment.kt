@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ferrifrancis.cookpad.R
@@ -50,7 +51,7 @@ class HomeFragment : Fragment() {
     private fun initRecyclerView()
     {
         rv_home.apply {
-            rv_home.layoutManager = LinearLayoutManager(activity)
+            rv_home.layoutManager = GridLayoutManager(activity,2)
             homeAdapter = HomeRecyclerAdapter()
             rv_home.adapter = homeAdapter
         }
