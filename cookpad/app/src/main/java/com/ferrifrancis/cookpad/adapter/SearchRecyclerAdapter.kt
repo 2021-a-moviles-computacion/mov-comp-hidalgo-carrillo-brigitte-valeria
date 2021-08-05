@@ -41,7 +41,7 @@ class SearchRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     ) : RecyclerView.ViewHolder(itemView)
     {
         val imagenReceta = itemView.img_receta
-        val tituloReceta = itemView.tv_titulo_receta
+        val tituloReceta = itemView.et_titulo_receta
 
 
         fun bind(home: Home) {

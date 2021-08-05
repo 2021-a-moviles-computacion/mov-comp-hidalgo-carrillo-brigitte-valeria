@@ -39,7 +39,7 @@
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/nombre_autor_receta"
+                android:text="@string/str_nombre_autor_receta"
                 android:textColor="@color/colorNombreAutorReceta"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -58,14 +58,14 @@
                 android:src="@drawable/receta_fideos" />
 
             <TextView
-                android:id="@+id/tv_titulo_receta"
+                android:id="@+id/et_titulo_receta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/titulo_receta"
+                android:text="@string/str_titulo_receta"
                 android:textColor="@color/colorTituloReceta"
                 android:textSize="18sp" />
         <com.google.android.material.chip.ChipGroup

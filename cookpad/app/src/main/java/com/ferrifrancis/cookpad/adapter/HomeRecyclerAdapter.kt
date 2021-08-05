@@ -37,7 +37,7 @@ class HomeRecyclerAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         itemView: View
     ): RecyclerView.ViewHolder(itemView){
         val imagenReceta = itemView.img_receta
-        val tituloReceta = itemView.tv_titulo_receta
+        val tituloReceta = itemView.et_titulo_receta
         val nombreAutorReceta = itemView.tv_nombre_autor_recete
         val imagenAutorReceta = itemView.img_usuario1
 

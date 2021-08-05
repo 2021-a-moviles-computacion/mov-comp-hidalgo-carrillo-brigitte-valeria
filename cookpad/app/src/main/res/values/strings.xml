@@ -3,13 +3,22 @@
     <string name="str_empty"></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="titulo_receta">Receta titulo</string>
-    <string name="nombre_autor_receta">Nombre autor receta</string>
-    <string name="busqueda_tendencia">Búsquedas en tendencia</string>
-    <string name="buscar_ingrediente_receta">Busca por receta o ingrediente</string>
-    <string name="crea_algo_nuevo">Crea algo nuevo</string>
-    <string name="ayuda_ins_otros">Ayuda e inspira a otros</string>
-    <string name="receta">Receta</string>
-    <string name="truco">Truco</string>
+    <string name="str_titulo_receta">Receta titulo</string>
+    <string name="str_nombre_autor_receta">Nombre autor receta</string>
+    <string name="str_busqueda_tendencia">Búsquedas en tendencia</string>
+    <string name="str_buscar_ingrediente_receta">Busca por receta o ingrediente</string>
+    <string name="str_crea_algo_nuevo">Crea algo nuevo</string>
+    <string name="str_ayuda_ins_otros">Ayuda e inspira a otros</string>
+    <string name="str_receta">Receta</string>
+    <string name="str_truco">Truco</string>
+
+    <string name="formulario_receta_titulo">Título. Ej: Pollo al horno</string>
+    <string name="formulario_receta_descripcion">¿Cuál es la historia de tu \nreceta, en quién te inspiraste,\n es especial para ti, para \n quién cocinaste?</string>
+    <string name="formulario_receta_procedencia">Añade la procedencia de tu \nreceta</string>
+    <string name="formulario_receta_comensales_descrp">Ej: 2 raciones</string>
+    <string name="formulario_receta_tiempo_decrp">Ej: 1 h 30 min</string>
+    <string name="formulario_receta_comensales_str">Comensales</string>
+    <string name="formulario_receta_tiempo_str">Tiempo de elaboración</string>
+    <string name="formulario_receta_desc_img">Añade una foto de tu receta hecha por ti</string>
 
 </resources>

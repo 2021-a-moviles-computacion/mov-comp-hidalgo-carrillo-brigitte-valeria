@@ -29,7 +29,7 @@
             android:src="@drawable/receta_fideos" />
 
         <TextView
-            android:id="@+id/tv_titulo_receta"
+            android:id="@+id/et_titulo_receta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
@@ -37,7 +37,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:textAlignment="@+id/img_receta"
-            android:text="@string/titulo_receta"
+            android:text="@string/str_titulo_receta"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </FrameLayout>

@@ -17,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/searchview_background"
         android:iconifiedByDefault="false"
-        android:queryHint="@string/buscar_ingrediente_receta"
+        android:queryHint="@string/str_buscar_ingrediente_receta"
 
         />
     <TextView
@@ -28,7 +28,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:text="@string/busqueda_tendencia"
+        android:text="@string/str_busqueda_tendencia"
         android:textColor="@color/colorNombreAutorReceta"
         android:textSize="20sp" />
 
