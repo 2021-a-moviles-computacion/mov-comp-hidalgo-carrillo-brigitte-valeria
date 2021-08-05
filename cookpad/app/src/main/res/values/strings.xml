@@ -7,5 +7,9 @@
     <string name="nombre_autor_receta">Nombre autor receta</string>
     <string name="busqueda_tendencia">Búsquedas en tendencia</string>
     <string name="buscar_ingrediente_receta">Busca por receta o ingrediente</string>
+    <string name="crea_algo_nuevo">Crea algo nuevo</string>
+    <string name="ayuda_ins_otros">Ayuda e inspira a otros</string>
+    <string name="receta">Receta</string>
+    <string name="truco">Truco</string>
 
 </resources>
