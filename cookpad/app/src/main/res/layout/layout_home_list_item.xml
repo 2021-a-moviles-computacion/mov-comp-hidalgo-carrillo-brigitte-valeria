@@ -75,14 +75,14 @@
             app:chipSpacingHorizontal="2dp"
             app:singleLine="true">
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_1"
+                android:id="@+id/chip_receta"
                 android:padding="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@mipmap/delicious_food_icon_foreground"
                 android:text="0"/>
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_2"
+                android:id="@+id/chip_truco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@mipmap/clapping_hands_icon_foreground"
