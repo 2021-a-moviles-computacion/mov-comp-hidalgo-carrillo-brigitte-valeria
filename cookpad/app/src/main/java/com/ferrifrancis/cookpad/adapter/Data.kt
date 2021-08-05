@@ -12,6 +12,12 @@ class Data {
                 "Fideos", mapOf(3 to "caraFeliz", 2 to "corazon", 1 to "aplauso")))
             list.add(Home("usuario2", R.drawable.usuario2,R.drawable.receta_lasagna,
                 "Lasagna", mapOf(3 to "caraFeliz", 2 to "corazon", 1 to "aplauso")))
+            list.add(Home("usuario3", R.drawable.usuario3,R.drawable.donas,
+                "Donas", mapOf(3 to "caraFeliz", 2 to "corazon", 1 to "aplauso")))
+            list.add(Home("usuario4", R.drawable.usuario4,R.drawable.hornado,
+                "Hornado", mapOf(3 to "caraFeliz", 2 to "corazon", 1 to "aplauso")))
+            list.add(Home("usuario4", R.drawable.usuario1,R.drawable.hamburguesa,
+                "Hamburguesa", mapOf(3 to "caraFeliz", 2 to "corazon", 1 to "aplauso")))
             return list
         }
 
