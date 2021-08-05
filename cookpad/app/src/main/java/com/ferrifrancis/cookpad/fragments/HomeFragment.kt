@@ -6,18 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ferrifrancis.cookpad.R
-import com.ferrifrancis.cookpad.adapter.HomeData
+import com.ferrifrancis.cookpad.adapter.Data
 import com.ferrifrancis.cookpad.adapter.HomeRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
 
-    //private var layoutManager: RecyclerView.LayoutManager? = null
-    //private var adapter: RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>? = null
     private lateinit var homeAdapter: HomeRecyclerAdapter //es no null,pero se inicializará más luego
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +40,7 @@ class HomeFragment : Fragment() {
 
     private fun addDataSet()
     {
-        val data = HomeData.createDataSet()
+        val data = Data.createDataSetHome()
         homeAdapter.submitList(data)
     }
 

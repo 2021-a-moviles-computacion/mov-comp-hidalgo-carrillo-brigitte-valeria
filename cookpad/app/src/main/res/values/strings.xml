@@ -5,5 +5,7 @@
 
     <string name="titulo_receta">Receta titulo</string>
     <string name="nombre_autor_receta">Nombre autor receta</string>
+    <string name="busqueda_tendencia">Búsquedas en tendencia</string>
+    <string name="buscar_ingrediente_receta">Busca por receta o ingrediente</string>
 
 </resources>

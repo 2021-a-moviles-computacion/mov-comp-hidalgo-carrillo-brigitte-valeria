@@ -39,12 +39,14 @@ class HomeRecyclerAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         val imagenReceta = itemView.img_receta
         val tituloReceta = itemView.tv_titulo_receta
         val nombreAutorReceta = itemView.tv_nombre_autor_recete
+        val imagenAutorReceta = itemView.img_usuario1
 
         fun bind(home : Home)
         {
             tituloReceta.setText(home.tituloReceta)
             nombreAutorReceta.setText(home.nombreAutorReceta)
             imagenReceta.setImageResource(home.imagenReceta)
+            imagenAutorReceta.setImageResource(home.imagenAutor)
         }
     }
 }
