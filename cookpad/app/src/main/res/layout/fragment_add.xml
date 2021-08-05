@@ -50,7 +50,7 @@
         android:layout_width="188dp"
         android:layout_height="52dp"
         android:layout_marginTop="28dp"
-        app:chipSpacingHorizontal="2dp"
+        app:chipSpacingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_subtitulo_fragment_add"
         app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toStartOf="@+id/tv_subtitulo_fragment_add"
@@ -63,14 +63,22 @@
             android:layout_height="wrap_content"
             android:padding="0dp"
             android:text="@string/receta"
-            app:chipIcon="@mipmap/document_icon_foreground" />
+            android:textColor="@color/colorWhite"
+            app:chipIcon="@mipmap/document_icon_foreground"
+            app:chipIconTint="@color/colorWhite"
+            app:shapeAppearanceOverlay="@style/circular_25"
+            app:chipBackgroundColor="@color/colorTituloReceta"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/truco"
-            app:chipIcon="@mipmap/idea_icon_foreground" />
+            android:textColor="@color/colorWhite"
+            app:chipIcon="@mipmap/idea_icon_foreground"
+            app:chipIconTint="@color/colorWhite"
+            app:shapeAppearanceOverlay="@style/circular_25"
+            app:chipBackgroundColor="@color/colorTituloReceta"/>
 
     </com.google.android.material.chip.ChipGroup>
 
