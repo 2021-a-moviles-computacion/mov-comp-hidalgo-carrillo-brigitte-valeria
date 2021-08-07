@@ -11,6 +11,7 @@
     <string name="str_ayuda_ins_otros">Ayuda e inspira a otros</string>
     <string name="str_receta">Receta</string>
     <string name="str_truco">Truco</string>
+    <string name="str_ingrediente">Ingredientes</string>
 
     <string name="formulario_receta_titulo">Título. Ej: Pollo al horno</string>
     <string name="formulario_receta_descripcion">¿Cuál es la historia de tu \nreceta, en quién te inspiraste,\n es especial para ti, para \n quién cocinaste?</string>
@@ -20,5 +21,5 @@
     <string name="formulario_receta_comensales_str">Comensales</string>
     <string name="formulario_receta_tiempo_str">Tiempo de elaboración</string>
     <string name="formulario_receta_desc_img">Añade una foto de tu receta hecha por ti</string>
-
+    <string name="formulario_receta_ingrediente_dscr">Ej: 250 g harina</string>
 </resources>
