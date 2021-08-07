@@ -23,4 +23,5 @@
     <string name="formulario_receta_tiempo_str">Tiempo de elaboración</string>
     <string name="formulario_receta_desc_img">Añade una foto de tu receta hecha por ti</string>
     <string name="formulario_receta_ingrediente_dscr">Ej: 250 g harina</string>
+    <string name="formulario_receta_paso_decrp">Ej: Mezcla los huevos con la \nleche hasta... </string>
 </resources>

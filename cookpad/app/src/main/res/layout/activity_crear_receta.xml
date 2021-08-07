@@ -311,12 +311,12 @@
 
                         <EditText
                             android:id="@+id/et_descripcion_paso"
-                            android:layout_width="20dp"
+                            android:layout_width="100dp"
                             android:layout_height="54dp"
                             android:layout_below="@id/tv_ingredientes"
                             android:background="@drawable/custom_input"
                             android:ems="10"
-                            android:hint="@string/formulario_receta_ingrediente_dscr"
+                            android:hint="@string/formulario_receta_paso_decrp"
                             android:inputType="textPersonName"
                             android:padding="10dp"
                             android:layout_marginLeft="15dp"
