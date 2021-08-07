@@ -12,6 +12,7 @@
     <string name="str_receta">Receta</string>
     <string name="str_truco">Truco</string>
     <string name="str_ingrediente">Ingredientes</string>
+    <string name="str_pasos">Pasos</string>
 
     <string name="formulario_receta_titulo">Título. Ej: Pollo al horno</string>
     <string name="formulario_receta_descripcion">¿Cuál es la historia de tu \nreceta, en quién te inspiraste,\n es especial para ti, para \n quién cocinaste?</string>
