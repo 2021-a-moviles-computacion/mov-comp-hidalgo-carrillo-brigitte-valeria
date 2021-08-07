@@ -5,109 +5,124 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CrearReceta">
 
-    <EditText
-        android:id="@+id/et_titulo_receta"
-        android:layout_width="284dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="@string/formulario_receta_titulo"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/et_descripcion_receta"
-        app:layout_constraintEnd_toEndOf="@+id/et_descripcion_receta"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_descripcion_receta"
-        app:layout_constraintTop_toBottomOf="@+id/img_receta"
-        app:layout_constraintVertical_bias="0.821" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".CrearReceta">
 
-    <EditText
-        android:id="@+id/et_descripcion_receta"
-        android:layout_width="283dp"
-        android:layout_height="128dp"
-        android:layout_marginBottom="28dp"
-        android:ems="10"
-        android:hint="@string/formulario_receta_descripcion"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/et_procedencia_receta"
-        app:layout_constraintEnd_toEndOf="@+id/et_procedencia_receta"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_procedencia_receta" />
+        <EditText
+            android:id="@+id/et_titulo_receta"
+            android:layout_width="320dp"
+            android:layout_height="54dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/formulario_receta_titulo"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/et_descripcion_receta"
+            app:layout_constraintEnd_toEndOf="@+id/et_descripcion_receta"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_descripcion_receta"
+            app:layout_constraintTop_toBottomOf="@+id/img_receta"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/et_tiempo_receta"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:hint="@string/formulario_receta_tiempo_decrp"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_tiempo_rreceta"
-        app:layout_constraintStart_toEndOf="@+id/tv_tiempo_rreceta"
-        app:layout_constraintTop_toTopOf="@+id/tv_tiempo_rreceta"
-        app:layout_constraintVertical_bias="0.28" />
+        <EditText
+            android:id="@+id/et_descripcion_receta"
+            android:layout_width="320dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/formulario_receta_descripcion"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/et_procedencia_receta"
+            app:layout_constraintEnd_toEndOf="@+id/et_procedencia_receta"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_procedencia_receta" />
 
-    <TextView
-        android:id="@+id/tv_comenales_receta"
-        android:layout_width="111dp"
-        android:layout_height="20dp"
-        android:text="@string/formulario_receta_comensales_str"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.246"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.777" />
+        <EditText
+            android:id="@+id/et_tiempo_receta"
+            android:layout_width="129dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="44dp"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/formulario_receta_tiempo_decrp"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tiempo_rreceta"
+            app:layout_constraintStart_toEndOf="@+id/tv_tiempo_rreceta"
+            app:layout_constraintTop_toTopOf="@+id/tv_tiempo_rreceta"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/tv_tiempo_rreceta"
-        android:layout_width="146dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="48dp"
-        android:text="@string/formulario_receta_tiempo_str"
-        app:layout_constraintStart_toStartOf="@+id/tv_comenales_receta"
-        app:layout_constraintTop_toBottomOf="@+id/tv_comenales_receta" />
+        <TextView
+            android:id="@+id/tv_comenales_receta"
+            android:layout_width="111dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="52dp"
+            android:text="@string/formulario_receta_comensales_str"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tiempo_rreceta"
+            app:layout_constraintStart_toStartOf="@+id/tv_tiempo_rreceta" />
 
-    <EditText
-        android:id="@+id/et_procedencia_receta"
-        android:layout_width="283dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="44dp"
-        android:ems="10"
-        android:hint="@string/formulario_receta_procedencia"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tv_comenales_receta"
-        app:layout_constraintStart_toStartOf="@+id/tv_comenales_receta" />
+        <TextView
+            android:id="@+id/tv_tiempo_rreceta"
+            android:layout_width="146dp"
+            android:layout_height="39dp"
+            android:text="@string/formulario_receta_tiempo_str"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.717" />
 
-    <ImageView
-        android:id="@+id/img_receta"
-        android:layout_width="374dp"
-        android:layout_height="154dp"
-        android:layout_marginTop="24dp"
-        android:adjustViewBounds="true"
-        android:padding="0dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/fondo_plato_comida"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/et_procedencia_receta"
+            android:layout_width="320dp"
+            android:layout_height="91dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/formulario_receta_procedencia"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_comenales_receta"
+            app:layout_constraintEnd_toEndOf="@+id/ed_comensales_receta"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_comenales_receta" />
 
-    <EditText
-        android:id="@+id/ed_comensales_receta"
-        android:layout_width="135dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="144dp"
-        android:ems="10"
-        android:hint="@string/formulario_receta_comensales_descrp"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_comenales_receta"
-        app:layout_constraintStart_toStartOf="@+id/tv_comenales_receta"
-        app:layout_constraintTop_toTopOf="@+id/tv_comenales_receta"
-        app:layout_constraintVertical_bias="0.424" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/img_receta"
+            android:layout_width="374dp"
+            android:layout_height="154dp"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/fondo_plato_comida"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/ed_comensales_receta"
+            android:layout_width="151dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="56dp"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/formulario_receta_comensales_descrp"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_comenales_receta"
+            app:layout_constraintEnd_toEndOf="@+id/et_tiempo_receta"
+            app:layout_constraintStart_toEndOf="@+id/tv_comenales_receta"
+            app:layout_constraintTop_toTopOf="@+id/tv_comenales_receta"
+            app:layout_constraintVertical_bias="0.529" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

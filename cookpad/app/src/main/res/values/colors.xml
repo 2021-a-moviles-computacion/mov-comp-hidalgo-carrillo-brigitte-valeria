@@ -6,5 +6,7 @@
     <color name="colorTituloReceta">#515656</color>
     <color name="colorNombreAutorReceta">#8F9696</color>
     <color name="colorWhite">#F3F8F8</color>
+    <color name="colorPlomoClaro">#DBDBDB</color>
+
 
 </resources>
