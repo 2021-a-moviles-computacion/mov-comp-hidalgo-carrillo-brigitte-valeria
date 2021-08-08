@@ -191,7 +191,7 @@
                     android:layout_marginBottom="15dp"
                  />
                 <ImageView
-                    android:id="@+id/img_three_dots_menu"
+                    android:id="@+id/img_three_dots_menu_secc_ingr"
                     android:layout_width="wrap_content"
                     android:layout_height="54dp"
                     android:adjustViewBounds="true"
@@ -220,7 +220,7 @@
                     android:layout_marginBottom="15dp"
                     />
                 <ImageView
-                    android:id="@+id/img_three_dots_menu_2"
+                    android:id="@+id/img_three_dots_menu2_secc_ingr"
                     android:layout_width="wrap_content"
                     android:layout_height="54dp"
                     android:adjustViewBounds="true"
@@ -242,7 +242,7 @@
             app:cardPreventCornerOverlap="false"
             android:layout_marginBottom="5dp"
             >
-            <!--el más grande-->
+            <!--el más grande (contiene a todos)-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -309,7 +309,7 @@
 
                         <EditText
                             android:id="@+id/et_descripcion_paso"
-                            android:layout_width="wrap_content"
+                            android:layout_width="252dp"
                             android:layout_height="77dp"
                             android:background="@drawable/custom_input"
                             android:ems="10"
@@ -330,6 +330,15 @@
                             app:shapeAppearanceOverlay="@style/roundimageview"
                             android:src="@drawable/camara_fondo_gris" />
                     </LinearLayout>
+                    <ImageView
+                        android:id="@+id/img_three_dots_menu_secc_pasos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="54dp"
+                        android:adjustViewBounds="true"
+                        android:padding="0dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_three_dots_vertical"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
