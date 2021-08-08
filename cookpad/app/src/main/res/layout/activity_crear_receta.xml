@@ -193,7 +193,7 @@
                 <ImageView
                     android:id="@+id/img_three_dots_menu_secc_ingr"
                     android:layout_width="wrap_content"
-                    android:layout_height="54dp"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:padding="0dp"
                     android:scaleType="fitXY"
@@ -222,7 +222,7 @@
                 <ImageView
                     android:id="@+id/img_three_dots_menu2_secc_ingr"
                     android:layout_width="wrap_content"
-                    android:layout_height="54dp"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:padding="0dp"
                     android:scaleType="fitXY"
@@ -333,7 +333,7 @@
                     <ImageView
                         android:id="@+id/img_three_dots_menu_secc_pasos"
                         android:layout_width="wrap_content"
-                        android:layout_height="54dp"
+                        android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:padding="0dp"
                         android:scaleType="fitXY"

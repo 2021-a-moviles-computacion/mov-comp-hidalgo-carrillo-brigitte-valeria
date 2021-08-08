@@ -26,4 +26,5 @@
     <string name="formulario_receta_paso_decrp">Ej: Mezcla los huevos \ncon la leche hasta... </string>
 
     <string name="formulario_truco_tit_descrp">Título: Cómo picar una cebolla</string>
+    <string name="formulario_truco_descrp_truco">Para picar una cebolla, usa el \ncuchillo cocinero y corta la \ncebolla por la mitad desde la \npunta del tallo hasta la \nraiz inferior</string>
 </resources>
