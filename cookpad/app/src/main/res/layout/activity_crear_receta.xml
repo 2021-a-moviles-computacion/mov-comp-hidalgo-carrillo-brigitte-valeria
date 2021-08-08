@@ -275,8 +275,6 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_below="@+id/tv_pasos"
-                            android:layout_marginTop="15dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginBottom="0dp"
                             android:padding="6dp"
@@ -311,17 +309,26 @@
 
                         <EditText
                             android:id="@+id/et_descripcion_paso"
-                            android:layout_width="100dp"
-                            android:layout_height="54dp"
-                            android:layout_below="@id/tv_ingredientes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="77dp"
                             android:background="@drawable/custom_input"
                             android:ems="10"
                             android:hint="@string/formulario_receta_paso_decrp"
                             android:inputType="textPersonName"
                             android:padding="10dp"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginBottom="15dp"
+
                             />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_paso"
+                            android:layout_width="90dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            app:shapeAppearanceOverlay="@style/roundimageview"
+                            android:src="@drawable/camara_fondo_gris" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
