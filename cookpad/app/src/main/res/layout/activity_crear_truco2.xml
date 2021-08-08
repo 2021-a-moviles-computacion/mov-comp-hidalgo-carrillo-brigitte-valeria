@@ -4,4 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearTruco"/>
+    android:background="@color/colorPlomoClaro"
+    tools:context=".CrearTruco">
+
+
+    <EditText
+        android:id="@+id/et_titulo_truco"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:hint="@string/formulario_truco_tit_descrp"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorTituloReceta"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.128" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_ingrediente"
+        android:layout_width="285dp"
+        android:layout_height="271dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="20dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_titulo_truco"
+        app:layout_constraintVertical_bias="0.095"></androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
