@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ferrifrancis.cookpad.R
+import com.ferrifrancis.cookpad.adapter.TusRecetasAdapter
 
 
-
-
-class MessageFragment : Fragment() {
-
+class TusTrucosFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +21,7 @@ class MessageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false)
+        return inflater.inflate(R.layout.fragment_tus_trucos, container, false)
     }
 
 

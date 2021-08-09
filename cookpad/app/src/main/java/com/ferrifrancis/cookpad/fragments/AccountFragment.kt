@@ -7,7 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ferrifrancis.cookpad.R
-
+import com.ferrifrancis.cookpad.adapter.TusRecetasAdapter
+import kotlinx.android.synthetic.main.fragment_account.*
 
 
 /**
@@ -33,6 +34,22 @@ class AccountFragment : Fragment() {
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_account, container, false)
+    }
+
+    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(itemView, savedInstanceState)
+        setUpTabs()
+    }
+
+    private fun setUpTabs()
+    {
+        val adapter = fragmentManager?.let { TusRecetasAdapter(supportFragmentManager= it) }
+        adapter?.addFragment(TusTrucosFragment(),"Trucos")
+        adapter?.addFragment(TusRecetasFragment(),"Recetas")
+        view_pager.adapter= adapter
+        tabs.setupWithViewPager(view_pager)
+
+        
     }
 
 
