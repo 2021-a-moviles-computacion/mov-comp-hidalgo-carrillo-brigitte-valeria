@@ -5,10 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.ferrifrancis.cookpad.R
+import com.ferrifrancis.cookpad.adapter.Data
+import com.ferrifrancis.cookpad.adapter.HomeRecyclerAdapter
+import com.ferrifrancis.cookpad.adapter.TusRecetasRecyclerAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_tus_recetas.*
 
 class TusRecetasFragment : Fragment() {
 
+    private lateinit var tusRecetasAdapter: TusRecetasRecyclerAdapter //es no null,pero se inicializará más luego
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +30,26 @@ class TusRecetasFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_tus_recetas, container, false)
     }
 
+    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(itemView, savedInstanceState)
+        initRecyclerView()
+        addDataSet()
+
+    }
+
+    private fun addDataSet()
+    {
+        val data = Data.createDataSetHome()
+        tusRecetasAdapter.submitList(data)
+    }
+
+    private fun initRecyclerView()
+    {
+        rv_tus_recetas.apply {
+            rv_tus_recetas.layoutManager = GridLayoutManager(activity,2)
+            tusRecetasAdapter = TusRecetasRecyclerAdapter()
+            rv_tus_recetas.adapter = tusRecetasAdapter
+        }
+    }
 
 }

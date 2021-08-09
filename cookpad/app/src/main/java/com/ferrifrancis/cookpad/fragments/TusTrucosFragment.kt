@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ferrifrancis.cookpad.R
-import com.ferrifrancis.cookpad.adapter.TusRecetasAdapter
 
 
 class TusTrucosFragment : Fragment() {
