@@ -11,11 +11,7 @@ import com.ferrifrancis.cookpad.adapter.TusRecetasAdapter
 import kotlinx.android.synthetic.main.fragment_account.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AccountFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class AccountFragment : Fragment() {
 
 
@@ -49,7 +45,7 @@ class AccountFragment : Fragment() {
         view_pager.adapter= adapter
         tabs.setupWithViewPager(view_pager)
 
-        
+
     }
 
 
