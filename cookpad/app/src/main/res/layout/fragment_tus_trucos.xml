@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TusTrucosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="286dp"
-        android:layout_height="120dp"
-        android:text="fragment tus trucos"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tus_trucos"
+        android:layout_width="343dp"
+        android:layout_height="333dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.959" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ class Home(
     val imagenAutor : Int,
     val imagenReceta: Int,
     val tituloReceta: String,
-    val reaccion: Map<Int?, String> = mapOf<Int?,String>(null to "caraFeliz", null to "corazon", null to "aplauso")
+    val reaccion: Map<Int?, String> = mapOf<Int?,String>(null to "caraFeliz", null to "corazon", null to "aplauso"),
+    val comentario: String?
 ) {
 }

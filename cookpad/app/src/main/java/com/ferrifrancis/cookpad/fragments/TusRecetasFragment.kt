@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ferrifrancis.cookpad.R
-import com.ferrifrancis.cookpad.adapter.Data
-import com.ferrifrancis.cookpad.adapter.HomeRecyclerAdapter
-import com.ferrifrancis.cookpad.adapter.TusRecetasRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.ferrifrancis.cookpad.data.Data
+import com.ferrifrancis.cookpad.adapter.AccountTusRecetasRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_tus_recetas.*
 
 class TusRecetasFragment : Fragment() {
 
-    private lateinit var tusRecetasAdapter: TusRecetasRecyclerAdapter //es no null,pero se inicializará más luego
+    private lateinit var tusRecetasAdapter: AccountTusRecetasRecyclerAdapter //es no null,pero se inicializará más luego
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +45,7 @@ class TusRecetasFragment : Fragment() {
     {
         rv_tus_recetas.apply {
             rv_tus_recetas.layoutManager = GridLayoutManager(activity,2)
-            tusRecetasAdapter = TusRecetasRecyclerAdapter()
+            tusRecetasAdapter = AccountTusRecetasRecyclerAdapter()
             rv_tus_recetas.adapter = tusRecetasAdapter
         }
     }

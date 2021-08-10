@@ -28,20 +28,21 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        Log.i("fragment","on create view")
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
+        Log.i("fragment","on view created")
         setUpTabs()
     }
 
     private fun setUpTabs()
     {
         val adapter = fragmentManager?.let { AccountAdapter(supportFragmentManager= it) }
-        adapter?.addFragment(TusTrucosFragment(),"Trucos")
-        adapter?.addFragment(TusRecetasFragment(),"Recetas")
+        adapter?.addFragment(TusTrucosFragment(),"Recetas guardadas ")
+        adapter?.addFragment(TusRecetasFragment(),"Tus recetas")
         view_pager.adapter= adapter
         tabs.setupWithViewPager(view_pager)
 

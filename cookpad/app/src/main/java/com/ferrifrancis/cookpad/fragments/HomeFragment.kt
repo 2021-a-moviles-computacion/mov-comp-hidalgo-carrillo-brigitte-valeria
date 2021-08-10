@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ferrifrancis.cookpad.R
-import com.ferrifrancis.cookpad.adapter.Data
+import com.ferrifrancis.cookpad.data.Data
 import com.ferrifrancis.cookpad.adapter.HomeRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -20,8 +20,6 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ferrifrancis.cookpad.R
-import com.ferrifrancis.cookpad.adapter.Data
-import com.ferrifrancis.cookpad.adapter.HomeRecyclerAdapter
+import com.ferrifrancis.cookpad.data.Data
 import com.ferrifrancis.cookpad.adapter.SearchRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
 
