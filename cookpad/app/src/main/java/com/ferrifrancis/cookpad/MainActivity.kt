@@ -4,6 +4,7 @@ import android.accounts.Account
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.ferrifrancis.cookpad.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.ic_home -> {replaceFragment(homeFragment)
@@ -42,5 +46,9 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
             Log.i("fragment","ingreso a la funcion replaceFragment")
         }
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return super.onContextItemSelected(item)
     }
 }
