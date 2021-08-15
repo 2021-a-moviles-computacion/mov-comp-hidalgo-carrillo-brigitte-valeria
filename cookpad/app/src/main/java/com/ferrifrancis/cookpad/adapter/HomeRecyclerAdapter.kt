@@ -77,8 +77,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
             popupMenu.show()
-            val popup = PopupMenu::class.java.getDeclaredField("mPopup")
-            true.also { popup.isAccessible = it }
+            
         }
     }
 }
