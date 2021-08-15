@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, fragment)
+            transaction.addToBackStack(null)
             transaction.commit()
             Log.i("fragment","ingreso a la funcion replaceFragment")
         }
