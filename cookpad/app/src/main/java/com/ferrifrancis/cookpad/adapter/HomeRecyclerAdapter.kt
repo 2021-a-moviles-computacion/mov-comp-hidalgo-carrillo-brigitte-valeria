@@ -13,13 +13,26 @@ import kotlinx.android.synthetic.main.layout_home_list_item.view.*
 
 class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: List<Home> = ArrayList()
+    private lateinit var  mListener: onItemClickListener
+
+    interface onItemClickListener{
+
+        fun onItemClick(position: Int)
+
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener)
+    {
+        mListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return HomeViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.layout_home_list_item,
                 parent,
                 false
-            )
+            ), mListener
         )
     }
 
@@ -40,7 +53,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class HomeViewHolder constructor(
-        itemView: View
+        itemView: View, listener: onItemClickListener
     ) : RecyclerView.ViewHolder(itemView) {
         val imagenReceta = itemView.img_receta
         val tituloReceta = itemView.et_titulo_receta
@@ -48,6 +61,12 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val imagenAutorReceta = itemView.img_usuario1
         val stripeMenu = itemView.stripe_menu
 
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+
+            }
+        }
         fun bind(home: Home) {
             tituloReceta.setText(home.tituloReceta)
             nombreAutorReceta.setText(home.nombreAutorReceta)
@@ -79,5 +98,13 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             popupMenu.show()
             
         }
+/*
+        fun anadirLike()
+        {
+            this.numeroLikes= this.numeroLikes+1
+            likesTextView.text= this.numeroLikes.toString()
+            contexto.aumentarTotalLikes()
+        }
+        */
     }
 }

@@ -1,6 +1,7 @@
 package com.ferrifrancis.cookpad.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -52,6 +53,13 @@ class HomeFragment : Fragment() {
             rv_home.layoutManager = GridLayoutManager(activity,2)
             homeAdapter = HomeRecyclerAdapter()
             rv_home.adapter = homeAdapter
+
         }
+        homeAdapter.setOnItemClickListener(object : HomeRecyclerAdapter.onItemClickListener {
+            override fun onItemClick(position: Int)
+            {
+                Log.i("homre-fragment","posición seleccionada ${position}")
+            }
+        })
     }
 }
