@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.layout_home_list_item.view.*
 
 class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: List<Home> = ArrayList()
-    private lateinit var  mListener: onItemClickListener
+    //private lateinit var  mListener: onItemClickListener
 
     interface onItemClickListener{
 
@@ -24,7 +24,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setOnItemClickListener(listener: onItemClickListener)
     {
-        mListener = listener
+       // mListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -33,7 +33,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 R.layout.layout_home_list_item,
                 parent,
                 false
-            ), mListener
+            )/*, mListener*/
         )
     }
 
@@ -54,7 +54,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class HomeViewHolder constructor(
-        itemView: View, listener: onItemClickListener
+        itemView: View/*, listener: onItemClickListener*/
     ) : RecyclerView.ViewHolder(itemView) {
         val imagenReceta = itemView.img_receta
         val tituloReceta = itemView.et_titulo_receta
@@ -66,11 +66,10 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
         init {
+            /*
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
-
-
-            }
+            }*/
             chipAplauso.setOnClickListener {
                 Log.i("home recycler adapter"," posicion item al dar clic en chip ${adapterPosition}")
                 Data.aumentarEn1Reaccion(adapterPosition,0)
@@ -80,7 +79,14 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 Data.aumentarEn1Reaccion(adapterPosition,1)
                 chipCorazon.setText(Data.listaDatos[adapterPosition].reaccionAplauso.toString())
             }
+
+            stripeMenu.setOnClickListener {
+                Log.i("popup-menu","set on click listener popupmenu")
+                popupMenu(it)
+
+            }
         }
+
         fun bind(home: Home) {
             tituloReceta.setText(home.tituloReceta)
             nombreAutorReceta.setText(home.nombreAutorReceta)
@@ -89,11 +95,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             chipAplauso.setText(home.reaccionAplauso.toString())
             chipCorazon.setText(home.reaccionCorazon.toString())
 
-            stripeMenu.setOnClickListener {
-                Log.i("popup-menu","set on click listener popupmenu")
-                popupMenu(it)
 
-            }
         }
 
         fun popupMenu(v: View) {
