@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "69855185328",
+    "project_id": "mov-com-2021a-hidalgo-carrillo",
+    "storage_bucket": "mov-com-2021a-hidalgo-carrillo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69855185328:android:4602ad937e6aed55eeae75",
+        "android_client_info": {
+          "package_name": "com.ferrifrancis.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69855185328-pvqo4cg7p9aqeeo8a881tco4ibf9jb69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmxzWb2RYj4sJ1VuUpSae0tTkGrs-s_rQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69855185328-pvqo4cg7p9aqeeo8a881tco4ibf9jb69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69855185328:android:82056d858d267cb4eeae75",
+        "android_client_info": {
+          "package_name": "com.ferrifrancis.firebase_uno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69855185328-pvqo4cg7p9aqeeo8a881tco4ibf9jb69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmxzWb2RYj4sJ1VuUpSae0tTkGrs-s_rQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69855185328-pvqo4cg7p9aqeeo8a881tco4ibf9jb69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69855185328:android:d08a3354618e725aeeae75",
+        "android_client_info": {
+          "package_name": "com.ferrifrancis.firebasedos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69855185328-pvqo4cg7p9aqeeo8a881tco4ibf9jb69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmxzWb2RYj4sJ1VuUpSae0tTkGrs-s_rQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69855185328-pvqo4cg7p9aqeeo8a881tco4ibf9jb69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
