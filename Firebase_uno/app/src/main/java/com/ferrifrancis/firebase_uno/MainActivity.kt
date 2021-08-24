@@ -10,6 +10,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthAnonymousUpgradeException
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -71,25 +72,29 @@ class MainActivity : AppCompatActivity() {
 
     fun registrarUsuarioPorPrimeraVez(usuario: IdpResponse )
     {
-        val usuarioLogeado = FirebaseAuth.getInstance().getCurrentUser()
+        val usuarioLogeado: FirebaseUser? = FirebaseAuth.getInstance().getCurrentUser() //recibo el usuario
         if(usuario.email !=null && usuarioLogeado != null)
         {
-            Log.i("firebase-firestore","email y usuario no null")
             //roles : ["usuario","admin" ]
-            val db = Firebase.firestore
-            val rolesUsuario = arrayListOf("usuario")
-            val nuevoUsuario = hashMapOf<String, Any>(
-                "roles" to rolesUsuario,
-            "uid" to usuarioLogeado.uid
+            val db = Firebase.firestore //base dedatos
+            val rolesUsuario = arrayListOf("usuario")  //le digo los roles
+            val nuevoUsuario = hashMapOf<String, Any>( //creo el nuevo usuario con:..
+                "roles" to rolesUsuario,//.. su rol
+            "uid" to usuarioLogeado.uid // .. su uid
             )
             val identificadorUsuario = usuario.email
-            db.collection("usuario")
-                .add(nuevoUsuario)
+
+            db.collection("usuario") //en la coleccion llamada usuario
+                //forma 1
+                //.add(nuevoUsuario) //añado el nuevo uusario
+                //forma2
+                .document(identificadorUsuario.toString())
+                .set(nuevoUsuario)
                 .addOnSuccessListener {
-                    Log.i("firebase-firestore", "Se creó")
+                    Log.i("firebase-firestore", "Se creó") //si todo sale bien entonces--
                 }
                 .addOnFailureListener {
-                 Log.i("firebase-firestore", "Falló")
+                 Log.i("firebase-firestore", "Falló") // si sale mal entonces..
                 }
         }
         else {
