@@ -13,9 +13,44 @@
         android:text="Inicio sesión"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.058" />
+
+    <TextView
+        android:id="@+id/tv_bienvenida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:text="Ingrese al aplicativo"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_login"
+        app:layout_constraintStart_toEndOf="@+id/btn_login"
+        app:layout_constraintTop_toTopOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="289dp"
+        android:layout_height="54dp"
+        android:text="LOGOUT"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.332" />
+
+    <Button
+        android:id="@+id/btn_producto"
+        android:layout_width="289dp"
+        android:layout_height="49dp"
+        android:text="Ir producto"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
