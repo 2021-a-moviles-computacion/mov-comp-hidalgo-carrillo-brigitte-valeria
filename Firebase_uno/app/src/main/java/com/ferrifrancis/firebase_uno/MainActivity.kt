@@ -24,6 +24,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val botonOrden = findViewById<Button>(R.id.btn_orden)
+        botonOrden.setOnClickListener {
+            val intent = Intent(
+                this,
+                EOrdenes::class.java
+            )
+            startActivity(intent)
+        }
+
+        val botonRestaurante = findViewById<Button>(R.id.btn_restaurante)
+        botonRestaurante.setOnClickListener {
+            val intent = Intent(
+                this,
+                DRestaurante::class.java
+            )
+            startActivity(intent)
+        }
+
         val botonLogin = findViewById<Button>(R.id.btn_login)
         botonLogin.setOnClickListener {
             llamarLoginUsuario()
@@ -63,6 +81,7 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
+
             CODIGO_INICIO_SESION -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val usuario: IdpResponse? = IdpResponse.fromResultIntent(data)
@@ -125,6 +144,8 @@ class MainActivity : AppCompatActivity() {
         val botonLogin = findViewById<Button>(R.id.btn_login)
         val botonLogout = findViewById<Button>(R.id.btn_logout)
         val botonProducto = findViewById<Button>(R.id.btn_producto)
+        val botonRestaurante = findViewById<Button>(R.id.btn_restaurante)
+        val botonOrden = findViewById<Button>(R.id.btn_orden)
 
         if(BAuthUsuario.usuario != null)
         {
@@ -132,6 +153,8 @@ class MainActivity : AppCompatActivity() {
             botonLogin.visibility = View.INVISIBLE
             botonProducto.visibility = View.VISIBLE
             botonLogout.visibility = View.VISIBLE
+            botonRestaurante.visibility = View.VISIBLE
+            botonOrden.visibility = View.VISIBLE
         }
         else
         {
@@ -139,6 +162,8 @@ class MainActivity : AppCompatActivity() {
             botonLogin.visibility = View.VISIBLE
             botonLogout.visibility = View.INVISIBLE
             botonProducto.visibility = View.INVISIBLE
+            botonRestaurante.visibility = View.INVISIBLE
+            botonOrden.visibility = View.INVISIBLE
         }
     }
 
