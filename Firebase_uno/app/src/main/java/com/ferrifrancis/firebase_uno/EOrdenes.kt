@@ -3,83 +3,86 @@ package com.ferrifrancis.firebase_uno
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.ferrifrancis.firebase_uno.dto.FirebaseProductoDto
 import com.ferrifrancis.firebase_uno.dto.FirebaseRestauranteDto
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_e_ordenes.*
 
 class EOrdenes : AppCompatActivity() {
+
+    var arregloProducto: ArrayList<FirebaseProductoDto> = arrayListOf<FirebaseProductoDto>()
+    val arregloRestaurante = arrayListOf<FirebaseRestauranteDto>()
+    val lista = arrayListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_e_ordenes)
-        llenarSpinnerRestaurante()
-        llenarSpinnerProducto()
+
+        setearSpinnerProducto()
+        //Log.i("firebase-firestore","arreglo producto${DataProducto.arregloProducto}")
+        //arregloProducto=setearArregloProducto()
+        setearSpinnerRestaurante()
+
+        //spRestaurante.adapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,lista)
+       //Log.i("firestore-firebase","${setearArregloProducto()[0]}")
+
+
     }
 
-    fun llenarSpinnerProducto()
+    fun setearSpinnerProducto(): ArrayList<FirebaseProductoDto>
     {
-        val spProducto = findViewById<Spinner>(R.id.sp_producto)
         val db = Firebase.firestore
-        val arregloProductos: ArrayList<FirebaseProductoDto>
+        val arregloProductos = arrayListOf<FirebaseProductoDto>()
+        val spProducto = findViewById<Spinner>(R.id.sp_producto)
+
 
         db.collection("producto")
             .get()
             .addOnSuccessListener { documents ->
-                DataProducto.limpiarArregloProducto()
+
                 for (document in documents) {
-                    val productoCargado = document.toObject(FirebaseProductoDto::class.java)
+                    val productoCargado: FirebaseProductoDto = document.toObject(FirebaseProductoDto::class.java)
+                    arregloProductos.add(productoCargado)
 
-                    if(productoCargado != null)
-                    {
-
-                        DataProducto.setearArregloProducto(productoCargado?.nombre ,
-                            productoCargado?.precio
-                        )
-                        spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,DataProducto.arregloProducto)
-
-                    }
                 }
+                spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arregloProductos)
+                Log.i("firestore-firebase","${arregloProductos[1]}")
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
-
-
+        DataProducto.arregloProducto = arregloProductos
+        return  arregloProductos
     }
 
-    fun llenarSpinnerRestaurante()
+    fun setearSpinnerRestaurante()
     {
-
-        //spRestaurante.adapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,PaisData.paisesDataSet())
-
-        val spRestaurante = findViewById<Spinner>(R.id.sp_restaurantes)
         val db = Firebase.firestore
-        val arregloRestaurante: ArrayList<FirebaseRestauranteDto>
+        val arregloRestaurante = arrayListOf<FirebaseRestauranteDto>()
+        val spRestaurante = findViewById<Spinner>(R.id.sp_restaurantes)
 
         db.collection("restaurante")
             .get()
             .addOnSuccessListener { documents ->
-                DataRestaurante.limpiarArregloRestaurante()
+
                 for (document in documents) {
-                    val restauranteCargado = document.toObject(FirebaseRestauranteDto::class.java)
+                    val restauranteCargado: FirebaseRestauranteDto = document.toObject(FirebaseRestauranteDto::class.java)
 
                     if(restauranteCargado != null)
                     {
-
-                        DataRestaurante.setearArregloRestaurante(restauranteCargado?.nombre)
-                        spRestaurante.adapter= ArrayAdapter<FirebaseRestauranteDto>(this, android.R.layout.simple_list_item_1,DataRestaurante.arregloRestaurante)
+                        arregloRestaurante.add(restauranteCargado)
 
                     }
                 }
+                spRestaurante.adapter= ArrayAdapter<FirebaseRestauranteDto>(this, android.R.layout.simple_list_item_1,arregloRestaurante)
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
+
     }
+
 }
