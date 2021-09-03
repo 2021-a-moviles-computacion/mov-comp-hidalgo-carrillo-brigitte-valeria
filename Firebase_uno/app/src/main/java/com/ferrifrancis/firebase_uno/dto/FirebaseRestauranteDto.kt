@@ -1,6 +1,6 @@
 package com.ferrifrancis.firebase_uno.dto
 
-data class FirebaseRestauranteDto(
+class FirebaseRestauranteDto(
     val nombre: String? = null
 ) {
     override fun toString(): String {

@@ -21,15 +21,22 @@ class EOrdenes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_e_ordenes)
 
-        setearSpinnerProducto()
+
+        //setearSpinnerProducto()
         //Log.i("firebase-firestore","arreglo producto${DataProducto.arregloProducto}")
-        //arregloProducto=setearArregloProducto()
-        setearSpinnerRestaurante()
+        arregloProducto=setearSpinnerProducto()
+        llenarSpinner(arregloProducto)
+        //setearSpinnerRestaurante()
 
         //spRestaurante.adapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,lista)
        //Log.i("firestore-firebase","${setearArregloProducto()[0]}")
 
 
+    }
+    fun llenarSpinner(arreglo: ArrayList<FirebaseProductoDto>)
+    {
+        val spProducto = findViewById<Spinner>(R.id.sp_producto)
+        spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arreglo)
     }
 
     fun setearSpinnerProducto(): ArrayList<FirebaseProductoDto>
@@ -38,23 +45,22 @@ class EOrdenes : AppCompatActivity() {
         val arregloProductos = arrayListOf<FirebaseProductoDto>()
         val spProducto = findViewById<Spinner>(R.id.sp_producto)
 
-
+        arregloProductos.add(FirebaseProductoDto())
         db.collection("producto")
             .get()
             .addOnSuccessListener { documents ->
 
                 for (document in documents) {
                     val productoCargado: FirebaseProductoDto = document.toObject(FirebaseProductoDto::class.java)
-                    arregloProductos.add(productoCargado)
-
+                    arregloProductos.add(FirebaseProductoDto(productoCargado.nombre,productoCargado.precio))
                 }
-                spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arregloProductos)
-                Log.i("firestore-firebase","${arregloProductos[1]}")
+                //spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arregloProductos)
+                //Log.i("firestore-firebase","${arregloProductos[1]}")
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
-        DataProducto.arregloProducto = arregloProductos
+        //DataProducto.arregloProducto = arregloProductos
         return  arregloProductos
     }
 
