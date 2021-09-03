@@ -4,6 +4,9 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.ferrifrancis.firebase_uno.dto.FirebaseProductoDto
@@ -13,62 +16,93 @@ import com.google.firebase.ktx.Firebase
 
 class EOrdenes : AppCompatActivity() {
 
-    var arregloProducto: ArrayList<FirebaseProductoDto> = arrayListOf<FirebaseProductoDto>()
-    val arregloRestaurante = arrayListOf<FirebaseRestauranteDto>()
-    val lista = arrayListOf<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_e_ordenes)
 
-
-        //setearSpinnerProducto()
-        //Log.i("firebase-firestore","arreglo producto${DataProducto.arregloProducto}")
-        arregloProducto=setearSpinnerProducto()
-        llenarSpinner(arregloProducto)
-        //setearSpinnerRestaurante()
-
-        //spRestaurante.adapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,lista)
-       //Log.i("firestore-firebase","${setearArregloProducto()[0]}")
-
-
-    }
-    fun llenarSpinner(arreglo: ArrayList<FirebaseProductoDto>)
-    {
+        val spRestaurante = findViewById<Spinner>(R.id.sp_restaurantes)
         val spProducto = findViewById<Spinner>(R.id.sp_producto)
-        spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arreglo)
+
+        val arregloProducto: ArrayList<FirebaseProductoDto> = setearSpinnerProducto(spProducto)
+        val arregloRestaurante: ArrayList<FirebaseRestauranteDto>
+
+
+
+        setearSpinnerRestaurante(spRestaurante)
+
+        spRestaurante.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.i("hola","${arregloProducto[position]}")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                }
+
+            }
+
+        spProducto.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                }
+
+            }
     }
 
-    fun setearSpinnerProducto(): ArrayList<FirebaseProductoDto>
+    fun setearSpinnerProducto(spProducto: Spinner): ArrayList<FirebaseProductoDto>
     {
         val db = Firebase.firestore
         val arregloProductos = arrayListOf<FirebaseProductoDto>()
-        val spProducto = findViewById<Spinner>(R.id.sp_producto)
 
-        arregloProductos.add(FirebaseProductoDto())
         db.collection("producto")
             .get()
             .addOnSuccessListener { documents ->
 
                 for (document in documents) {
                     val productoCargado: FirebaseProductoDto = document.toObject(FirebaseProductoDto::class.java)
-                    arregloProductos.add(FirebaseProductoDto(productoCargado.nombre,productoCargado.precio))
+                    if(productoCargado != null)
+                    {
+                        arregloProductos.add(FirebaseProductoDto(productoCargado.nombre,productoCargado.precio))
+                    }
                 }
-                //spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arregloProductos)
+                spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arregloProductos)
                 //Log.i("firestore-firebase","${arregloProductos[1]}")
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
-        //DataProducto.arregloProducto = arregloProductos
+
         return  arregloProductos
     }
 
-    fun setearSpinnerRestaurante()
+    fun setearSpinnerRestaurante(spRestaurante: Spinner)
     {
         val db = Firebase.firestore
         val arregloRestaurante = arrayListOf<FirebaseRestauranteDto>()
-        val spRestaurante = findViewById<Spinner>(R.id.sp_restaurantes)
 
         db.collection("restaurante")
             .get()
@@ -79,7 +113,7 @@ class EOrdenes : AppCompatActivity() {
 
                     if(restauranteCargado != null)
                     {
-                        arregloRestaurante.add(restauranteCargado)
+                        arregloRestaurante.add(FirebaseRestauranteDto(restauranteCargado.nombre))
 
                     }
                 }
