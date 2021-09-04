@@ -12,6 +12,8 @@ import com.ferrifrancis.firebase_uno.dto.Restaurante
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_e_ordenes.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class EOrdenes : AppCompatActivity() {
 
@@ -26,18 +28,17 @@ class EOrdenes : AppCompatActivity() {
         val spRestaurante = findViewById<Spinner>(R.id.sp_restaurantes)
         val spProducto = findViewById<Spinner>(R.id.sp_producto)
         val botonAnadir = findViewById<Button>(R.id.btn_anadir_lista_producto)
-        val etCantidad = findViewById<EditText>(R.id.et_cantidad_producto)
+
         var posRestauranteSelec: Int? = null
         var posProductoSelec: Int? = null
-        var arregloOrdenes: ArrayList<Orden>
-        //val arregloOrdenes = ArrayList<Orden>()
+
 
         this.arregloProducto = jalarDocsProductosDeFirestore()
         this.arregloRestaurante = jalarDocsRestauranteDeFirestore()
 
         setearSpinnerProductos(spProducto)
         setearSpinnerRestaurante(spRestaurante)
-
+        setearTotalOrdenes()
 
         spRestaurante.onItemSelectedListener =
             object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
@@ -74,26 +75,17 @@ class EOrdenes : AppCompatActivity() {
             }
 
         botonAnadir.setOnClickListener {
-            val cantidad = etCantidad.text.toString().toIntOrNull()
 
-            if (posProductoSelec != 0 && posRestauranteSelec != 0 && cantidad != null) {
-                if (arregloRestaurante != null && arregloProducto != null) {
-                    val precio = arregloProducto[posProductoSelec!!].precio
-                    val nombreRes = arregloRestaurante[posRestauranteSelec!!].nombre
-                    val nombreProd = arregloProducto[posProductoSelec!!].nombre
 
-                    val ordenNueva = Orden(
-                        nombreRes,
-                        nombreProd,
-                        precio,
-                        cantidad,
-                        precio?.times(cantidad)
-                    )
-                    this.arregloOrdenes.add(ordenNueva)
-                    poneOrdenesEnAdaptador()
-                    vaciarFormulario()
-                    Toast.makeText(this, "Orden agregada", Toast.LENGTH_SHORT).show()
-                }
+            if (crearOrden(posProductoSelec, posRestauranteSelec)) {
+                poneOrdenesEnAdaptador()
+                setearTotalOrdenes()
+                vaciarFormulario()
+                Toast.makeText(
+                    this,
+                    "Orden agregada",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 Toast.makeText(
                     this,
@@ -103,6 +95,64 @@ class EOrdenes : AppCompatActivity() {
             }
         }
 
+
+    }
+
+    fun setearTotalOrdenes()
+    {
+        if(arregloOrdenes.isEmpty())
+            tv_precio.text = "$ 0.0"
+        else
+            tv_precio.text = "$ "+calcularTotalOrdenes().toString()
+    }
+    fun crearOrden(posProductoSelec: Int?,posRestauranteSelec: Int?): Boolean
+    {
+        //crea un objetoo orden y lo añade a la variable global arregloOrdenes
+
+        val cantidad = et_cantidad_producto.text.toString().toIntOrNull()
+        if (posProductoSelec != 0 && posRestauranteSelec != 0 && cantidad != null) {
+            if (arregloRestaurante != null && arregloProducto != null) {
+                val precio = arregloProducto[posProductoSelec!!].precio
+                val nombreRes = arregloRestaurante[posRestauranteSelec!!].nombre
+                val nombreProd = arregloProducto[posProductoSelec!!].nombre
+
+                val ordenNueva = Orden(
+                    nombreRes,
+                    nombreProd,
+                    precio,
+                    cantidad,
+                    doubleDosDecimales(precio?.times(cantidad))
+                )
+                this.arregloOrdenes.add(ordenNueva)
+                return true
+            }
+            else return false
+        }
+        else
+            return false
+    }
+
+    fun doubleDosDecimales(numero: Double?): Double?
+    {
+        if(numero != null) {
+            val df: DecimalFormat = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+            return df.format(numero).toDouble()
+        }
+        else return null
+    }
+
+    fun calcularTotalOrdenes(): Double?
+    {
+        var total = 0.0
+
+        this.arregloOrdenes.forEach {
+            val orden = it
+            if (orden != null && orden.totalOrden != null)
+                total = total + orden.totalOrden!!
+        }
+
+        return doubleDosDecimales(total)
 
     }
 

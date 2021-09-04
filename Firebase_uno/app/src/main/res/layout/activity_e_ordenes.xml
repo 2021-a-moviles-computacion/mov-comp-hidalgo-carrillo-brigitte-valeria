@@ -43,8 +43,8 @@
             android:id="@+id/btn_anadir_lista_producto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:text="AÑADIR" />
     </LinearLayout>
 
@@ -53,13 +53,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Lista de producto" />
+        android:text="Lista órdenes" />
 
     <ListView
         android:id="@+id/lv_lista_productos"
         android:layout_width="match_parent"
         android:layout_height="139dp"
         android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft = "true"
+            android:text="Total" />
+        <TextView
+            android:id="@+id/tv_precio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight = "true"
+            android:text="Precio" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_completar_pedido"
