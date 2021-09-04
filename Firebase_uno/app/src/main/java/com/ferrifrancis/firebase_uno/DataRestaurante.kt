@@ -1,15 +1,15 @@
 package com.ferrifrancis.firebase_uno
 
 
-import com.ferrifrancis.firebase_uno.dto.FirebaseRestauranteDto
+import com.ferrifrancis.firebase_uno.dto.Restaurante
 
 class DataRestaurante {
     companion object{
-        var arregloRestaurante= arrayListOf<FirebaseRestauranteDto>()
+        var arregloRestaurante= arrayListOf<Restaurante>()
 
         fun setearArregloRestaurante( nombreRestaurante: String?)
         {
-            val restauranteNuevo = FirebaseRestauranteDto(nombreRestaurante)
+            val restauranteNuevo = Restaurante(nombreRestaurante)
             arregloRestaurante.add(restauranteNuevo)
         }
 

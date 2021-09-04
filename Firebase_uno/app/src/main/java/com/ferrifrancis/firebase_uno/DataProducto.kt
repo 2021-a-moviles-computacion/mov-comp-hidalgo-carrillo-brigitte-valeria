@@ -1,16 +1,15 @@
 package com.ferrifrancis.firebase_uno
 
-import com.ferrifrancis.firebase_uno.dto.FirebaseProductoDto
-import com.ferrifrancis.firebase_uno.dto.FirebaseRestauranteDto
+import com.ferrifrancis.firebase_uno.dto.Producto
 
 class DataProducto {
 
     companion object{
-        var arregloProducto= arrayListOf<FirebaseProductoDto>()
+        var arregloProducto= arrayListOf<Producto>()
 
         fun setearArregloProducto( nombreProducto: String?, precio: Double?)
         {
-            val productoNuevo = FirebaseProductoDto(nombreProducto, precio)
+            val productoNuevo = Producto(nombreProducto, precio)
             arregloProducto.add(productoNuevo)
         }
 

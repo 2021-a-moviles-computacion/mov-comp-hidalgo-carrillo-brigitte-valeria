@@ -1,11 +1,14 @@
 package com.ferrifrancis.firebase_uno.dto
 
-class FirebaseProductoDto(
+class Producto(
     val nombre: String? = null,
     val precio: Double? = null ) {
 
     override fun toString(): String {
-        return "${nombre} $${precio}"
+        if(nombre == null && precio == null)
+            return "Elija producto"
+        else
+            return "${nombre} $${precio}"
     }
 
 
