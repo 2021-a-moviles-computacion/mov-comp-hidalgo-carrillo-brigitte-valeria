@@ -11,6 +11,7 @@ import com.ferrifrancis.firebase_uno.dto.Producto
 import com.ferrifrancis.firebase_uno.dto.Restaurante
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_e_ordenes.*
 
 class EOrdenes : AppCompatActivity() {
 
@@ -73,55 +74,78 @@ class EOrdenes : AppCompatActivity() {
             }
 
         botonAnadir.setOnClickListener {
-            val cantidad =  etCantidad.text.toString().toIntOrNull()
+            val cantidad = etCantidad.text.toString().toIntOrNull()
 
-            if(posProductoSelec != 0 && posRestauranteSelec!= 0 && cantidad != null) {
-                //Log.i("eordenes","prodcuto-->${this.arregloProducto[posProductoSelec!!]}")
-                val ordenNueva = Orden(arregloRestaurante[posRestauranteSelec!!].nombre,arregloProducto[posProductoSelec!!].nombre,arregloProducto[posProductoSelec!!].precio)
-                //Log.i("arreglo ordenes","${ordenNueva.precioProducto} -${ordenNueva.nombreProducto}-${ordenNueva.nombreRestaurante}")
-                this.arregloOrdenes.add(ordenNueva)
-                //Log.i("arreglo ordenes","${this.arregloOrdenes[0].precioProducto}")
-                poneDatosEnAdaptador()
-            }
-            else
-            {
-                Toast.makeText(this, "Favor elejir producto, restaurante e ingresar cantidad", Toast.LENGTH_LONG).show()
+            if (posProductoSelec != 0 && posRestauranteSelec != 0 && cantidad != null) {
+                if (arregloRestaurante != null && arregloProducto != null) {
+                    val precio = arregloProducto[posProductoSelec!!].precio
+                    val nombreRes = arregloRestaurante[posRestauranteSelec!!].nombre
+                    val nombreProd = arregloProducto[posProductoSelec!!].nombre
+
+                    val ordenNueva = Orden(
+                        nombreRes,
+                        nombreProd,
+                        precio,
+                        cantidad,
+                        precio?.times(cantidad)
+                    )
+                    this.arregloOrdenes.add(ordenNueva)
+                    poneOrdenesEnAdaptador()
+                    vaciarFormulario()
+                    Toast.makeText(this, "Orden agregada", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    "Favor elejir producto, restaurante e ingresar cantidad",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
 
     }
 
-    fun poneDatosEnAdaptador()
-    {
+    fun vaciarFormulario() {
+        sp_restaurantes.setSelection(0)
+        sp_producto.setSelection(0)
+        et_cantidad_producto.text.clear()
+    }
+
+    fun poneOrdenesEnAdaptador() {
         val adaptador: ArrayAdapter<Orden> = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
             this.arregloOrdenes
-
         )
 
-        val listViewOrdenes = findViewById<ListView>(R.id.lv_lista_productos)
-        listViewOrdenes.adapter = adaptador
-        registerForContextMenu(listViewOrdenes)
+        lv_lista_productos.adapter = adaptador
+        registerForContextMenu(lv_lista_productos)
     }
 
-    fun setearSpinnerProductos(spProducto: Spinner)
-    {
-        spProducto.adapter= ArrayAdapter<Producto>(this, android.R.layout.simple_list_item_1,this.arregloProducto)
+    fun setearSpinnerProductos(spProducto: Spinner) {
+        spProducto.adapter =
+            ArrayAdapter<Producto>(this, android.R.layout.simple_list_item_1, this.arregloProducto)
     }
 
-    fun setearSpinnerRestaurante(spRestaurante: Spinner)
-    {
-        spRestaurante.adapter= ArrayAdapter<Restaurante>(this, android.R.layout.simple_list_item_1,this.arregloRestaurante)
+    fun setearSpinnerRestaurante(spRestaurante: Spinner) {
+        spRestaurante.adapter = ArrayAdapter<Restaurante>(
+            this,
+            android.R.layout.simple_list_item_1,
+            this.arregloRestaurante
+        )
     }
 
-    fun jalarDocsProductosDeFirestore(): ArrayList<Producto>
-    {
+    fun jalarDocsProductosDeFirestore(): ArrayList<Producto> {
         val db = Firebase.firestore
         val arregloProductos = arrayListOf<Producto>()
 
-        arregloProductos.add(Producto(null, null)) //Si quito esto, no puedo seleccionar en el spinner
+        arregloProductos.add(
+            Producto(
+                null,
+                null
+            )
+        ) //Si quito esto, no puedo seleccionar en el spinner
 
         db.collection("producto")
             .get()
@@ -129,9 +153,13 @@ class EOrdenes : AppCompatActivity() {
 
                 for (document in documents) {
                     val productoCargado: Producto = document.toObject(Producto::class.java)
-                    if(productoCargado != null)
-                    {
-                        arregloProductos.add(Producto(productoCargado.nombre,productoCargado.precio))
+                    if (productoCargado != null) {
+                        arregloProductos.add(
+                            Producto(
+                                productoCargado.nombre,
+                                productoCargado.precio
+                            )
+                        )
                     }
                 }
                 //spProducto.adapter= ArrayAdapter<FirebaseProductoDto>(this, android.R.layout.simple_list_item_1,arregloProductos)
@@ -141,7 +169,7 @@ class EOrdenes : AppCompatActivity() {
                 Log.w(TAG, "Error getting documents: ", exception)
             }
 
-        return  arregloProductos
+        return arregloProductos
     }
 
     fun jalarDocsRestauranteDeFirestore(): ArrayList<Restaurante> {
@@ -157,8 +185,7 @@ class EOrdenes : AppCompatActivity() {
                 for (document in documents) {
                     val restauranteCargado: Restaurante = document.toObject(Restaurante::class.java)
 
-                    if(restauranteCargado != null)
-                    {
+                    if (restauranteCargado != null) {
                         arregloRestaurante.add(Restaurante(restauranteCargado.nombre))
 
                     }

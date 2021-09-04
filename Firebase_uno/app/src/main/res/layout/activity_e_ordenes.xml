@@ -20,32 +20,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
 
+    <Spinner
+        android:id="@+id/sp_producto"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/sp_producto"
+        <EditText
+            android:id="@+id/et_cantidad_producto"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Ingrese cantidad"
+            android:inputType="numberDecimal" />
 
         <Button
             android:id="@+id/btn_anadir_lista_producto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="ADD" />
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="AÑADIR" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/et_cantidad_producto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Ingrese cantidad"
-        android:inputType="numberDecimal" />
 
     <TextView
         android:id="@+id/textView3"
