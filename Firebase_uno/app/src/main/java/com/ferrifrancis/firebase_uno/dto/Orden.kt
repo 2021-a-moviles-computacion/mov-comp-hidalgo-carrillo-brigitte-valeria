@@ -8,8 +8,12 @@ class Orden(
     val totalOrden: Double?
 ) {
     override fun toString(): String {
+
         return "Restaurante: ${nombreRestaurante}\nProducto: ${nombreProducto}\n" +
-                "Precio: $${precioProducto}\nCantidad: ${cantidad}" +
-                "\nTotal: $${totalOrden}"
+                "Precio Unit.: $${precioProducto}\nCantidad: ${cantidad}" +
+                "\nSubtotal: $${totalOrden}"
+       /* return "${nombreRestaurante}\t${nombreProducto}\t" +
+                "$${precioProducto}\t${cantidad}" +
+                "\t$${totalOrden}"*/
     }
 }
