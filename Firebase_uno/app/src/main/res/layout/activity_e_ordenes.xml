@@ -35,7 +35,7 @@
 
         <EditText
             android:id="@+id/et_cantidad_producto"
-            android:layout_width="235dp"
+            android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="13dp"
