@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         botonRestaurante.setOnClickListener {
             val intent = Intent(
                 this,
-                DRestaurante::class.java
+                CRestaurante::class.java
             )
             startActivity(intent)
         }

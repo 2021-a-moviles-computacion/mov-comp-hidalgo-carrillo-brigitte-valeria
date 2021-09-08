@@ -2,6 +2,7 @@ package com.ferrifrancis.firebase_uno
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.google.firebase.firestore.ktx.firestore
@@ -15,9 +16,30 @@ class CProducto : AppCompatActivity() {
         val btnCrearProducto = findViewById<Button>(R.id.btn_crear_producto)
         btnCrearProducto.setOnClickListener {
             crearProducto()
+            //crearRestaurante()
 
         }
     }
+
+    fun crearRestaurante()
+    {
+        //val etNombreRestaurante = findViewById<EditText>(R.id.et_nombre_restaurante)
+
+        val nuevoRestaurante = hashMapOf<String, Any>(
+            "nombre" to "rest prueba"//etNombreRestaurante.text.toString(),
+        )
+
+        val db = Firebase.firestore
+        val referencia = db.collection("restaurante")
+
+        referencia.add(nuevoRestaurante)
+            .addOnSuccessListener {
+                //etNombreRestaurante.text.clear()
+                Log.i("firebase-firestore","restaurante creado")
+            }
+
+    }
+
 
     fun crearProducto(){
         val editTextNombre = findViewById<EditText>(R.id.et_nombre_producto)

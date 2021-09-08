@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DRestaurante">
+    tools:context=".CRestaurante">
 
     <EditText
         android:id="@+id/et_nombre_restaurante"
@@ -31,4 +31,25 @@
         app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="@+id/et_nombre_restaurante"
         app:layout_constraintTop_toBottomOf="@+id/et_nombre_restaurante" />
+
+    <Button
+        android:id="@+id/btn_datos_firebasee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="datos prueba"
+        app:layout_constraintEnd_toEndOf="@+id/et_nombre_restaurante"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="@+id/btn_crear_restaurante"
+        app:layout_constraintTop_toBottomOf="@+id/btn_crear_restaurante" />
+    <Button
+        android:id="@+id/btn_consultarrear_restaurante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="consultar restaurante"
+        app:layout_constraintEnd_toEndOf="@+id/et_nombre_restaurante"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="@+id/btn_datos_firebasee"
+        app:layout_constraintTop_toBottomOf="@+id/btn_datos_firebasee" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".EOrdenes"></activity>
-        <activity android:name=".DRestaurante" />
+        <activity android:name=".CRestaurante" />
         <activity android:name=".CProducto" />
         <activity android:name=".MainActivity">
             <intent-filter>
