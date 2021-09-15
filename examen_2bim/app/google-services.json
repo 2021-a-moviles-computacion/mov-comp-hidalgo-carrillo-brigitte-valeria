@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923907346086",
+    "project_id": "hidalgo-examen2bim",
+    "storage_bucket": "hidalgo-examen2bim.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923907346086:android:841814eb50ed5dab2aee67",
+        "android_client_info": {
+          "package_name": "com.ferrifrancis.exam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923907346086-dkpi4899gpbcqo3a13gh9a8j1700favf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEYeL481jBaui-xt1t5dUrygxJGuDuxCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923907346086-dkpi4899gpbcqo3a13gh9a8j1700favf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
