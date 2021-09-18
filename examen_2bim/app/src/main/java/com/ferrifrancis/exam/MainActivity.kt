@@ -77,6 +77,12 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+            CODIGO_RPTA_CREAR_EST->{
+                if (resultCode == RESULT_OK)
+                {
+                    Log.i("main-activity","intent rpta crear estudiante")
+                }
+            }
         }
     }
 
@@ -176,17 +182,6 @@ class MainActivity : AppCompatActivity() {
         //Log.i("main-activity","item selected ${this.listaColegios[this.indxItemContextMenu].nombreColegio}")
     }
 
-
-
-    fun abrirActividad(clase: Class<*>) {
-
-        val intentExplicito = Intent(
-            this,
-            clase
-        )
-        this.startActivity(intentExplicito)
-
-    }
 
     fun abrirActividadConParametros(
         clase: Class<*>,

@@ -3,6 +3,7 @@ package com.ferrifrancis.exam
 import Colegio
 import Estudiante
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -44,10 +45,8 @@ class BFormularioEstudiante : AppCompatActivity() {
             0 -> { //registrar
                 prepararActividadParaRegistrar(botonEditarEstudiante)
                 botonRegsitrarEstudiante.setOnClickListener {
-
                     registraEstudianteFirestore()
-                    abrirActividad(MainActivity::class.java)
-
+                    //abrirActividad(MainActivity::class.java)
 
                 }
             }
@@ -63,7 +62,7 @@ class BFormularioEstudiante : AppCompatActivity() {
                         )
                         Log.i("bd", "editó estudiante? ${resulAct}")
                         Toast.makeText(this, "¡Estudiante editado!", LENGTH_SHORT).show()
-                        abrirActividad(MainActivity::class.java)
+                        //abrirActividad(MainActivity::class.java)
                     }
                 }
             }
@@ -102,13 +101,22 @@ class BFormularioEstudiante : AppCompatActivity() {
 
             referencia.add(nuevoEstudiante)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show()
-                    Log.i("form-estudiante", "Firebase: Se creó colegio")
+                    Toast.makeText(this, "¡Estudiante registrado!", Toast.LENGTH_SHORT).show()
+                    abreMainPorIntent()
+                    Log.i("form-estudiante", "Firebase: Se creó estudiante")
                 }
                 .addOnFailureListener {
-                    Log.i("form-estudiante", "Firebase: NO se creó colegio")
+                    Log.i("form-estudiante", "Firebase: NO se creó estudainte")
                 }
         }
+    }
+
+    private fun abreMainPorIntent() {
+        val intentDevolverParametros = Intent()
+        //intentDevolverParametros.putExtra("arregloColegiosCreados",this.colegioNuevo)
+        this.setResult(Activity.RESULT_OK, intentDevolverParametros)
+        finish()
+        this.finish()
     }
 
     fun escondeEditText(objeto: EditText) {
