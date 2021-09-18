@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     var indxItemContextMenu = 0
     var listaColegios= jalarDatosColegioFirestore()
-    val CODIGO_RESPUESTA = 200
+    val CODIGO_RESPUESTA = 200 // para crear
+    val CODIGO_RTA_ACTUALIZAR: Int = 203
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             //Se usa la misma actividad para editar y registrar
             //Cuando envío el código 0, la actividad se abre para registrar
             //Cuando envío el código 1, la actividad se abre para editar
-            abrirActividadConParametros(BFormularioColegio::class.java, null, 0)
+            abrirActividadConParametros(BFormularioColegio::class.java, null, 0,CODIGO_RESPUESTA)
 
         }
 
@@ -55,6 +56,22 @@ class MainActivity : AppCompatActivity() {
                         this.listaColegios.add(colegio)
                     }
                     Log.i("main-activity","Colegio recibido por intent: ${colegio}")
+
+                }
+            }
+            CODIGO_RTA_ACTUALIZAR ->{
+                if (resultCode == RESULT_OK)
+                {
+                    val colegioIntent = data?.getParcelableExtra<Colegio>("arregloColegiosCreados")
+                    listaColegios.forEach {
+                        val colegioLista = it
+                        if (colegioIntent != null) {
+                            if(colegioLista.idColegio == colegioIntent.idColegio) {
+                                colegioLista.numAulas = colegioIntent.numAulas
+                            }
+                        }
+                    }
+                    Log.i("main-activity","intent codigo rpta actualziar")
 
                 }
             }
@@ -79,11 +96,11 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mi_editar -> {
-                Log.i("list-view", "no")
                 abrirActividadConParametros(
                     BFormularioColegio::class.java,
                     listaColegios[this.indxItemContextMenu],
-                    1
+                    1,
+                    CODIGO_RTA_ACTUALIZAR
                 )
                 //abrirActividadConParametros(BFormularioColegio::class.java, listaColegios[this.indxItemContextMenu],1)
 
@@ -172,14 +189,15 @@ class MainActivity : AppCompatActivity() {
     fun abrirActividadConParametros(
         clase: Class<*>,
         colegio: Colegio? = null,
-        codEditOrCreate: Int
+        codEditOrCreate: Int,
+        codigoRpta: Int
     ) {
         //0 --> registra, ver
         //1 --> edita
         val intentExplicito = Intent(this, clase)// con quien te vas a comunicar
         intentExplicito.putExtra("colegio", colegio)//la información que vas a pasar
         intentExplicito.putExtra("id", codEditOrCreate)
-        startActivityForResult(intentExplicito, CODIGO_RESPUESTA)//manda este código
+        startActivityForResult(intentExplicito, codigoRpta)//manda este código
     }
 
 

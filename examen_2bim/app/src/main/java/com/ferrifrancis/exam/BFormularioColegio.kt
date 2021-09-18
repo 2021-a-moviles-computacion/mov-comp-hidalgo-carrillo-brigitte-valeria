@@ -77,7 +77,9 @@ class BFormularioColegio : AppCompatActivity() {
                     }
                     .addOnSuccessListener {
                         Log.i("firestore","se editó colegio")
-                        Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show() }
+                        Toast.makeText(this, "¡Aulas colegio actualizadas!", Toast.LENGTH_SHORT).show()
+                        devuelveNuevoColegioPorIntent()
+                    }
             }
         }
         else
@@ -162,12 +164,11 @@ class BFormularioColegio : AppCompatActivity() {
     fun registrarColegio()
     {
         //registro colegio y envio por intent el objeto colegio nuevo a la main activity
+
         val nombreColegio= findViewById<EditText>(R.id.it_nombre_cole).text.toString()
         val distrito = findViewById<EditText>(R.id.it_distrito_cole).text.toString().toInt()
         val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole).text.toString().toInt()
         val esFiscal = findViewById<Switch>(R.id.sw_esfiscal_cole).isChecked
-
-
 
         val nuevoColegioHashMap = hashMapOf<String, Any>(
             "nombreColegio" to nombreColegio,
