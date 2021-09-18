@@ -145,6 +145,7 @@ class BFormularioColegio : AppCompatActivity() {
 
     fun registrarColegio()
     {
+        //registro colegio y envio por intent el objeto colegio nuevo a la main activity
         val nombreColegio= findViewById<EditText>(R.id.it_nombre_cole).text.toString()
         val distrito = findViewById<EditText>(R.id.it_distrito_cole).text.toString().toInt()
         val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole).text.toString().toInt()

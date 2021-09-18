@@ -52,7 +52,9 @@ class MainActivity : AppCompatActivity() {
                 if (resultCode == RESULT_OK)
                 {
                     val colegio = data?.getParcelableExtra<Colegio>("arregloColegiosCreados")
-
+                    if (colegio != null) {
+                        this.listaColegios.add(colegio)
+                    }
                     Log.i("main-activity","Colegio recibido por intent: ${colegio}")
 
                 }
