@@ -187,11 +187,11 @@ class BFormularioColegio : AppCompatActivity() {
 
                 devuelveNuevoColegioPorIntent()
                 Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show()
-                Log.i("firebase","Se creo colegio ID -->${id}")
+                Log.i("firebase","Se creó colegio ID -->${id}")
 
             }
             .addOnFailureListener {
-
+                Log.i("firebase","NO se creó colegio")
             }
 
 

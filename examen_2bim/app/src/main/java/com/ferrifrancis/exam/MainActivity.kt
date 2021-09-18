@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
 
             R.id.mi_registrar_estudiantes -> {
-
+            Log.i("main-activity","colegio id -->${listaColegios[this.indxItemContextMenu].idColegio}")
                 abrirActividadConParametros(
                     BFormularioEstudiante::class.java,
                     listaColegios[this.indxItemContextMenu],
