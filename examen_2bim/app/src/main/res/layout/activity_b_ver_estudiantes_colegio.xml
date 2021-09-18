@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="@string/menItmCol_verEst"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,16 +53,5 @@
         app:layout_constraintStart_toStartOf="@+id/tv_nombre_colegio_est_cole"
         app:layout_constraintTop_toBottomOf="@+id/tv_ver_estudiante_est_cole"
         app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_anadir_est_col"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/menItmCol_registrarEst"
-        app:layout_constraintEnd_toEndOf="@+id/lv_estudiante_est_cole"
-        app:layout_constraintHorizontal_bias="0.627"
-        app:layout_constraintStart_toStartOf="@+id/lv_estudiante_est_cole"
-        app:layout_constraintTop_toBottomOf="@+id/lv_estudiante_est_cole" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

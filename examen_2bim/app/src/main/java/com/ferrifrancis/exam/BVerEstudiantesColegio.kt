@@ -34,12 +34,7 @@ class BVerEstudiantesColegio: AppCompatActivity() {
             listaEstudiantes = jalarDatosEstudianteBD()
             poneDatosEnAdaptador()
 
-            val botonRegistrar = findViewById<Button>(R.id.btn_anadir_est_col)
-            //0 --> registra, ver
-            //1 --> edita
-            botonRegistrar.setOnClickListener {
-                abrirActividadConParametros(BFormularioEstudiante::class.java, colegio,null,0)
-            }
+
         }
     }
     fun eliminaEstudiante(): Boolean

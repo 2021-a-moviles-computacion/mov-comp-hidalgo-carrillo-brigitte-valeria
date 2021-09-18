@@ -6,193 +6,70 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".BFormularioEstudiante">
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_registra_est_for_est"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/menItmCol_registrarEst"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.041" />
-
-        <TextView
-            android:id="@+id/rv_nombre_est_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/txt_nombre"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/tv_cedula_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txt_cedula"
-            app:layout_constraintEnd_toEndOf="@+id/it_nombre_est_for_est"
-            app:layout_constraintHorizontal_bias="0.011"
-            app:layout_constraintStart_toStartOf="@+id/it_nombre_est_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/it_nombre_est_for_est" />
-
-        <TextView
-            android:id="@+id/tv_fecha_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txt_fecha_nac"
-            app:layout_constraintEnd_toEndOf="@+id/it_cedula_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/it_cedula_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/it_cedula_for_est" />
-
-        <TextView
-            android:id="@+id/tv_curso_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/txt_curso"
-            app:layout_constraintEnd_toEndOf="@+id/it_fecha_nac_for_est"
-            app:layout_constraintHorizontal_bias="0.005"
-            app:layout_constraintStart_toStartOf="@+id/it_fecha_nac_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/it_fecha_nac_for_est" />
-
-        <EditText
-            android:id="@+id/it_nombre_est_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/rv_nombre_est_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/rv_nombre_est_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/rv_nombre_est_for_est" />
-
-        <EditText
-            android:id="@+id/it_cedula_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/tv_cedula_for_est"
-            app:layout_constraintHorizontal_bias="0.106"
-            app:layout_constraintStart_toStartOf="@+id/tv_cedula_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/tv_cedula_for_est" />
-
-        <EditText
-            android:id="@+id/it_fecha_nac_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/tv_fecha_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_fecha_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/tv_fecha_for_est" />
-
-        <TextView
-            android:id="@+id/tv_sexo_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/txt_sexo"
-            app:layout_constraintEnd_toEndOf="@+id/it_curso_for_est"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="@+id/it_curso_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/it_curso_for_est" />
-
-        <EditText
-            android:id="@+id/it_curso_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/tv_curso_for_est"
-            app:layout_constraintHorizontal_bias="0.017"
-            app:layout_constraintStart_toStartOf="@+id/tv_curso_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/tv_curso_for_est" />
-
-        <TextView
-            android:id="@+id/tv_informacion_colegio_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="@string/txt_inf_colegio"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.23"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_registra_est_for_est" />
-
-        <TextView
-            android:id="@+id/tv_nombre_coleg_for_est"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txt_nombre"
-            app:layout_constraintEnd_toEndOf="@+id/tv_informacion_colegio_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_informacion_colegio_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/tv_informacion_colegio_for_est" />
-
-        <TextView
-            android:id="@+id/tv_pone_nombre_cole_for_est"
-            android:layout_width="192dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="11dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_nombre_coleg_for_est"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_nombre_coleg_for_est"
-            app:layout_constraintTop_toTopOf="@+id/tv_nombre_coleg_for_est"
-            app:layout_constraintVertical_bias="0.478" />
+            android:gravity="center_horizontal"
+            android:textSize="20dp"
+            android:text="@string/menItmCol_registrarEst" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:layout_marginTop="36dp"
-            android:text="@string/txt_inf_estudiante"
-            app:layout_constraintEnd_toEndOf="@+id/tv_nombre_coleg_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_nombre_coleg_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nombre_coleg_for_est" />
+            android:text="@string/txt_inf_estudiante" />
 
-        <Button
-            android:id="@+id/btn_registrar_for_est"
-            android:layout_width="227dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/menItmCol_registrarEst"
-            app:layout_constraintEnd_toEndOf="@+id/rg_sexo_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/rg_sexo_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/rg_sexo_for_est" />
+        <EditText
+            android:id="@+id/it_nombre_est_for_est"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/txt_nombre"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/it_cedula_for_est"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/txt_cedula"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/it_fecha_nac_for_est"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/txt_fecha_nac"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tv_sexo_for_est"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/txt_sexo" />
 
         <RadioGroup
             android:id="@+id/rg_sexo_for_est"
             android:layout_width="191dp"
             android:layout_height="82dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_sexo_for_est"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_sexo_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/tv_sexo_for_est">
+            android:layout_marginTop="8dp">
 
             <RadioButton
                 android:id="@+id/rb_femenino_for_est"
@@ -207,27 +84,48 @@
                 android:text="@string/txt_masculino" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/btn_editar_for_est"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/it_curso_for_est"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="84dp"
-            android:text="@string/txt_act_est"
-            app:layout_constraintEnd_toEndOf="@+id/rg_sexo_for_est"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/rg_sexo_for_est"
-            app:layout_constraintTop_toBottomOf="@+id/rg_sexo_for_est" />
+            android:hint="@string/txt_curso"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/tv_actualiza_est_for_est"
+            android:id="@+id/tv_informacion_colegio_for_est"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/txt_act_est"
-            app:layout_constraintBottom_toTopOf="@+id/tv_registra_est_for_est"
-            app:layout_constraintEnd_toEndOf="@+id/tv_registra_est_for_est"
-            app:layout_constraintHorizontal_bias="0.526"
-            app:layout_constraintStart_toStartOf="@+id/tv_registra_est_for_est" />
+            android:textSize="18dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/txt_inf_colegio" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_pone_nombre_cole_for_est"
+            android:layout_width="192dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="11dp" />
+
+
+
+        <Button
+            android:id="@+id/btn_registrar_for_est"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/menItmCol_registrarEst" />
+
+
+
+        <Button
+            android:id="@+id/btn_editar_for_est"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/txt_act_est" />
+
+
+    </LinearLayout>
 </ScrollView>

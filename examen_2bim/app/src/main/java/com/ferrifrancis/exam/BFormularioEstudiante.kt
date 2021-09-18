@@ -92,7 +92,7 @@ class BFormularioEstudiante : AppCompatActivity() {
 
     fun prepararActividadParaRegistrar(btnEditar: Button)
     {
-        findViewById<TextView>(R.id.tv_actualiza_est_for_est).visibility = View.GONE
+
         btnEditar.visibility = View.GONE
 
     }
@@ -106,7 +106,6 @@ class BFormularioEstudiante : AppCompatActivity() {
         findViewById<TextView>(R.id.tv_registra_est_for_est).visibility= View.GONE
         findViewById<TextView>(R.id.tv_informacion_colegio_for_est).visibility= View.GONE
         findViewById<TextView>(R.id.tv_pone_nombre_cole_for_est).visibility= View.GONE
-        findViewById<TextView>(R.id.tv_nombre_coleg_for_est).visibility= View.GONE
         botonRegistrar.visibility = View.GONE
         //Setea y edita los edit text que no puede editar
         nombre.setText(estudiante.nombre)

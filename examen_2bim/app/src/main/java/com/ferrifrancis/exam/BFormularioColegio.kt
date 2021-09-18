@@ -38,9 +38,7 @@ class BFormularioColegio : AppCompatActivity() {
             0->{
                 preparaActividadParaRegistrar()
                 botonAnadirColegio.setOnClickListener {
-                    registrarColegio()
-
-
+                    registrarColegio() //registra y envia por intent el objeto colegio nuevo
                 }
             }
             1 ->{ //1 --> edita
@@ -48,7 +46,7 @@ class BFormularioColegio : AppCompatActivity() {
                     preparaActividadParaEditar(colegio)
 
                     botonEditarColegio.setOnClickListener {
-                        editarColegio(colegio)
+                        editarColegio( colegio) //edita y envia por intent el objeto colegio nuevo
                         //abrirActividad(MainActivity::class.java)
                     }
                 }

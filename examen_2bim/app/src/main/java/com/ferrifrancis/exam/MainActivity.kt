@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     var indxItemContextMenu = 0
     var listaColegios= jalarDatosColegioFirestore()
-    val CODIGO_RESPUESTA = 200 // para crear
-    val CODIGO_RTA_ACTUALIZAR: Int = 203
+    val CODIGO_RESPUESTA = 200 // para crear COELGIO
+    val CODIGO_RTA_ACTUALIZAR: Int = 201 //para act coelgio
+    val CODIGO_RPTA_CREAR_EST = 210
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,21 +78,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onContextItemSelected(item: MenuItem): Boolean {
 
         return when (item?.itemId) {
 
             R.id.mi_ver_est -> {
-                /*
+
                 abrirActividadConParametros(
                     BVerEstudiantesColegio::class.java,
                     listaColegios[this.indxItemContextMenu],
-
-                    0
+                    0,
+                    CODIGO_RPTA_CREAR_EST
 
                 )
-                Log.i("bdd", "-->envia:${listaColegios[this.indxItemContextMenu].idColegio}")
-                */
 
                 return true
             }
