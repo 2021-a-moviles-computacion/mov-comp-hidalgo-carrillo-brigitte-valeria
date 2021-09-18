@@ -6,7 +6,7 @@ class Colegio(
     var esFiscal: Boolean? = null,
     var distrito: Int? = null,
     var numAulas: Int? = null,
-    internal var idColegio: String? = null): Parcelable
+    var idColegio: String? = null): Parcelable
 {
 
 

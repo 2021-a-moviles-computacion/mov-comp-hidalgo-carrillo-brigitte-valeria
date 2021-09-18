@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         listaColegios = jalarDatosColegioFirestore()
         poneDatosEnAdaptador()
 
-        
-
 
         val botonAñadir = findViewById<Button>(R.id.btn_añadirColegio)
         botonAñadir.setOnClickListener {
@@ -41,11 +39,26 @@ class MainActivity : AppCompatActivity() {
             //Cuando envío el código 0, la actividad se abre para registrar
             //Cuando envío el código 1, la actividad se abre para editar
             abrirActividadConParametros(BFormularioColegio::class.java, null, 0)
+
         }
 
     }
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            CODIGO_RESPUESTA ->{
+                if (resultCode == RESULT_OK)
+                {
+                    val colegio = data?.getParcelableExtra<Colegio>("arregloColegiosCreados")
+
+                    Log.i("main-activity","Colegio recibido por intent: ${colegio}")
+
+                }
+            }
+        }
+    }
     override fun onContextItemSelected(item: MenuItem): Boolean {
 
         return when (item?.itemId) {
@@ -65,14 +78,14 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mi_editar -> {
-                /*
+
                 abrirActividadConParametros(
                     BFormularioColegio::class.java,
                     listaColegios[this.indxItemContextMenu],
                     1
                 )
                 //abrirActividadConParametros(BFormularioColegio::class.java, listaColegios[this.indxItemContextMenu],1)
-                 */
+
                 return true
 
             }

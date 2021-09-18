@@ -2,9 +2,11 @@ package com.ferrifrancis.exam
 
 import Colegio
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -13,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 import kotlin.collections.ArrayList
 
 class BFormularioColegio : AppCompatActivity() {
-    val listaColegios = ArrayList<Colegio>()
+    var colegioNuevo: Colegio = Colegio()
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +42,8 @@ class BFormularioColegio : AppCompatActivity() {
                 preparaActividadParaRegistrar()
                 botonAnadirColegio.setOnClickListener {
                     registrarColegio()
-                    limpiaFormularioColegio()
+
+
                 }
             }
             1 ->{ //1 --> edita
@@ -66,8 +69,17 @@ class BFormularioColegio : AppCompatActivity() {
 
 
 
-    }
 
+    }
+    fun devuelveNuevoColegioPorIntent()
+    {
+        val intentDevolverParametros = Intent()
+
+        intentDevolverParametros.putExtra("arregloColegiosCreados",this.colegioNuevo)
+        this.setResult(Activity.RESULT_OK, intentDevolverParametros)
+        finish()
+        this.finish()
+    }
     fun preparaActividadParaRegistrar()
     {
         val botonEditarColegio =  findViewById<Button>(R.id.btn_editar)
@@ -133,24 +145,33 @@ class BFormularioColegio : AppCompatActivity() {
 
     fun registrarColegio()
     {
-        val nombreColegio: EditText = findViewById<EditText>(R.id.it_nombre_cole)
-        val distrito = findViewById<EditText>(R.id.it_distrito_cole)
-        val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole)
-        val esFiscal = findViewById<Switch>(R.id.sw_esfiscal_cole)
+        val nombreColegio= findViewById<EditText>(R.id.it_nombre_cole).text.toString()
+        val distrito = findViewById<EditText>(R.id.it_distrito_cole).text.toString().toInt()
+        val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole).text.toString().toInt()
+        val esFiscal = findViewById<Switch>(R.id.sw_esfiscal_cole).isChecked
 
-        val nuevoColegio = hashMapOf<String, Any>(
-            "nombreColegio" to nombreColegio.text.toString(),
-            "distrito" to distrito.text.toString().toInt(),
-            "numAulas" to numAulas.text.toString().toInt(),
-            "esFiscal" to esFiscal.isChecked
+
+
+        val nuevoColegioHashMap = hashMapOf<String, Any>(
+            "nombreColegio" to nombreColegio,
+            "distrito" to distrito,
+            "numAulas" to numAulas,
+            "esFiscal" to esFiscal
         )
+
+        //this.listaColegiosNuevos.add(nuevoColegio)
+
         val db = Firebase.firestore
         val referencia = db.collection("colegio")
 
-        referencia.add(nuevoColegio)
+        referencia.add(nuevoColegioHashMap)
             .addOnSuccessListener {
+                val id: String =it.id
+                this.colegioNuevo= Colegio(nombreColegio,esFiscal,distrito,numAulas,id)
+
+                devuelveNuevoColegioPorIntent()
                 Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show()
-                Log.i("firebase","Se creo colegio")
+                Log.i("firebase","Se creo colegio ID -->${id}")
 
             }
             .addOnFailureListener {
