@@ -22,14 +22,13 @@ import java.lang.Thread.sleep
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     var indxItemContextMenu = 0
-    lateinit var listaColegios: ArrayList<Colegio>
+    var listaColegios= jalarDatosColegioFirestore()
     val CODIGO_RESPUESTA = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listaColegios = jalarDatosColegioFirestore()
         poneDatosEnAdaptador()
 
 
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mi_editar -> {
-
+                Log.i("list-view", "no")
                 abrirActividadConParametros(
                     BFormularioColegio::class.java,
                     listaColegios[this.indxItemContextMenu],
@@ -238,9 +237,10 @@ class MainActivity : AppCompatActivity() {
 
                     //Log.i("firestore", "identificador colegio ${identificador}")
                     val colegioCargado= Colegio(nombreColegio,esFiscal,distrito,numAulas,identificador)
-                    Log.i("firestore", "identificador objeo ${colegioCargado.nombreColegio}")
+
+                    //sleep(1000)
                     arregloColegio.add(colegioCargado)
-                    Log.i("firestore", "identificador colegio lista ${arregloColegio[numero].distrito}")
+                    Log.i("firestore", "identificador objeo ${arregloColegio[numero].idColegio}")
                     numero = numero +1
 
                 }

@@ -14,7 +14,8 @@ class Colegio(
         parcel.readString(),
         parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString()
 
     ) {
     }
@@ -28,7 +29,7 @@ class Colegio(
         parcel.writeValue(esFiscal)
         parcel.writeValue(distrito)
         parcel.writeValue(numAulas)
-        parcel.writeValue(idColegio)
+        parcel.writeString(idColegio)
     }
 
     override fun describeContents(): Int {

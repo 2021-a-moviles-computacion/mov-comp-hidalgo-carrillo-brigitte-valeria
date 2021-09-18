@@ -25,10 +25,7 @@ class BFormularioColegio : AppCompatActivity() {
 
         val botonAnadirColegio =  findViewById<Button>(R.id.id_btn_anadir_cole)
         val botonEditarColegio =  findViewById<Button>(R.id.btn_editar)
-        val nombreColegio: EditText = findViewById<EditText>(R.id.it_nombre_cole)
-        val distrito = findViewById<EditText>(R.id.it_distrito_cole)
-        val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole)
-        val esFiscal = findViewById<Switch>(R.id.sw_esfiscal_cole)
+
 
         val opcionAbrirComo=intent.getIntExtra("id",-1)//recibo los datos que mandó la otra clase
         val colegio=intent.getParcelableExtra<Colegio>("colegio")//recibo los datos que mandó la otra clase
@@ -51,17 +48,8 @@ class BFormularioColegio : AppCompatActivity() {
                     preparaActividadParaEditar(colegio)
 
                     botonEditarColegio.setOnClickListener {
-                        Log.i("bd", "ID COLEGIO ${numAulas.text.toString().toInt()}")
-                        /*
-                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarAulasColegioPorID(
-                            colegio.idColegio,
-                            numAulas.text.toString().toInt()
-                        )
-                        if (resulAct) Toast.makeText(this, "¡Colegio editado!", Toast.LENGTH_SHORT).show()
-
-                        Log.i("bd", "actualizo? ${resulAct}")
-                         */
-                        abrirActividad(MainActivity::class.java)
+                        editarColegio(colegio)
+                        //abrirActividad(MainActivity::class.java)
                     }
                 }
             }
@@ -71,6 +59,33 @@ class BFormularioColegio : AppCompatActivity() {
 
 
     }
+
+    fun editarColegio(colegio: Colegio) {
+        Log.i("formulario-colegio","entró función editar colegio")
+        val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole).text.toString().toInt()
+        val aulasNuevo = hashMapOf<String, Any>(
+            "numAulas" to numAulas
+        )
+
+        val db = Firebase.firestore
+        Log.i("formulario-colegio","id colegio ${colegio.idColegio}")
+        if (colegio != null) {
+            colegio.idColegio?.let {
+                db.collection("colegio").document(it).update(aulasNuevo)
+                    .addOnFailureListener {
+                        Log.i("firestore","NO se editó colegio")
+                    }
+                    .addOnSuccessListener {
+                        Log.i("firestore","se editó colegio")
+                        Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show() }
+            }
+        }
+        else
+        {
+            Log.i("formulario-colegio","colegio nulo")
+        }
+    }
+
     fun devuelveNuevoColegioPorIntent()
     {
         val intentDevolverParametros = Intent()
@@ -112,7 +127,9 @@ class BFormularioColegio : AppCompatActivity() {
         val botonEditarColegio =  findViewById<Button>(R.id.btn_editar)
 
         //Setea y edita los edit text que no puede editar
+
         nombreColegio.setText(colegio.nombreColegio)
+        Log.i("formulario-colegio","id colegio en fun prepara.. ${colegio.idColegio}")
         escondeEditText(nombreColegio)
 
         distrito.setText(colegio.distrito.toString())
@@ -123,7 +140,6 @@ class BFormularioColegio : AppCompatActivity() {
         else
             esFiscal.setChecked(false)
 
-        esFiscal.setText(colegio.distrito.toString())
         escondeSwitch(esFiscal)
 
         btnAnadirColegio.visibility= View.GONE
