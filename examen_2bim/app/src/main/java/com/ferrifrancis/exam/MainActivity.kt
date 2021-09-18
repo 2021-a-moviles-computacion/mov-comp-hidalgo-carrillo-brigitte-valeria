@@ -17,11 +17,12 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.ktx.firestore
 import kotlin.collections.ArrayList
 import com.google.firebase.ktx.Firebase
+import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     var indxItemContextMenu = 0
-    var listaColegios: ArrayList<Colegio>?= null
+    lateinit var listaColegios: ArrayList<Colegio>
     val CODIGO_RESPUESTA = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         listaColegios = jalarDatosColegioFirestore()
         poneDatosEnAdaptador()
+
+        
+
 
         val botonAñadir = findViewById<Button>(R.id.btn_añadirColegio)
         botonAñadir.setOnClickListener {
@@ -41,33 +45,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun abrirActividad(clase: Class<*>) {
-
-        val intentExplicito = Intent(
-            this,
-            clase
-        )
-        this.startActivity(intentExplicito)
-
-    }
-
-    fun abrirActividadConParametros(
-        clase: Class<*>,
-        colegio: Colegio? = null,
-        codEditOrCreate: Int
-    ) {
-        //0 --> registra, ver
-        //1 --> edita
-        val intentExplicito = Intent(this, clase)// con quien te vas a comunicar
-        intentExplicito.putExtra("colegio", colegio)//la información que vas a pasar
-        intentExplicito.putExtra("id", codEditOrCreate)
-        startActivityForResult(intentExplicito, CODIGO_RESPUESTA)//manda este código
-    }
-
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        this.listaColegios
+
         return when (item?.itemId) {
+
             R.id.mi_ver_est -> {
                 /*
                 abrirActividadConParametros(
@@ -105,10 +87,9 @@ class MainActivity : AppCompatActivity() {
                     builder.setPositiveButton(
                         "Si",
                         DialogInterface.OnClickListener { dialog, which ->
-                            Log.i("list-view", "si")
-                            val rptaEliminar = eliminarColegioBD()
-                            Log.i("bdd", "eliminar: ${rptaEliminar}")
-                            listaColegios=jalarDatosColegioFirestore()
+
+                            eliminarColegioFirestore()
+                            eliminarColegioLista()
                             poneDatosEnAdaptador()
 
 
@@ -159,29 +140,57 @@ class MainActivity : AppCompatActivity() {
         //escuchando qué posición toca
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         this.indxItemContextMenu = info.position
-
+        //Log.i("main-activity","item selected ${this.listaColegios[this.indxItemContextMenu].nombreColegio}")
     }
 
 
-    fun eliminarColegioBD(): Boolean {
-        /*
-        EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
-        val indxCole: Int? = this.listaColegios[indxItemContextMenu].idColegio
-        if (indxCole != null) {
-            val rptaEliminarCole: Boolean = EBaseDeDatos.TablaUsuario!!.eliminarColegioPorID(indxCole)
-            EBaseDeDatos.TablaUsuario!!.eliminarEstPorIDCole(indxCole)
-            if (rptaEliminarCole) Toast.makeText(this, "¡Eliminado!", Toast.LENGTH_SHORT).show()
-            return rptaEliminarCole
-        } else
-            return false
 
-         */
-        return true
+    fun abrirActividad(clase: Class<*>) {
+
+        val intentExplicito = Intent(
+            this,
+            clase
+        )
+        this.startActivity(intentExplicito)
+
     }
 
+    fun abrirActividadConParametros(
+        clase: Class<*>,
+        colegio: Colegio? = null,
+        codEditOrCreate: Int
+    ) {
+        //0 --> registra, ver
+        //1 --> edita
+        val intentExplicito = Intent(this, clase)// con quien te vas a comunicar
+        intentExplicito.putExtra("colegio", colegio)//la información que vas a pasar
+        intentExplicito.putExtra("id", codEditOrCreate)
+        startActivityForResult(intentExplicito, CODIGO_RESPUESTA)//manda este código
+    }
+
+
+    fun eliminarColegioFirestore(): Boolean {
+        val idColegio = this.listaColegios[this.indxItemContextMenu].idColegio
+        if (idColegio != null) {
+            val db = Firebase.firestore
+            db.collection("colegio").document(idColegio)
+                .delete()
+                .addOnSuccessListener { Log.d("main-activity", "Documetno colegio se borró") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+            return true
+        }
+        else
+        {return false}
+    }
+
+    fun eliminarColegioLista()
+    {
+        this.listaColegios.removeAt(this.indxItemContextMenu)
+    }
     fun poneDatosEnAdaptador()
     {
         if(this.listaColegios != null) {
+            Log.i("adaptador main","la lista de colegio esta vacia")
             val adaptador: ArrayAdapter<Colegio> = ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -195,29 +204,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun jalarDatosColegioFirestore(): ArrayList<Colegio>?
+    fun jalarDatosColegioFirestore(): ArrayList<Colegio>
     {
         val db = Firebase.firestore
         val arregloColegio=ArrayList<Colegio>()
-
-
+        var numero = 0
 
         db.collection("colegio")
             .get()
             .addOnSuccessListener { documents ->
 
                 for (document in documents) {
-                    val colegioCargado: Colegio = document.toObject(Colegio::class.java)
+                    val nombreColegio: String? = document.get("nombreColegio").toString()
+                    val distrito: Int? = document.get("distrito").toString().toInt()
+                    val esFiscal: Boolean? = document.get("esFiscal").toString().toBoolean()
+                    val numAulas: Int? = document.get("numAulas").toString().toInt()
+                    val identificador: String? = document.id
 
-                    if (colegioCargado != null) {
-                        arregloColegio.add(Colegio(colegioCargado.nombre,colegioCargado.esFiscal,colegioCargado.distrito,colegioCargado.numAulas,colegioCargado.idColegio))
-                    }
+                    //Log.i("firestore", "identificador colegio ${identificador}")
+                    val colegioCargado= Colegio(nombreColegio,esFiscal,distrito,numAulas,identificador)
+                    Log.i("firestore", "identificador objeo ${colegioCargado.nombreColegio}")
+                    arregloColegio.add(colegioCargado)
+                    Log.i("firestore", "identificador colegio lista ${arregloColegio[numero].distrito}")
+                    numero = numero +1
+
                 }
-                //spRestaurante.adapter= ArrayAdapter<FirebaseRestauranteDto>(this, android.R.layout.simple_list_item_1,arregloRestaurante)
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
+        sleep(10000)
+        //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
+
         return arregloColegio
     }
 

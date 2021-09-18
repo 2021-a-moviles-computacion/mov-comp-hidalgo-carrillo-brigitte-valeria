@@ -14,7 +14,7 @@ import android.widget.Toast.LENGTH_SHORT
 class BFormularioEstudiante : AppCompatActivity() {
 
     var listaEstudiante = ArrayList<Estudiante>()
-    var idColegio =-1
+    var idColegio: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b_formulario_estudiante)
@@ -28,7 +28,7 @@ class BFormularioEstudiante : AppCompatActivity() {
         EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
 
         val txt_nombreColegio = findViewById<TextView>(R.id.tv_pone_nombre_cole_for_est)
-        txt_nombreColegio.text = colegio?.nombre
+        txt_nombreColegio.text = colegio?.nombreColegio
         val botonRegsitrarEstudiante = findViewById<Button>(R.id.btn_registrar_for_est)
         val botonEditarEstudiante = findViewById<Button>(R.id.btn_editar_for_est)
 
@@ -45,7 +45,7 @@ class BFormularioEstudiante : AppCompatActivity() {
                 botonRegsitrarEstudiante.setOnClickListener {
                     if (colegio != null) {
 
-                        Log.i("bdd", "nombre colegio${colegio.nombre}")
+                        Log.i("bdd", "nombre colegio${colegio.nombreColegio}")
                         this.idColegio = colegio.idColegio!!
 
                         val estudiante = getValoresFormularioDevuelveEstudiante()

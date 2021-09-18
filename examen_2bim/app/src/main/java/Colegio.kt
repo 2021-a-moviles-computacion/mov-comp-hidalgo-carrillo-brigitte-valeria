@@ -2,11 +2,11 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Colegio(
-    var nombre: String? = null,
+    var nombreColegio: String? = null,
     var esFiscal: Boolean? = null,
     var distrito: Int? = null,
     var numAulas: Int? = null,
-    var idColegio: Int? = null): Parcelable
+    internal var idColegio: String? = null): Parcelable
 {
 
 
@@ -14,17 +14,17 @@ class Colegio(
         parcel.readString(),
         parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int
+
     ) {
     }
 
     override fun toString(): String {
-        return "${nombre}"
+        return "${nombreColegio}"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(nombre)
+        parcel.writeString(nombreColegio)
         parcel.writeValue(esFiscal)
         parcel.writeValue(distrito)
         parcel.writeValue(numAulas)

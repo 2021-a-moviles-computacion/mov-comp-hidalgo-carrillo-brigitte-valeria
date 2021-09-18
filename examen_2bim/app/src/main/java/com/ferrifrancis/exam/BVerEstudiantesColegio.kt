@@ -16,7 +16,7 @@ import androidx.appcompat.app.AlertDialog
 class BVerEstudiantesColegio: AppCompatActivity() {
     var posicionEstudiante =0
     var listaEstudiantes = ArrayList<Estudiante>()
-    var idColegio: Int? = null
+    var idColegio: String? = null
     val CODIGO_RESPUESTA = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +28,8 @@ class BVerEstudiantesColegio: AppCompatActivity() {
         if(colegio != null) {
 
             val tvNombreCoelgio = findViewById<TextView>(R.id.tv_ver_est_cole)
-            tvNombreCoelgio.text = colegio.nombre
-            Log.i("intent-explicito", "${colegio.nombre}")
+            tvNombreCoelgio.text = colegio.nombreColegio
+            Log.i("intent-explicito", "${colegio.nombreColegio}")
 
             listaEstudiantes = jalarDatosEstudianteBD()
             poneDatosEnAdaptador()
@@ -55,8 +55,11 @@ class BVerEstudiantesColegio: AppCompatActivity() {
     fun jalarDatosEstudianteBD(): ArrayList<Estudiante>
     {
         if(this.idColegio != null) {
-            EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
+            Log.i("bdd","jalar datos estudiante")
+        /*EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
             return EBaseDeDatos.TablaUsuario!!.consultaEstudiantesXIDCole(idColegio!!)
+
+             */
         }
         return ArrayList<Estudiante>()
     }

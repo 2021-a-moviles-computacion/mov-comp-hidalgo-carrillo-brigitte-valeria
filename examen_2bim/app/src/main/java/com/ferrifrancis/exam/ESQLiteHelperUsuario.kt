@@ -60,6 +60,8 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     }
 
     fun consultaEstudiantesXIDCole(id: Int): ArrayList<Estudiante> {
+        val arrayEstudiantes = ArrayList<Estudiante>()
+        /*
         val conexionEstudiante = readableDatabase
         val consulta = "SELECT * FROM estudiante WHERE idColegio = ${id}"
         val resultadoConsulta = conexionEstudiante.rawQuery(consulta, null)
@@ -84,6 +86,8 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         }
         conexionEstudiante.close()
         resultadoConsulta.close()
+
+         */
         return arrayEstudiantes
     }
 
@@ -111,7 +115,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
     fun creaColegioFormulario(colegio: Colegio): Boolean {
         val conexionEscritura = writableDatabase
         val contenidosAgregar = ContentValues()
-        contenidosAgregar.put("nombreColegio", colegio.nombre)
+        contenidosAgregar.put("nombreColegio", colegio.nombreColegio)
         //contenidosAgregar.put("metros2", colegio.metros2)
         contenidosAgregar.put("esFiscal", colegio.esFiscal)
         contenidosAgregar.put("distrito", colegio.distrito)
@@ -130,7 +134,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         val listaColegios = ArrayList<Colegio>()
 
         val resultadoConsulta: Cursor = conexionConsulta.rawQuery(scriptConsulta, null)
-
+        /*
         if (resultadoConsulta.moveToFirst()) {
 
             do {
@@ -150,6 +154,8 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
         }
         conexionConsulta.close()
         resultadoConsulta.close()
+
+         */
         return listaColegios
     }
 
@@ -160,7 +166,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
 
         val resultadoLectura = baseLectura.rawQuery(scriptConsulta, null)
         val colegio = Colegio(null, null, null, null, null)
-
+        /*
         if (resultadoLectura.moveToFirst()) {
             do {
                 val idColegio = resultadoLectura.getInt(0)
@@ -172,7 +178,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
                     val aulasNum = resultadoLectura.getInt(4)
 
                     colegio.idColegio = idColegio
-                    colegio.nombre = nombre
+                    colegio.nombreColegio = nombre
                     colegio.esFiscal = esFiscal
                     colegio.distrito = distrito
                     colegio.numAulas = aulasNum
@@ -180,6 +186,8 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
                 }
             } while (resultadoLectura.moveToNext())
         }
+
+         */
         baseLectura.close()
         resultadoLectura.close()
         return arregloColegio
@@ -192,7 +200,7 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
 
         val resultadoConsulta = conexionLectura.rawQuery(scriptConsulta, null)
 
-
+        /*
         if (resultadoConsulta.moveToFirst()) {
             do {
                 val cedula = resultadoConsulta.getString(0)
@@ -209,6 +217,8 @@ open class ESQLiteHelperUsuario(context: Context?):SQLiteOpenHelper(
             } while (resultadoConsulta.moveToNext())
         }
 
+
+         */
         conexionLectura.close()
         resultadoConsulta.close()
         Log.i("bdd", "Consulta estudiante")

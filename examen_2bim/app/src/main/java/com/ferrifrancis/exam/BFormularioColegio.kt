@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_b_formulario_colegio.*
 import kotlin.collections.ArrayList
 
 class BFormularioColegio : AppCompatActivity() {
@@ -41,7 +40,7 @@ class BFormularioColegio : AppCompatActivity() {
                 preparaActividadParaRegistrar()
                 botonAnadirColegio.setOnClickListener {
                     registrarColegio()
-
+                    limpiaFormularioColegio()
                 }
             }
             1 ->{ //1 --> edita
@@ -50,12 +49,15 @@ class BFormularioColegio : AppCompatActivity() {
 
                     botonEditarColegio.setOnClickListener {
                         Log.i("bd", "ID COLEGIO ${numAulas.text.toString().toInt()}")
+                        /*
                         val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarAulasColegioPorID(
                             colegio.idColegio,
                             numAulas.text.toString().toInt()
                         )
                         if (resulAct) Toast.makeText(this, "¡Colegio editado!", Toast.LENGTH_SHORT).show()
+
                         Log.i("bd", "actualizo? ${resulAct}")
+                         */
                         abrirActividad(MainActivity::class.java)
                     }
                 }
@@ -81,12 +83,14 @@ class BFormularioColegio : AppCompatActivity() {
         objeto.setCursorVisible(false)
         objeto.setKeyListener(null)
     }
+
     fun escondeSwitch(objeto: Switch){
         objeto.setFocusable(false);
         objeto.setEnabled(false);
         objeto.setCursorVisible(false);
         objeto.setKeyListener(null);
     }
+
     fun preparaActividadParaEditar( colegio: Colegio)
     {
         val nombreColegio: EditText = findViewById<EditText>(R.id.it_nombre_cole)
@@ -96,7 +100,7 @@ class BFormularioColegio : AppCompatActivity() {
         val botonEditarColegio =  findViewById<Button>(R.id.btn_editar)
 
         //Setea y edita los edit text que no puede editar
-        nombreColegio.setText(colegio.nombre)
+        nombreColegio.setText(colegio.nombreColegio)
         escondeEditText(nombreColegio)
 
         distrito.setText(colegio.distrito.toString())
@@ -114,6 +118,17 @@ class BFormularioColegio : AppCompatActivity() {
         botonEditarColegio.visibility= View.VISIBLE
 
 
+    }
+
+    fun limpiaFormularioColegio()
+    {
+        val nombreColegio: EditText = findViewById<EditText>(R.id.it_nombre_cole)
+        val distrito = findViewById<EditText>(R.id.it_distrito_cole)
+        val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole)
+
+        nombreColegio.text.clear()
+        distrito.text.clear()
+        numAulas.text.clear()
     }
 
     fun registrarColegio()
