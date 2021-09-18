@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     val CODIGO_RESPUESTA = 200 // para crear COELGIO
     val CODIGO_RTA_ACTUALIZAR: Int = 201 //para act coelgio
     val CODIGO_RPTA_CREAR_EST = 210
+    val CODIGO_RPTA_VER_EST = 211
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                     BVerEstudiantesColegio::class.java,
                     listaColegios[this.indxItemContextMenu],
                     0,
-                    CODIGO_RPTA_CREAR_EST
+                    CODIGO_RPTA_VER_EST
 
                 )
 
@@ -143,13 +144,14 @@ class MainActivity : AppCompatActivity() {
 
 
             R.id.mi_registrar_estudiantes -> {
-                /*
+
                 abrirActividadConParametros(
                     BFormularioEstudiante::class.java,
                     listaColegios[this.indxItemContextMenu],
-                    0
+                    0,
+                    CODIGO_RPTA_CREAR_EST
                 )
-                */
+
 
                 return true
             }
