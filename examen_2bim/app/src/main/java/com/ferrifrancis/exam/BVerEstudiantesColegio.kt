@@ -2,6 +2,7 @@ package com.ferrifrancis.exam
 
 import Colegio
 import Estudiante
+import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,26 +13,29 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class BVerEstudiantesColegio: AppCompatActivity() {
     var posicionEstudiante =0
     var listaEstudiantes = ArrayList<Estudiante>()
-    var idColegio: String? = null
+
     val CODIGO_RESPUESTA = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b_ver_estudiantes_colegio)
-        val listaView = findViewById<ListView>(R.id.lv_estudiante_est_cole)
-        val colegio = intent.getParcelableExtra<Colegio>("colegio")
-        this.idColegio = colegio?.idColegio
+
+        val colegio: Colegio? = intent.getParcelableExtra<Colegio>("colegio")
+
+
         if(colegio != null) {
 
             val tvNombreCoelgio = findViewById<TextView>(R.id.tv_ver_est_cole)
             tvNombreCoelgio.text = colegio.nombreColegio
-            Log.i("intent-explicito", "${colegio.nombreColegio}")
 
-            listaEstudiantes = jalarDatosEstudianteBD()
+
+            listaEstudiantes = jalarDatosEstudianteFirestore(colegio)
             poneDatosEnAdaptador()
 
 
@@ -47,16 +51,43 @@ class BVerEstudiantesColegio: AppCompatActivity() {
 
     }
 
-    fun jalarDatosEstudianteBD(): ArrayList<Estudiante>
+    fun jalarDatosEstudianteFirestore(colegio: Colegio): ArrayList<Estudiante>
     {
-        if(this.idColegio != null) {
-            Log.i("bdd","jalar datos estudiante")
-        /*EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
-            return EBaseDeDatos.TablaUsuario!!.consultaEstudiantesXIDCole(idColegio!!)
+        val db = Firebase.firestore
+        val arregloEstudiante =ArrayList<Estudiante>()
+        //var numero =0
 
-             */
-        }
-        return ArrayList<Estudiante>()
+        db.collection("estudiante")
+            .whereEqualTo("idColegio",colegio.idColegio)
+            .get()
+            .addOnSuccessListener { documents ->
+
+                for (document in documents) {
+                    val cedula: String? = document.get("cedula").toString()
+                    val curso: String? = document.get("curso").toString()
+                    val fechaNacimiento: String? = document.get("fechaNacimiento").toString()
+                    val idColegio: String? = document.get("idColegio").toString()
+                    val nombre: String? = document.get("nombre").toString()
+                    val sexo: String? = document.get("sexo").toString()
+
+
+                    //Log.i("firestore", "identificador colegio ${identificador}")
+                    val estudianteCargado= Estudiante(nombre,fechaNacimiento,curso,cedula,sexo,idColegio)
+                    Log.i("firestore", "estudiante cargado ${estudianteCargado.nombre}")
+                    //sleep(1000)
+                    arregloEstudiante.add(estudianteCargado)
+                    //Log.i("firestore", "identificador objeo ${arregloEstudiante[numero].idColegio}")
+                    //numero = numero +1
+
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+        Thread.sleep(10000)
+        //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
+
+        return arregloEstudiante
     }
 
     fun abrirActividadConParametros(
@@ -96,6 +127,7 @@ class BVerEstudiantesColegio: AppCompatActivity() {
             listViewEstudiante.adapter = adaptadorVacio
         }
     }
+
     override fun onContextItemSelected(item: MenuItem): Boolean {
         //0 --> registra, ver
         //1 --> edita
@@ -118,8 +150,8 @@ class BVerEstudiantesColegio: AppCompatActivity() {
                             Log.i("list-view","Estudiante seleccionado para eliminar:${listaEstudiantes[posicionEstudiante].cedula}")
                             val resultadoEliminar=eliminaEstudiante()
                             Log.i("bdd","eliminó estudainte? ${resultadoEliminar}")
-                            listaEstudiantes= jalarDatosEstudianteBD()
-                            poneDatosEnAdaptador()
+                            //listaEstudiantes= jalarDatosEstudianteFirestore()
+                            //poneDatosEnAdaptador()
 
 
                         })
