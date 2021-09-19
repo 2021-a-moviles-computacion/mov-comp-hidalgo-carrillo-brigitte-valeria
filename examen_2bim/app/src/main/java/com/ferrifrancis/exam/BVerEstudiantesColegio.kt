@@ -13,78 +13,92 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
+import java.lang.Thread.sleep
+import android.widget.Adapter as Adapter1
 
-class BVerEstudiantesColegio: AppCompatActivity() {
-    var posicionEstudiante =0
+class BVerEstudiantesColegio : AppCompatActivity() {
+    var posicionEstudiante = 0
     var listaEstudiantes = ArrayList<Estudiante>()
-
+    var adaptador: ArrayAdapter<Estudiante>?= null
     val CODIGO_RESPUESTA = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b_ver_estudiantes_colegio)
 
+        val listViewEstudiante = findViewById<ListView>(R.id.lv_estudiante_est_cole)
+
         val colegio: Colegio? = intent.getParcelableExtra<Colegio>("colegio")
 
-
-        if(colegio != null) {
+        if (colegio != null) {
 
             val tvNombreCoelgio = findViewById<TextView>(R.id.tv_ver_est_cole)
             tvNombreCoelgio.text = colegio.nombreColegio
 
-
-            listaEstudiantes = jalarDatosEstudianteFirestore(colegio)
-            poneDatosEnAdaptador()
+            //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
 
 
+            this.listaEstudiantes=jalarDatosEstudianteFirestore(colegio)
+
+            adaptador= ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                listaEstudiantes
+            )
+            listViewEstudiante.adapter= adaptador
+            registerForContextMenu(listViewEstudiante)
         }
     }
-    fun eliminaEstudiante(): Boolean
-    {
-        EBaseDeDatos.TablaUsuario = ESQLiteHelperUsuario(this)
 
-        val resultadoEliminar: Boolean =EBaseDeDatos.TablaUsuario!!.eliminarEstudiantePorCedula(listaEstudiantes[posicionEstudiante].cedula)
-        if (resultadoEliminar) Toast.makeText(this, "¡Eliminado!", Toast.LENGTH_SHORT).show()
-        return resultadoEliminar
+    fun eliminaEstudiante(): Boolean {
+       return true
 
     }
 
-    fun jalarDatosEstudianteFirestore(colegio: Colegio): ArrayList<Estudiante>
+   fun jalarDatosEstudianteFirestore(colegio: Colegio): ArrayList<Estudiante>
     {
         val db = Firebase.firestore
         val arregloEstudiante =ArrayList<Estudiante>()
         //var numero =0
 
-        db.collection("estudiante")
-            .whereEqualTo("idColegio",colegio.idColegio)
-            .get()
-            .addOnSuccessListener { documents ->
 
-                for (document in documents) {
-                    val cedula: String? = document.get("cedula").toString()
-                    val curso: String? = document.get("curso").toString()
-                    val fechaNacimiento: String? = document.get("fechaNacimiento").toString()
-                    val idColegio: String? = document.get("idColegio").toString()
-                    val nombre: String? = document.get("nombre").toString()
-                    val sexo: String? = document.get("sexo").toString()
+            db.collection("estudiante")
+                .whereEqualTo("idColegio", colegio.idColegio)
+                .get()
+
+                .addOnSuccessListener { documents ->
+
+                    for (document in documents) {
+                        val cedula: String? = document.get("cedula").toString()
+                        val curso: String? = document.get("curso").toString()
+                        val fechaNacimiento: String? = document.get("fechaNacimiento").toString()
+                        val idColegio: String? = document.get("idColegio").toString()
+                        val nombre: String? = document.get("nombre").toString()
+                        val sexo: String? = document.get("sexo").toString()
 
 
-                    //Log.i("firestore", "identificador colegio ${identificador}")
-                    val estudianteCargado= Estudiante(nombre,fechaNacimiento,curso,cedula,sexo,idColegio)
-                    Log.i("firestore", "estudiante cargado ${estudianteCargado.nombre}")
-                    //sleep(1000)
-                    arregloEstudiante.add(estudianteCargado)
-                    //Log.i("firestore", "identificador objeo ${arregloEstudiante[numero].idColegio}")
-                    //numero = numero +1
-
+                        //Log.i("firestore", "identificador colegio ${identificador}")
+                        val estudianteCargado =
+                            Estudiante(nombre, fechaNacimiento, curso, cedula, sexo, idColegio)
+                        Log.i("firestore", "estudiante cargado ${estudianteCargado.nombre}")
+                        //sleep(1000)
+                        arregloEstudiante.add(estudianteCargado)
+                        adaptador?.notifyDataSetChanged()
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-        Thread.sleep(10000)
+                .addOnFailureListener { exception ->
+                    Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                }
+
+
+
         //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
 
         return arregloEstudiante
@@ -102,13 +116,13 @@ class BVerEstudiantesColegio: AppCompatActivity() {
         intentExplicito.putExtra("colegio", colegio)//la información que vas a pasar
         intentExplicito.putExtra("estudiante", estudiante)//la información que vas a pasar
         intentExplicito.putExtra("id", codEditOrCreate)
-        startActivityForResult(intentExplicito,CODIGO_RESPUESTA)//manda este código
+        startActivityForResult(intentExplicito, CODIGO_RESPUESTA)//manda este código
 
     }
-    fun poneDatosEnAdaptador()
-    {
+
+    fun poneDatosEnAdaptador() {
         val listViewEstudiante = findViewById<ListView>(R.id.lv_estudiante_est_cole)
-        if(this.listaEstudiantes.isNotEmpty()) {
+        if (this.listaEstudiantes.isNotEmpty()) {
             val adaptadorLleno: ArrayAdapter<Estudiante> = ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -117,8 +131,7 @@ class BVerEstudiantesColegio: AppCompatActivity() {
             )
             listViewEstudiante.adapter = adaptadorLleno
             registerForContextMenu(listViewEstudiante)
-        }
-        else{
+        } else {
             val adaptadorVacio: ArrayAdapter<String> = ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -133,13 +146,17 @@ class BVerEstudiantesColegio: AppCompatActivity() {
         //1 --> edita
 
 
-        return when(item?.itemId)
-        {
-            R.id.mi_editar_est ->{
-                abrirActividadConParametros(BFormularioEstudiante::class.java,null,listaEstudiantes[posicionEstudiante],1)
+        return when (item?.itemId) {
+            R.id.mi_editar_est -> {
+                abrirActividadConParametros(
+                    BFormularioEstudiante::class.java,
+                    null,
+                    listaEstudiantes[posicionEstudiante],
+                    1
+                )
                 return true
             }
-            R.id.mi_eliminar_est ->{
+            R.id.mi_eliminar_est -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Eliminar Estudiante")
                 builder.setMessage("Se eliminará el registro del estudiante ¿Eliminar?")
@@ -147,9 +164,12 @@ class BVerEstudiantesColegio: AppCompatActivity() {
                     builder.setPositiveButton(
                         "Si",
                         DialogInterface.OnClickListener { dialog, which ->
-                            Log.i("list-view","Estudiante seleccionado para eliminar:${listaEstudiantes[posicionEstudiante].cedula}")
-                            val resultadoEliminar=eliminaEstudiante()
-                            Log.i("bdd","eliminó estudainte? ${resultadoEliminar}")
+                            Log.i(
+                                "list-view",
+                                "Estudiante seleccionado para eliminar:${listaEstudiantes[posicionEstudiante].cedula}"
+                            )
+                            val resultadoEliminar = eliminaEstudiante()
+                            Log.i("bdd", "eliminó estudainte? ${resultadoEliminar}")
                             //listaEstudiantes= jalarDatosEstudianteFirestore()
                             //poneDatosEnAdaptador()
 
@@ -177,12 +197,12 @@ class BVerEstudiantesColegio: AppCompatActivity() {
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
 
-         super.onCreateContextMenu(menu, v, menuInfo)
-         val inflater = menuInflater
-         inflater.inflate(R.menu.menu_estudiante,menu)
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_estudiante, menu)
 
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         posicionEstudiante = info.position
-        Log.i("list-view","posicion seleccionada list view: ${posicionEstudiante}")
+        Log.i("list-view", "posicion seleccionada list view: ${posicionEstudiante}")
     }
 }
