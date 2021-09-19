@@ -7,9 +7,11 @@ class Estudiante(
     var curso: String?=null,
     val cedula: String?=null,
     val sexo: String?=null,
-    val idColegio: String?=null): Parcelable
+    val idColegio: String?=null,
+    val idEstudiante: String?=null): Parcelable
 {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -30,6 +32,7 @@ class Estudiante(
         parcel.writeString(cedula)
         parcel.writeString(sexo)
         parcel.writeString(idColegio)
+        parcel.writeString(idEstudiante)
 
     }
 

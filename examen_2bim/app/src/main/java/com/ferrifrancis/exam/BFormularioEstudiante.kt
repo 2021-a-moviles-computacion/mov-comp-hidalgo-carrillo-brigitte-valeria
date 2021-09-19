@@ -18,6 +18,7 @@ class BFormularioEstudiante : AppCompatActivity() {
 
     var listaEstudiante = ArrayList<Estudiante>()
     var colegio: Colegio? = Colegio()
+    var estudiante: Estudiante? = Estudiante()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class BFormularioEstudiante : AppCompatActivity() {
 
         this.colegio =
             intent.getParcelableExtra<Colegio>("colegio")//recibo los datos que mandó la otra clase
-        val estudiante =
+        this.estudiante =
             intent.getParcelableExtra<Estudiante>("estudiante")//recibo los datos que mandó la otra clase
         val abrirFormularioComo =
             intent.getIntExtra("id", -1)//recibo los datos que mandó la otra clase
@@ -53,16 +54,11 @@ class BFormularioEstudiante : AppCompatActivity() {
             1 -> { //editar
                 if (estudiante != null) {
                     preparaActividadParaEditar(
-                        estudiante
+                        estudiante!!
                     )
                     botonEditarEstudiante.setOnClickListener {
-                        val resulAct = EBaseDeDatos.TablaUsuario!!.actualizarCursoEstudiantePorID(
-                            estudiante.cedula!!,
-                            curso.text.toString()
-                        )
-                        Log.i("bd", "editó estudiante? ${resulAct}")
-                        Toast.makeText(this, "¡Estudiante editado!", LENGTH_SHORT).show()
-                        //abrirActividad(MainActivity::class.java)
+                        actualizarEstudiante()
+                        abrirActividad(MainActivity::class.java)
                     }
                 }
             }
@@ -182,20 +178,34 @@ class BFormularioEstudiante : AppCompatActivity() {
 
     }
 
-    fun getValoresFormularioDevuelveEstudiante(): Estudiante {
-        val nombre = findViewById<EditText>(R.id.it_nombre_est_for_est).text.toString()
-        val cedula = findViewById<EditText>(R.id.it_cedula_for_est).text.toString()
-        val curso = findViewById<EditText>(R.id.it_curso_for_est).text.toString()
-        val fecha = findViewById<EditText>(R.id.it_fecha_nac_for_est).text.toString()
-        val sexo =
-            if (findViewById<RadioGroup>(R.id.rg_sexo_for_est).checkedRadioButtonId == 0) "F" else "M"
+    fun actualizarEstudiante()
+    {
 
-        var estudiante = Estudiante()
-        if (colegio?.idColegio != null) {
-            estudiante = Estudiante(nombre, fecha, curso, cedula, sexo, colegio!!.idColegio)
+        val curso = findViewById<EditText>(R.id.it_curso_for_est).text.toString()
+        val estudianteActualizado = hashMapOf<String, Any>(
+            "curso" to curso
+        )
+
+        val db = Firebase.firestore
+        Log.i("formulario-estudiante","id colegio ${estudiante?.idEstudiante}")
+        if (estudiante != null) {
+            estudiante!!.idEstudiante?.let {
+                db.collection("estudiante").document(it).update(estudianteActualizado)
+                    .addOnFailureListener {
+                        Log.i("firestore","NO se editó estudiante")
+                    }
+                    .addOnSuccessListener {
+                        Log.i("firestore","se editó estudiante")
+                        Toast.makeText(this, "¡Curso estudiante actualizado!", Toast.LENGTH_SHORT).show()
+                    }
+            }
         }
-        return estudiante
+        else
+        {
+            Log.i("formulario-colegio","colegio nulo")
+        }
     }
+
 
     fun abrirActividad(clase: Class<*>) {
         val intentExplicito = Intent(

@@ -148,16 +148,6 @@ class BFormularioColegio : AppCompatActivity() {
 
     }
 
-    fun limpiaFormularioColegio()
-    {
-        val nombreColegio: EditText = findViewById<EditText>(R.id.it_nombre_cole)
-        val distrito = findViewById<EditText>(R.id.it_distrito_cole)
-        val numAulas = findViewById<EditText>(R.id.it_num_aulas_cole)
-
-        nombreColegio.text.clear()
-        distrito.text.clear()
-        numAulas.text.clear()
-    }
 
     fun registrarColegio()
     {
@@ -197,12 +187,5 @@ class BFormularioColegio : AppCompatActivity() {
 
     }
 
-    fun abrirActividad (clase: Class<*>)
-    {
-        val intentoExplicito = Intent(
-            this,
-            clase
-        )
-        this.startActivity(intentoExplicito)
-    }
+
 }

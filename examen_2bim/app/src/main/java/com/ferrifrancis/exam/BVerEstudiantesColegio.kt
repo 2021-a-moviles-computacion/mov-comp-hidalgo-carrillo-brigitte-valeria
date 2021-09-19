@@ -44,7 +44,6 @@ class BVerEstudiantesColegio : AppCompatActivity() {
 
             //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
 
-
             this.listaEstudiantes=jalarDatosEstudianteFirestore(colegio)
 
             adaptador= ArrayAdapter(
@@ -57,10 +56,6 @@ class BVerEstudiantesColegio : AppCompatActivity() {
         }
     }
 
-    fun eliminaEstudiante(): Boolean {
-       return true
-
-    }
 
    fun jalarDatosEstudianteFirestore(colegio: Colegio): ArrayList<Estudiante>
     {
@@ -82,11 +77,10 @@ class BVerEstudiantesColegio : AppCompatActivity() {
                         val idColegio: String? = document.get("idColegio").toString()
                         val nombre: String? = document.get("nombre").toString()
                         val sexo: String? = document.get("sexo").toString()
+                        val idDoc: String? = document.id.toString()
 
-
-                        //Log.i("firestore", "identificador colegio ${identificador}")
                         val estudianteCargado =
-                            Estudiante(nombre, fechaNacimiento, curso, cedula, sexo, idColegio)
+                            Estudiante(nombre, fechaNacimiento, curso, cedula, sexo, idColegio,idDoc)
                         Log.i("firestore", "estudiante cargado ${estudianteCargado.nombre}")
                         //sleep(1000)
                         arregloEstudiante.add(estudianteCargado)
@@ -102,6 +96,23 @@ class BVerEstudiantesColegio : AppCompatActivity() {
         //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
 
         return arregloEstudiante
+    }
+
+    fun eliminarEstudianteFirestore()
+    {
+        val idxEstudainte = this.listaEstudiantes[this.posicionEstudiante].idEstudiante
+        if(idxEstudainte != null)
+        {
+            val db = Firebase.firestore
+            db.collection("estudiante").document(idxEstudainte)
+                .delete()
+                .addOnSuccessListener {
+                    Toast.makeText(this,"¡Estudiante eliminado!",Toast.LENGTH_SHORT).show()
+                    Log.d("main-activity", "Documetno estudiante se borró")
+                }
+                .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error deleting document", e) }
+
+        }
     }
 
     fun abrirActividadConParametros(
@@ -120,27 +131,25 @@ class BVerEstudiantesColegio : AppCompatActivity() {
 
     }
 
-    fun poneDatosEnAdaptador() {
-        val listViewEstudiante = findViewById<ListView>(R.id.lv_estudiante_est_cole)
-        if (this.listaEstudiantes.isNotEmpty()) {
-            val adaptadorLleno: ArrayAdapter<Estudiante> = ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                this.listaEstudiantes
-
-            )
-            listViewEstudiante.adapter = adaptadorLleno
-            registerForContextMenu(listViewEstudiante)
-        } else {
-            val adaptadorVacio: ArrayAdapter<String> = ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                arrayListOf("No existen registros")
-            )
-            listViewEstudiante.adapter = adaptadorVacio
-        }
+    fun eliminarColegioLista()
+    {
+        this.listaEstudiantes.removeAt(this.posicionEstudiante)
     }
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_estudiante, menu)
+
+        val info = menuInfo as AdapterView.AdapterContextMenuInfo
+        posicionEstudiante = info.position
+        Log.i("list-view", "posicion seleccionada list view: ${posicionEstudiante}")
+    }
     override fun onContextItemSelected(item: MenuItem): Boolean {
         //0 --> registra, ver
         //1 --> edita
@@ -164,15 +173,9 @@ class BVerEstudiantesColegio : AppCompatActivity() {
                     builder.setPositiveButton(
                         "Si",
                         DialogInterface.OnClickListener { dialog, which ->
-                            Log.i(
-                                "list-view",
-                                "Estudiante seleccionado para eliminar:${listaEstudiantes[posicionEstudiante].cedula}"
-                            )
-                            val resultadoEliminar = eliminaEstudiante()
-                            Log.i("bdd", "eliminó estudainte? ${resultadoEliminar}")
-                            //listaEstudiantes= jalarDatosEstudianteFirestore()
-                            //poneDatosEnAdaptador()
-
+                            eliminarEstudianteFirestore()
+                            eliminarColegioLista()
+                            adaptador?.notifyDataSetChanged()
 
                         })
                     builder.setNegativeButton(
@@ -191,18 +194,5 @@ class BVerEstudiantesColegio : AppCompatActivity() {
 
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu?,
-        v: View?,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
 
-        super.onCreateContextMenu(menu, v, menuInfo)
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_estudiante, menu)
-
-        val info = menuInfo as AdapterView.AdapterContextMenuInfo
-        posicionEstudiante = info.position
-        Log.i("list-view", "posicion seleccionada list view: ${posicionEstudiante}")
-    }
 }
