@@ -22,7 +22,8 @@ import java.lang.Thread.sleep
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     var indxItemContextMenu = 0
-    var listaColegios= jalarDatosColegioFirestore()
+    var listaColegios = jalarDatosColegioFirestore()
+    var adaptador: ArrayAdapter<Colegio>? = null
     val CODIGO_RESPUESTA = 200 // para crear COELGIO
     val CODIGO_RTA_ACTUALIZAR: Int = 201 //para act coelgio
     val CODIGO_RPTA_CREAR_EST = 210
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             //Se usa la misma actividad para editar y registrar
             //Cuando envío el código 0, la actividad se abre para registrar
             //Cuando envío el código 1, la actividad se abre para editar
-            abrirActividadConParametros(BFormularioColegio::class.java, null, 0,CODIGO_RESPUESTA)
+            abrirActividadConParametros(BFormularioColegio::class.java, null, 0, CODIGO_RESPUESTA)
 
         }
 
@@ -49,38 +50,36 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            CODIGO_RESPUESTA ->{
-                if (resultCode == RESULT_OK)
-                {
+        when (requestCode) {
+            CODIGO_RESPUESTA -> {
+                if (resultCode == RESULT_OK) {
                     val colegio = data?.getParcelableExtra<Colegio>("arregloColegiosCreados")
                     if (colegio != null) {
                         this.listaColegios.add(colegio)
+                        adaptador?.notifyDataSetChanged()
                     }
-                    Log.i("main-activity","Colegio recibido por intent: ${colegio}")
+                    Log.i("main-activity", "Colegio recibido por intent: ${colegio}")
 
                 }
             }
-            CODIGO_RTA_ACTUALIZAR ->{
-                if (resultCode == RESULT_OK)
-                {
+            CODIGO_RTA_ACTUALIZAR -> {
+                if (resultCode == RESULT_OK) {
                     val colegioIntent = data?.getParcelableExtra<Colegio>("arregloColegiosCreados")
                     listaColegios.forEach {
                         val colegioLista = it
                         if (colegioIntent != null) {
-                            if(colegioLista.idColegio == colegioIntent.idColegio) {
+                            if (colegioLista.idColegio == colegioIntent.idColegio) {
                                 colegioLista.numAulas = colegioIntent.numAulas
                             }
                         }
                     }
-                    Log.i("main-activity","intent codigo rpta actualziar")
+                    Log.i("main-activity", "intent codigo rpta actualziar")
 
                 }
             }
-            CODIGO_RPTA_CREAR_EST->{
-                if (resultCode == RESULT_OK)
-                {
-                    Log.i("main-activity","intent rpta crear estudiante")
+            CODIGO_RPTA_CREAR_EST -> {
+                if (resultCode == RESULT_OK) {
+                    Log.i("main-activity", "intent rpta crear estudiante")
                 }
             }
         }
@@ -128,7 +127,7 @@ class MainActivity : AppCompatActivity() {
 
                             eliminarColegioFirestore()
                             eliminarColegioLista()
-                            poneDatosEnAdaptador()
+
 
 
                         })
@@ -150,7 +149,10 @@ class MainActivity : AppCompatActivity() {
 
 
             R.id.mi_registrar_estudiantes -> {
-            Log.i("main-activity","colegio id -->${listaColegios[this.indxItemContextMenu].idColegio}")
+                Log.i(
+                    "main-activity",
+                    "colegio id -->${listaColegios[this.indxItemContextMenu].idColegio}"
+                )
                 abrirActividadConParametros(
                     BFormularioEstudiante::class.java,
                     listaColegios[this.indxItemContextMenu],
@@ -207,36 +209,35 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener { Log.d("main-activity", "Documetno colegio se borró") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
             return true
+        } else {
+            return false
         }
-        else
-        {return false}
     }
 
-    fun eliminarColegioLista()
-    {
+    fun eliminarColegioLista() {
         this.listaColegios.removeAt(this.indxItemContextMenu)
-    }
-    fun poneDatosEnAdaptador()
-    {
-        if(this.listaColegios != null) {
-            Log.i("adaptador main","la lista de colegio esta vacia")
-            val adaptador: ArrayAdapter<Colegio> = ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                this.listaColegios!!
-
-            )
-
-            val listViewColegio = findViewById<ListView>(R.id.ltv_colegio)
-            listViewColegio.adapter = adaptador
-            registerForContextMenu(listViewColegio)
-        }
+        adaptador?.notifyDataSetChanged()
     }
 
-    fun jalarDatosColegioFirestore(): ArrayList<Colegio>
-    {
+    fun poneDatosEnAdaptador() {
+
+        Log.i("adaptador main", "la lista de colegio esta vacia")
+        this.adaptador = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            this.listaColegios!!
+
+        )
+
+        val listViewColegio = findViewById<ListView>(R.id.ltv_colegio)
+        listViewColegio.adapter = adaptador
+        registerForContextMenu(listViewColegio)
+
+    }
+
+    fun jalarDatosColegioFirestore(): ArrayList<Colegio> {
         val db = Firebase.firestore
-        val arregloColegio=ArrayList<Colegio>()
+        val arregloColegio = ArrayList<Colegio>()
         var numero = 0
 
         db.collection("colegio")
@@ -251,19 +252,21 @@ class MainActivity : AppCompatActivity() {
                     val identificador: String? = document.id
 
                     //Log.i("firestore", "identificador colegio ${identificador}")
-                    val colegioCargado= Colegio(nombreColegio,esFiscal,distrito,numAulas,identificador)
+                    val colegioCargado =
+                        Colegio(nombreColegio, esFiscal, distrito, numAulas, identificador)
 
                     //sleep(1000)
                     arregloColegio.add(colegioCargado)
+                    adaptador?.notifyDataSetChanged()
                     Log.i("firestore", "identificador objeo ${arregloColegio[numero].idColegio}")
-                    numero = numero +1
+                    numero = numero + 1
 
                 }
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
-        sleep(10000)
+        //sleep(10000)
         //Log.i("firestore", "identificador colegio ${arregloColegio[1].distrito}")
 
         return arregloColegio
