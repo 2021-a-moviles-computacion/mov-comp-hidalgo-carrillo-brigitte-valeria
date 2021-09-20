@@ -77,10 +77,12 @@ class BVerEstudiantesColegio : AppCompatActivity() {
                         val idColegio: String? = document.get("idColegio").toString()
                         val nombre: String? = document.get("nombre").toString()
                         val sexo: String? = document.get("sexo").toString()
+                        val latitud = document.get("coordLat").toString().toDouble()
+                        val longitud = document.get("coordLong").toString().toDouble()
                         val idDoc: String? = document.id.toString()
 
                         val estudianteCargado =
-                            Estudiante(nombre, fechaNacimiento, curso, cedula, sexo, idColegio,idDoc)
+                            Estudiante(nombre, fechaNacimiento, curso, cedula, sexo, idColegio,idDoc, latitud, longitud)
                         Log.i("firestore", "estudiante cargado ${estudianteCargado.nombre}")
                         //sleep(1000)
                         arregloEstudiante.add(estudianteCargado)

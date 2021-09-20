@@ -107,7 +107,22 @@
             android:ems="10"
             android:inputType="textPersonName" />
 
-
+        <EditText
+            android:id="@+id/it_coord_lat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Coordenada latitud"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/it_coord_long"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Coordenada longitud"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
 
 

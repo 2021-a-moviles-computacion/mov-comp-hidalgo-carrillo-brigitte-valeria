@@ -77,6 +77,8 @@ class BFormularioEstudiante : AppCompatActivity() {
         val fecha = findViewById<EditText>(R.id.it_fecha_nac_for_est).text.toString()
         val sexo =
             if (findViewById<RadioGroup>(R.id.rg_sexo_for_est).checkedRadioButtonId == 0) "F" else "M"
+        val latitud = findViewById<EditText>(R.id.it_coord_lat).text.toString().toDouble()
+        val longitud = findViewById<EditText>(R.id.it_coord_long).text.toString().toDouble()
         val idColegio = colegio?.idColegio
 
         Log.i("form-estudiante", "id colegio ${idColegio}")
@@ -88,8 +90,9 @@ class BFormularioEstudiante : AppCompatActivity() {
                 "curso" to curso,
                 "cedula" to cedula,
                 "sexo" to sexo,
-                "idColegio" to idColegio!!
-
+                "idColegio" to idColegio!!,
+                "coordLat" to latitud,
+                "coordLong" to longitud
             )
 
             val db = Firebase.firestore
@@ -144,6 +147,8 @@ class BFormularioEstudiante : AppCompatActivity() {
         val cedula = findViewById<EditText>(R.id.it_cedula_for_est)
         val curso = findViewById<EditText>(R.id.it_curso_for_est)
         val fecha = findViewById<EditText>(R.id.it_fecha_nac_for_est)
+        val coordLong = findViewById<EditText>(R.id.it_coord_long)
+        val coordLat = findViewById<EditText>(R.id.it_coord_lat)
         val sexo = findViewById<RadioGroup>(R.id.rg_sexo_for_est)
         val botonRegistrar = findViewById<Button>(R.id.btn_registrar_for_est)
 
@@ -151,8 +156,15 @@ class BFormularioEstudiante : AppCompatActivity() {
         findViewById<TextView>(R.id.tv_registra_est_for_est).visibility = View.GONE
         findViewById<TextView>(R.id.tv_informacion_colegio_for_est).visibility = View.GONE
         findViewById<TextView>(R.id.tv_pone_nombre_cole_for_est).visibility = View.GONE
+
         botonRegistrar.visibility = View.GONE
         //Setea y edita los edit text que no puede editar
+        coordLat.setText(estudiante.coordLat.toString())
+        escondeEditText(coordLat)
+
+        coordLong.setText(estudiante.coordLong.toString())
+        escondeEditText(coordLong)
+
         nombre.setText(estudiante.nombre)
         escondeEditText(nombre)
 
