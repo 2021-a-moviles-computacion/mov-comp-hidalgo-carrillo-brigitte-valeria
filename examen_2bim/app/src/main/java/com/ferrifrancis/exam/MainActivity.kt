@@ -220,6 +220,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+   
+
     fun eliminarColegioLista() {
         this.listaColegios.removeAt(this.indxItemContextMenu)
         adaptador?.notifyDataSetChanged()
@@ -279,3 +281,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+
