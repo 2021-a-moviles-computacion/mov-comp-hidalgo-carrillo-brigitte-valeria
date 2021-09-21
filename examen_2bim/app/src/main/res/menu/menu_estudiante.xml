@@ -6,6 +6,10 @@
         android:id="@+id/mi_editar_est"
         android:title="@string/menItmCol_editar" />
     <item
+        android:id="@+id/mi_irmapa_est"
+        android:title="@string/txt_irmapa" />
+    <item
         android:id="@+id/mi_eliminar_est"
         android:title="@string/menItmCol_eliminar" />
+
 </menu>

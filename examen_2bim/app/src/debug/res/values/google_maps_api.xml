@@ -4,12 +4,12 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=60:69:F9:2E:8A:1A:78:FA:7A:F2:CC:1D:DA:79:30:26:7D:78:5D:65%3Bcom.ferrifrancis.firebase_uno
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=60:69:F9:2E:8A:1A:78:FA:7A:F2:CC:1D:DA:79:30:26:7D:78:5D:65%3Bcom.ferrifrancis.exam.fragment
 
     You can also add your credentials to an existing key, using these values:
 
     Package name:
-    com.ferrifrancis.firebase_uno
+    com.ferrifrancis.exam.fragment
 
     SHA-1 certificate fingerprint:
     60:69:F9:2E:8A:1A:78:FA:7A:F2:CC:1D:DA:79:30:26:7D:78:5D:65
@@ -20,5 +20,5 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAGUik-fIyEfljDWGwsUI0KbAibFkqwg2I</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAxZdtkrn5J-UWaSSSUY4ZTnq0UH1a0pHM</string>
 </resources>

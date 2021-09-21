@@ -28,6 +28,7 @@ class BVerEstudiantesColegio : AppCompatActivity() {
     var listaEstudiantes = ArrayList<Estudiante>()
     var adaptador: ArrayAdapter<Estudiante>?= null
     val CODIGO_RESPUESTA = 200
+    val CODIGO_RSPTA_MAPA = 220
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -189,6 +190,15 @@ class BVerEstudiantesColegio : AppCompatActivity() {
                 }
                 val dialogo = builder.create()
                 dialogo.show()
+                return true
+            }
+            R.id.mi_irmapa_est ->{
+                abrirActividadConParametros(
+                    MapsActivity::class.java,
+                    null,
+                    listaEstudiantes[posicionEstudiante],
+                    1
+                )
                 return true
             }
             else -> super.onContextItemSelected(item)
