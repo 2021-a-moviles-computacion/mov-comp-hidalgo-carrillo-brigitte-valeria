@@ -75,8 +75,9 @@ class BFormularioColegio : AppCompatActivity() {
                     }
                     .addOnSuccessListener {
                         Log.i("firestore","se editó colegio")
+                        colegio.numAulas = numAulas
                         Toast.makeText(this, "¡Aulas colegio actualizadas!", Toast.LENGTH_SHORT).show()
-                        devuelveNuevoColegioPorIntent()
+                        devuelveNuevoColegioPorIntent(colegio)
                     }
             }
         }
@@ -86,11 +87,12 @@ class BFormularioColegio : AppCompatActivity() {
         }
     }
 
-    fun devuelveNuevoColegioPorIntent()
+    fun devuelveNuevoColegioPorIntent(colegio: Colegio)
     {
         val intentDevolverParametros = Intent()
 
-        intentDevolverParametros.putExtra("arregloColegiosCreados",this.colegioNuevo)
+        intentDevolverParametros.putExtra("arregloColegiosCreados",colegio)
+        Log.i("main-activity","${colegio.idColegio}")
         this.setResult(Activity.RESULT_OK, intentDevolverParametros)
         finish()
         this.finish()
@@ -175,7 +177,7 @@ class BFormularioColegio : AppCompatActivity() {
                 val id: String =it.id
                 this.colegioNuevo= Colegio(nombreColegio,esFiscal,distrito,numAulas,id)
 
-                devuelveNuevoColegioPorIntent()
+                devuelveNuevoColegioPorIntent(this.colegioNuevo)
                 Toast.makeText(this, "¡Colegio registrado!", Toast.LENGTH_SHORT).show()
                 Log.i("firebase","Se creó colegio ID -->${id}")
 

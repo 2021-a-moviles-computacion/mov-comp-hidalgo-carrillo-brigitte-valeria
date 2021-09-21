@@ -21,7 +21,7 @@ class Colegio(
     }
 
     override fun toString(): String {
-        return "${nombreColegio}"
+        return "${nombreColegio}\n# aulas: ${numAulas}"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

@@ -20,6 +20,7 @@
             android:layout_marginTop="28dp"
             android:layout_marginBottom="28dp"
             android:gravity="center_horizontal"
+            android:textStyle="bold"
             android:text="@string/txt_inf_colegio"
             android:textSize="20dp" />
 

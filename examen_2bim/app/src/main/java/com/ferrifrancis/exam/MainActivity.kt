@@ -65,14 +65,20 @@ class MainActivity : AppCompatActivity() {
             CODIGO_RTA_ACTUALIZAR -> {
                 if (resultCode == RESULT_OK) {
                     val colegioIntent = data?.getParcelableExtra<Colegio>("arregloColegiosCreados")
-                    listaColegios.forEach {
-                        val colegioLista = it
-                        if (colegioIntent != null) {
-                            if (colegioLista.idColegio == colegioIntent.idColegio) {
-                                colegioLista.numAulas = colegioIntent.numAulas
+
+                    if (colegioIntent != null) {
+                        this.listaColegios.forEach {
+                            val colegio = it
+                            if(colegio.idColegio == colegioIntent?.idColegio)
+                            {
+                                colegio.numAulas = colegioIntent.numAulas
+                                adaptador?.notifyDataSetChanged()
                             }
                         }
+
+
                     }
+
                     Log.i("main-activity", "intent codigo rpta actualziar")
 
                 }
