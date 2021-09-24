@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
 
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Eliminar Colegio")
-                builder.setMessage("Se eliminará el colegio y el registro de todos sus estudiantes ¿Eliminar?")
+                builder.setMessage("¿Está seguro que desea eliminar?")
 
                 builder.apply {
                     builder.setPositiveButton(
