@@ -13,6 +13,7 @@ import android.widget.*
 import android.widget.Toast.LENGTH_SHORT
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_b_formulario_estudiante.*
 
 class BFormularioEstudiante : AppCompatActivity() {
 
@@ -40,7 +41,7 @@ class BFormularioEstudiante : AppCompatActivity() {
         val botonRegsitrarEstudiante = findViewById<Button>(R.id.btn_registrar_for_est)
         val botonEditarEstudiante = findViewById<Button>(R.id.btn_editar_for_est)
 
-         val curso = findViewById<EditText>(R.id.it_curso_for_est)
+        val curso = findViewById<EditText>(R.id.it_curso_for_est)
 
         when (abrirFormularioComo) {
             0 -> { //registrar
@@ -75,39 +76,70 @@ class BFormularioEstudiante : AppCompatActivity() {
         val cedula = findViewById<EditText>(R.id.it_cedula_for_est).text.toString()
         val curso = findViewById<EditText>(R.id.it_curso_for_est).text.toString()
         val fecha = findViewById<EditText>(R.id.it_fecha_nac_for_est).text.toString()
-        val sexo =
-            if (findViewById<RadioGroup>(R.id.rg_sexo_for_est).checkedRadioButtonId == 0) "F" else "M"
-        val latitud = findViewById<EditText>(R.id.it_coord_lat).text.toString().toDouble()
-        val longitud = findViewById<EditText>(R.id.it_coord_long).text.toString().toDouble()
+        val radio: RadioGroup = findViewById<RadioGroup>(R.id.rg_sexo_for_est)
+        val latitud = findViewById<EditText>(R.id.it_coord_lat).text.toString().toDoubleOrNull()
+        val longitud = findViewById<EditText>(R.id.it_coord_long).text.toString().toDoubleOrNull()
         val idColegio = colegio?.idColegio
+        var sexo: String?
 
-        Log.i("form-estudiante", "id colegio ${idColegio}")
 
-        if (idColegio != null) {
-            val nuevoEstudiante = hashMapOf<String, Any>(
-                "nombre" to nombre,
-                "fechaNacimiento" to fecha,
-                "curso" to curso,
-                "cedula" to cedula,
-                "sexo" to sexo,
-                "idColegio" to idColegio!!,
-                "coordLat" to latitud,
-                "coordLong" to longitud
-            )
+        if (rb_femenino_for_est.isChecked || rb_masculino_for_est.isChecked) {
+            sexo = findViewById<RadioButton>(rg_sexo_for_est.checkedRadioButtonId).text?.toString()
 
-            val db = Firebase.firestore
-            val referencia = db.collection("estudiante")
-
-            referencia.add(nuevoEstudiante)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "¡Estudiante registrado!", Toast.LENGTH_SHORT).show()
-                    abreMainPorIntent()
-                    Log.i("form-estudiante", "Firebase: Se creó estudiante")
-                }
-                .addOnFailureListener {
-                    Log.i("form-estudiante", "Firebase: NO se creó estudainte")
-                }
+        } else {
+            sexo = null
+            Log.i("form-est", "radio no seleccionado")
         }
+
+        if (!nombre.isNullOrEmpty() && !cedula.isNullOrEmpty() && !curso.isNullOrEmpty() && !fecha.isNullOrEmpty()
+            && sexo != null && latitud != null && longitud != null && !idColegio.isNullOrEmpty() && idColegio != null
+        ) {
+            if (esLongCedula(cedula) && esFormatoFecha(fecha)) {
+                Log.i("form-est", "entró if")
+
+                val nuevoEstudiante = hashMapOf<String, Any>(
+                    "nombre" to nombre,
+                    "fechaNacimiento" to fecha,
+                    "curso" to curso,
+                    "cedula" to cedula,
+                    "sexo" to sexo,
+                    "idColegio" to idColegio!!,
+                    "coordLat" to latitud!!,
+                    "coordLong" to longitud!!
+                )
+
+                val db = Firebase.firestore
+                val referencia = db.collection("estudiante")
+
+                referencia.add(nuevoEstudiante)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "¡Estudiante registrado!", Toast.LENGTH_SHORT)
+                            .show()
+                        abreMainPorIntent()
+                        Log.i("form-estudiante", "Firebase: Se creó estudiante")
+                    }
+                    .addOnFailureListener {
+                        Log.i("form-estudiante", "Firebase: NO se creó estudainte")
+                    }
+
+
+            } else {
+                Log.i("form-estudiante", "Datos mal llenados")
+                Toast.makeText(
+                    this,
+                    "Cédula o fecha incorrectos",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        } else {
+            Log.i("form-estudiante", "Datos mal llenados")
+            Toast.makeText(
+                this,
+                "Por favor, registre de manera correcta el formulario",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
     }
 
     private fun abreMainPorIntent() {
@@ -116,6 +148,17 @@ class BFormularioEstudiante : AppCompatActivity() {
         this.setResult(Activity.RESULT_OK, intentDevolverParametros)
         finish()
         this.finish()
+    }
+
+    fun esLongCedula(cadena: String): Boolean {
+        val regex = """^(\d{10})$""".toRegex()
+        return regex.matches(cadena)
+    }
+
+    fun esFormatoFecha(cadena: String): Boolean {
+        val regex = """^(\d{4}-\d{2}-\d{2})$""".toRegex()
+        return regex.matches(cadena)
+
     }
 
     fun escondeEditText(objeto: EditText) {
@@ -190,8 +233,7 @@ class BFormularioEstudiante : AppCompatActivity() {
 
     }
 
-    fun actualizarEstudiante()
-    {
+    fun actualizarEstudiante() {
 
         val curso = findViewById<EditText>(R.id.it_curso_for_est).text.toString()
         val estudianteActualizado = hashMapOf<String, Any>(
@@ -199,22 +241,21 @@ class BFormularioEstudiante : AppCompatActivity() {
         )
 
         val db = Firebase.firestore
-        Log.i("formulario-estudiante","id colegio ${estudiante?.idEstudiante}")
+        Log.i("formulario-estudiante", "id colegio ${estudiante?.idEstudiante}")
         if (estudiante != null) {
             estudiante!!.idEstudiante?.let {
                 db.collection("estudiante").document(it).update(estudianteActualizado)
                     .addOnFailureListener {
-                        Log.i("firestore","NO se editó estudiante")
+                        Log.i("firestore", "NO se editó estudiante")
                     }
                     .addOnSuccessListener {
-                        Log.i("firestore","se editó estudiante")
-                        Toast.makeText(this, "¡Curso estudiante actualizado!", Toast.LENGTH_SHORT).show()
+                        Log.i("firestore", "se editó estudiante")
+                        Toast.makeText(this, "¡Curso estudiante actualizado!", Toast.LENGTH_SHORT)
+                            .show()
                     }
             }
-        }
-        else
-        {
-            Log.i("formulario-colegio","colegio nulo")
+        } else {
+            Log.i("formulario-colegio", "colegio nulo")
         }
     }
 

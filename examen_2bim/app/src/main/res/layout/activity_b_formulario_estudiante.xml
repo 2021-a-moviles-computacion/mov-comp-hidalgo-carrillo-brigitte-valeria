@@ -37,15 +37,20 @@
             android:layout_width="192dp"
             android:layout_height="31dp"
             android:layout_marginTop="12dp" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:textStyle="bold"
             android:layout_marginTop="20dp"
-            android:text="@string/txt_inf_estudiante" />
+            android:text="@string/txt_inf_estudiante"
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/it_nombre_est_for_est"
@@ -63,7 +68,7 @@
             android:layout_marginTop="12dp"
             android:hint="@string/txt_cedula"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/it_fecha_nac_for_est"
@@ -105,7 +110,7 @@
             android:id="@+id/it_curso_for_est"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txt_curso"
+            android:hint="Curso. Ej: Matemática"
             android:layout_marginTop="12dp"
             android:ems="10"
             android:inputType="textPersonName" />
@@ -114,18 +119,18 @@
             android:id="@+id/it_coord_lat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Coordenada latitud"
+            android:hint="Coordenada latitud. Ej: -12.3"
             android:layout_marginTop="12dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType= "text"/>
         <EditText
             android:id="@+id/it_coord_long"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Coordenada longitud"
+            android:hint="Coordenada longitud. Ej: -20.4"
             android:layout_marginTop="12dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="text" />
 
 
 
@@ -134,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="40dp"
             android:text="@string/menItmCol_registrarEst" />
 
 
@@ -146,6 +151,8 @@
 
             android:layout_marginBottom="20dp"
             android:text="@string/txt_act_est" />
+
+
 
 
     </LinearLayout>

@@ -29,7 +29,7 @@
             android:id="@+id/it_nombre_cole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre Colegio"
+            android:hint="Nombre colegio"
             android:inputType="textPersonName" />
 
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:hint="Número distrito"
+            android:hint="Número distrito. Ej: 3"
             android:inputType="number" />
 
         <EditText
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:hint="Número aulas"
+            android:hint="Número aulas. Ej: 40"
             android:inputType="number" />
 
         <Button
