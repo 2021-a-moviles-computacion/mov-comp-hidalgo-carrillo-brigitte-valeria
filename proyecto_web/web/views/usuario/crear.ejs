@@ -1,0 +1,26 @@
+<%-include ('../comunes/cabecera')%>
+   <div class="container">
+       <% const existeMensaje = typeof  datos.mensaje !== "undefined"%>
+        <% if(existeMensaje){ %>
+           <div class ="alert alert-success" role = "alert">
+               <%= datos.mensaje%>
+           </div>
+       <%}%>
+       <h1>Crear usuario</h1>
+       <form action = '/usuario/crear-usuario-formulario' method='post'>
+           <div class="mb-3">
+               <label for="nombre" class="form-label"> Nombre* </label>
+               <!--viajar como parámetros de consulta con el name (en este caso búsqueda)-->
+               <input placeholder="Ej: Adri" type="text" name="nombre" class="form-control" id="nombre" aria-describedby="ayudaNombre">
+               <div id="ayudaNombre" class="form-text"> Ingrese nombre </div>
+           </div>
+           <div class="mb-3">
+               <label for="apellido" class="form-label"> Apellido* </label>
+               <!--viajar como parámetros de consulta con el name (en este caso búsqueda)-->
+               <input placeholder="Ej: Adri" type="text" name="apellido" class="form-control" id="apellido" aria-describedby="ayudaApellido">
+               <div id="ayudaApellido" class="form-text"> Ingrese Apellido </div>
+           </div>
+           <button type="submit" class="btn btn-primary w-100">Buscar</button>
+       </form>
+   </div>
+<%-include ('../comunes/footer')%>s

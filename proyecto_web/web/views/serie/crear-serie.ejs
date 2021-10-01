@@ -1,0 +1,101 @@
+<%- include('../comunes/cabecera') %>
+
+<div class='container'>
+    <!--  !== ! = =      -->
+
+    <% const existeMensaje = typeof datos.mensaje !== 'undefined'%>
+    <% if(existeMensaje){%>
+        <% if(datos.mensaje.includes("Se creó")){%>
+            <div class="alert alert-success" role="alert">
+                <%= datos.mensaje%>
+            </div>
+        <%} else {%>
+            <div class="alert alert-danger" role="alert">
+                <%= datos.mensaje%>
+            </div>
+        <%}%>
+    <%}%>
+
+    <h1 style="padding: 10px">Crear serie</h1>
+
+    <form action='/serie/crear-serie-formulario' method='post'>
+
+        <div class="mb-3">
+            <label for="nombre_serie" class="form-label">
+                Nombre serie*
+            </label>
+            <input placeholder="Ej: Friends"
+                   type="text"
+                   name="nombre_serie"
+                   class="form-control"
+                   id="nombre_serie"
+                   aria-describedby="nombre_serie_ayuda">
+            <div id="nombre_serie_ayuda" class="form-text">
+                Ingrese el nombre.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="nombre_director" class="form-label">
+                Nombre director*
+            </label>
+            <input placeholder="Ej: David Crane"
+                   type="text"
+                   name="nombre_director"
+                   class="form-control"
+                   id="nombre_director"
+                   aria-describedby="nombre_director_ayuda">
+            <div id="nombre_director_ayuda" class="form-text">
+                Ingrese nombre dicrector.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_lanzamiento" class="form-label">
+                Fecha lanzamiento (aaaa-mm-dd)*
+            </label>
+            <input placeholder="Ej: 1994-09-22"
+                   type="text"
+                   name="fecha_lanzamiento"
+                   class="form-control"
+                   id="fecha_lanzamiento"
+                   aria-describedby="fecha_lanzamiento_ayuda">
+            <div id="fecha_lanzamiento_ayuda" class="form-text">
+                Ingrese fecha lanzamiento.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label>
+                <input type="checkbox"
+                       name="tiene_emmy"
+                       id="tiene_emmy"
+                       value="tiene_emmy"
+                >
+                ¿Premio Emmy?
+            </label>
+            <div id="tiene_emmy_ayuda" class="form-text">
+                Seleccione en caso de que la serie haya ganado algún premio Emmy.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="tempordas" class="form-label">
+                Temporadas
+            </label>
+            <input placeholder="Ej: 10"
+                   type="text"
+                   name="temporadas"
+                   class="form-control"
+                   id="temporadas"
+                   aria-describedby="temporadas_ayuda">
+            <div id="temporadas_ayuda" class="form-text">
+                Ingrese número temporadas
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Crear serie</button>
+    </form>
+</div>
+
+<%- include('../comunes/footer') %>

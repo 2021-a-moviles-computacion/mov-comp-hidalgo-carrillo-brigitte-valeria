@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:123456789@localhost:3010/web"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//tabla del usuario
+model Serie {
+    id                      Int         @id @default(autoincrement())
+    nombre_serie            String
+    nombre_director         String
+    fecha_creacion_dato     DateTime    @default(now())
+    fecha_lanzamiento       String
+    tiene_emmy              Boolean
+    temporadas              Int
+}

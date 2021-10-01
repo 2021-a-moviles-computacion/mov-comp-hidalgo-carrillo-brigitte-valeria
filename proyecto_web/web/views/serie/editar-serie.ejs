@@ -1,0 +1,88 @@
+<%- include('../comunes/cabecera') %>
+
+
+<div class="container">
+    <h1>Editar serie</h1>
+    <form action='/serie/editar-serie-formulario/<%=datos.serie.id%>' method='post'>
+
+        <div class="mb-3">
+            <label for="nombre_serie" class="form-label">
+                Nombre serie*
+            </label>
+            <input
+                   type="text"
+                   name="nombre_serie"
+                   class="form-control"
+                   id="nombre_serie"
+                   value="<%=datos.serie.nombre_serie%>"
+                   readonly="readonly"
+            >
+
+        </div>
+
+        <div class="mb-3">
+            <label for="nombre_director" class="form-label">
+                Nombre director*
+            </label>
+            <input
+                   type="text"
+                   name="nombre_director"
+                   class="form-control"
+                   id="nombre_director"
+                   value="<%=datos.serie.nombre_director%>"
+                   aria-describedby="nombre_director_ayuda">
+            <div id="nombre_director_ayuda" class="form-text">
+                Ingrese nombre director.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_lanzamiento" class="form-label">
+                Fecha lanzamiento (aaaa-mm-dd)*
+            </label>
+            <input
+                   type="text"
+                   name="fecha_lanzamiento"
+                   class="form-control"
+                   id="fecha_lanzamiento"
+                   value="<%=datos.serie.fecha_lanzamiento%>"
+                   readonly="readonly"
+                   >
+
+        </div>
+
+        <div class="mb-3">
+            <label>
+                <input type="checkbox"
+                       name="tiene_emmy"
+                       id="tiene_emmy"
+                       value="tiene_emmy"
+                >
+                ¿Premio Emmy?
+            </label>
+            <div id="tiene_emmy_ayuda" class="form-text">
+                Seleccione en caso de que la serie haya ganado algún premio Emmy.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="tempordas" class="form-label">
+                Temporadas
+            </label>
+            <input
+                   type="text"
+                   name="temporadas"
+                   class="form-control"
+                   id="temporadas"
+                   aria-describedby="temporadas_ayuda"
+                   value="<%=datos.serie.temporadas%>"
+            >
+            <div id="temporadas_ayuda" class="form-text">
+                Ingrese número temporadas
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Editar serie</button>
+    </form>
+</div>
+<%- include('../comunes/footer') %>

@@ -1,0 +1,57 @@
+<%-include ('../comunes/cabecera')%>
+
+<div class='container'>
+    <h1>Lista</h1>
+
+    <% const existeMensaje = typeof  datos.mensaje !== "undefined"%>
+    <% if(existeMensaje){ %>
+        <div class ="alert alert-danger" role = "alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+
+    <form action = '/usuario/lista-usuarios' method='get'>
+        <div class="mb-3">
+            <label for="busqueda" class="form-label"> Busqueda </label>
+            <!--viajar como parámetros de consulta con el name (en este caso búsqueda)-->
+            <input placeholder="Ej: Adri" type="text" name="busqueda" class="form-control" id="busqueda" aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-text"> Puede buscar por nombre o apellido.> </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </form>
+
+    <div>
+        <a href="/usuario/vista-crear">
+            <button class ='btn btn-success'>
+                Crear nuevo usuario
+            </button>
+        </a>
+    </div>
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% datos.usuario.forEach ((objeto) => {%> <!--itero lo que recibo-->
+        <tr>
+            <!--pongo esos datos en la tabla-->
+            <th><%= objeto.id %></th>
+            <th><%= objeto.nombre%></th>
+            <th><%= objeto.apellido%></th>
+            <th>
+                <form action="/usuario/eliminar-usuario/<%=objeto.id%>" method="post"
+                <button class='btn btn-danger'>Eliminar</button>
+            </th>
+        </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
+
+
+
+<%-include ('../comunes/footer')%>
