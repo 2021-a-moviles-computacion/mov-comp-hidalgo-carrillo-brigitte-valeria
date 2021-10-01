@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Exam</string>
+    <string name="txt_colegios">Colegios</string>
+    <string name="txt_colegio">Colegio</string>
+    <string name="btn_registrar">Registrar</string>
+    <string name="menItmCol_editar">Editar</string>
+    <string name="menItmCol_eliminar">Eliminar</string>
+    <string name="menItmCol_registrarEst">Registrar estudiante</string>
+    <string name="menItmCol_verEst">Ver estudiantes</string>
+
+    <string name="txt_nombre">Nombre</string>
+    <string name="txt_metros2_cole">Metros cuadrados</string>
+    <string name="txt_fiscal_cole">¿Es fiscal?</string>
+    <string name="txt_distrito_cole">Distrito</string>
+    <string name="txt_num_aulas_cole">Número aulas</string>
+    <string name="txt_registrar_cole">Registrar colegio</string>
+    <string name="txt_datos_estudiante">Datos estudiante</string>
+
+    <string name="txt_cedula">Cedula</string>
+    <string name="txt_fecha_nac">Fecha nacimiento (aaaa-mm-dd)</string>
+    <string name="txt_curso">Curso</string>
+    <string name="txt_sexo">Sexo</string>
+
+    <string name="txt_femenino">Femenino</string>
+    <string name="txt_masculino">Masculino</string>
+    <string name="txt_inf_colegio">Información colegio</string>
+    <string name="txt_inf_estudiante">Información estudiante</string>
+
+    <string name="txt_act_cole">Editar colegio</string>
+    <string name="txt_act_est">Editar estudiante</string>
+
+    <string name="txt_irmapa">Ir mapa</string>
+
+</resources>

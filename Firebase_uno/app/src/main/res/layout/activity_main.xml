@@ -13,9 +13,78 @@
         android:text="Inicio sesión"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.058" />
+
+    <TextView
+        android:id="@+id/tv_bienvenida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:text="Ingrese al aplicativo"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_login"
+        app:layout_constraintStart_toEndOf="@+id/btn_login"
+        app:layout_constraintTop_toTopOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="262dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="56dp"
+        android:text="LOGOUT"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btn_orden"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="@+id/btn_orden"
+        app:layout_constraintTop_toBottomOf="@+id/btn_orden" />
+
+    <Button
+        android:id="@+id/btn_producto"
+        android:layout_width="289dp"
+        android:layout_height="49dp"
+        android:text="Ir producto"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/btn_restaurante"
+        android:layout_width="284dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="32dp"
+        android:text="Ir restaurante"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btn_producto"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="@+id/btn_producto"
+        app:layout_constraintTop_toBottomOf="@+id/btn_producto" />
+
+    <Button
+        android:id="@+id/btn_orden"
+        android:layout_width="286dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:text="Ir órdenes"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btn_restaurante"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="@+id/btn_restaurante"
+        app:layout_constraintTop_toBottomOf="@+id/btn_restaurante" />
+
+    <Button
+        android:id="@+id/btn_ir_mapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="111dp"
+        android:text="IR MAPA"
+        app:layout_constraintEnd_toEndOf="@+id/btn_logout"
+        app:layout_constraintStart_toStartOf="@+id/btn_logout"
+        app:layout_constraintTop_toTopOf="@+id/btn_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
